@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="css/snap-drawer.css" />
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation/foundation.js"></script>
 </head>
 <body>
     <!-- <div class="page"> -->
@@ -19,11 +22,13 @@
                 
                 <aside class="">
                     <ul class="off-canvas-list">
+                        <li><a href="main-page.html"><i class="fa fa-home"></i>Beranda</a></li>
                         <li><a href="#"><i class="fa fa-building-o"></i>Instansi</a></li>
                         <li><a href="#"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
                         <li><a href="#"><i class="fa fa-bullhorn"></i>Berita</a></li>
                         <li><a href="#"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
                         <li><a href="#"><i class="fa fa-cog"></i>Pengaturan</a></li>
+                        <li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
                     </ul>
                 </aside>
 
@@ -34,12 +39,16 @@
 
         <nav class="tab-bar">
             <section class="left-small">
-                <a id="open-left" class="left-off-canvas-toggle" ><span class="fa fa-bars"></span></a>
+                <a id="open-left" class="left-off-canvas-toggle" >
+                    <span class="fa fa-bars">
+                        <span>EMPUS</span>
+                    </span>
+                </a>
                 <!-- <a href="#" id="open-left"></a> -->
             </section>
 
             <section class="middle tab-bar-section">
-                <h1 class="title">EMPUS</h1>
+                <h1 class="title">Home</h1>
             </section>
 
             <section class="right-small">
@@ -47,6 +56,29 @@
                 <!-- <a href="#" id="open-left"></a> -->
             </section>
         </nav>
+        <div class="fixed">
+            <nav class="top-bar">
+                <ul class="title-area">
+                    <li class="name">
+                        <hi><a href="main-page.html">EMPUS</a></hi>
+                    </li>
+                </ul>
+                <section class="top-bar-section">
+                    <ul class="left">
+                        <li><a href="">Instansi</a></li>
+                        <li><a href="">Pelayanan</a></li>
+                        <li><a href="">Berita</a></li>
+                        <li><a href="">Opini</a></li>
+                        <li><a href=""></a></li>
+                    </ul>
+                </section>
+                <section class="top-bar-section">
+                    <ul class="right">
+                        <li><a href="login.html" >Login</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </div>       
         
         <section id="content" class="main-content snap-content">
             <!-- Topnav -->
@@ -100,6 +132,15 @@
                                         </div>
                                     </a>
                                 </li>
+                                <li class="limore">
+                                    <a href="#">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -112,37 +153,52 @@
                         <div class="panel-body">
                             <ul>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                    <a href="#" >
+                                         <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                    </a>
+                                </li>
+                                <li class="limore">
+                                    <a href="#">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -158,37 +214,52 @@
                         <div class="panel-body">
                             <ul>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                    </a>
+                                </li>
+                                <li class="limore">
+                                    <a href="#">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -202,37 +273,52 @@
                         <div class="panel-body">
                             <ul>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 <li>
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            
+                                    <a href="#" >
+                                        <div class="row">
+                                            <div class="small-3 columns">
+                                                <img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+                                            </div>
+                                            <div class="small-9 columns">
+                                                <h6>Kelurahan Cibinong</h6>
+                                                <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                            </div>
                                         </div>
-                                        <div class="small-9 columns">
-                                            <h6>Kelurahan Cibinong</h6>
-                                            <p>Kelurahan Cibinong bertanggung jawab memberikan pelayanan yang layak ...</p>
+                                    </a>
+                                </li>
+                                <li class="limore">
+                                    <a href="#">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>

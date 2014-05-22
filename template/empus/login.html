@@ -22,7 +22,7 @@
                 
                 <aside class="">
                     <ul class="off-canvas-list">
-                        <li><a href="main-page.html"><i class="fa fa-home"></i>Beranda</a></li>
+                        <li><a href="index.html"><i class="fa fa-home"></i>Beranda</a></li>
                         <li><a href="#"><i class="fa fa-building-o"></i>Instansi</a></li>
                         <li><a href="#"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
                         <li><a href="#"><i class="fa fa-bullhorn"></i>Berita</a></li>
@@ -60,7 +60,7 @@
             <nav class="top-bar">
                 <ul class="title-area">
                     <li class="name">
-                        <hi><a href="#">EMPUS</a></hi>
+                        <hi><a href="index.html">EMPUS</a></hi>
                     </li>
                 </ul>
                 <section class="top-bar-section">
@@ -85,20 +85,30 @@
             <div class="row login">
                 <div class="small-12 medium-4 medium-centered columns">
                     <div class="panel">
-                        <div class="panel-heading">
+                        <div class="panel-heading hide-for-small-only">
                             <h5>Login</h5>
                         </div>
                         <div class="panel-body">
                            <div class="row">
-                                <div class="small-12 columns">
-                                    <input type="text" name="email" placeholder="email">
-                                    <input type="password" name="password" placeholder="password">        
-                                </div>
-                                <div class="small-12 medium-12 columns text-center">
-                                    <input type="submit" value="Login" class="button expand">
-                                    <a href="register.html" class="tiny secondary expand reg">Register</a> <span class="divider">|</span>
-                                    <a href="" class="tiny secondary expand reg">Lupa Password</a>
-                                </div>
+
+                                <form action="" method="post" data-abide>
+                                    <div class="small-12 columns">
+                                        <div class="email-field">
+                                            <input type="text" name="email" placeholder="email" required>
+                                            <small class="error">Email harus diisi</small>
+                                        </div>
+                                        <div class="password-field">
+                                            <input type="password" name="password" placeholder="password" required>        
+                                            <small class="error">Password harus diisi</small>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 medium-12 columns text-center">
+                                        <input type="submit" value="Login" class="button expand">
+                                        <a href="" class="tiny secondary reg">Lupa Password</a> <span class="divider">|</span>
+                                        <a href="register.html" class="tiny secondary reg">Register</a>
+                                    </div>
+                                    
+                                </form>
                                 
                            </div>
                         </div>
@@ -117,6 +127,8 @@
     <script src="js/vendor/snap.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/foundation/foundation.abide.js"></script>
+
     <script>
         $(document).foundation();
         window.addEventListener('load', function() {
