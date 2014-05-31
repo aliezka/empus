@@ -6,16 +6,15 @@
 					<h5>Login</h5>
 				</div>
 				<div class="panel-body">
-					
 					<div class="row">
 						{{ Form::open(array('role' => 'form', 'class' => 'form-signin', 'data-abide')) }}
 							<div class="small-12 columns">
 								<div class="email-field">
-									{{ Form::text('username', null, array('class' => 'form-control', 'placeholder' => 'Email address', 'autofocus')) }}
-									<small class="error">Email harus diisi</small>
+									{{ Form::email('username', null, array('class' => 'form-control', 'placeholder' => 'Email address', 'autofocus', 'required')) }}
+									<small class="error">Email tidak valid</small>
 								</div>
 								<div class="password-field">
-									{{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}
+									{{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password', 'required')) }}
 									<small class="error">Password harus diisi</small>
 								</div>
 							</div>
@@ -27,6 +26,12 @@
 							</div>
 						{{ Form::close() }}
 					</div>
+
+					@if (Session::has('message'))
+					<div class="row">
+						<small class="error">{{ Session::get('message') }}</small>
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>

@@ -6,6 +6,7 @@ class AccessController extends BaseController {
 	}
 
 	public function login() {
+		var_dump('abcde');
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('user.login');
 	}
@@ -29,7 +30,7 @@ class AccessController extends BaseController {
 			Debugbar::info($validator->messages()->all());
 			$Renderer = Debugbar::getJavascriptRenderer();
 			
-			Redirect::to('login')
+			return Redirect::to('login')
 				->withInput(Input::except('password'))
 				->withErrors($validator);
 		} else {
@@ -68,11 +69,10 @@ class AccessController extends BaseController {
 			//return  Response::json(array('status' => 'OK', 'message' => 'Logged in'));
 		}
 
-		
 		$Renderer = Debugbar::getJavascriptRenderer();
 
-		Redirect::to('login')
+		return Redirect::to('login')
 				->withInput(Input::except('password'))
-				->withErrors($validator);
+				->with('message', 'Username atau password tidak cocok.');
 	}
 }
