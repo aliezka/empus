@@ -51,6 +51,13 @@ Route::post('register', 'AccessController@sRegister');
 Route::get('user', 'ProfileController@detail');
 Route::get('user/{id}', 'ProfileController@detail');
 
+// Whoami
+Route::get('/whoami', function() {
+			if (Auth::user())
+				return  'Login as ' . Auth::user()->email;
+			else return 'Not yet login.';
+		}
+	);
 /*
 END PUBLIC PAGE
 */
