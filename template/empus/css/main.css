@@ -107,25 +107,32 @@ p{
 
 /* == Main Content == */
 .main-content{
-	padding-top: 55px;
+	padding-top: 45px;
 }
 
 /* == Panels == */
+.wide-panel{
+	width:100%;
+	padding: 0;
+}
 .panel{
 	padding: 0;
+	margin-bottom: 0;
+	border: 0;
 }
 .panel-heading{
 	background-color: #f2f2f2;
-	padding: 7px 7px 1px 7px;
+	padding: 5px 13px 5px 13px;
 	border-bottom: 1px #d4d4d4 solid;
+	/*margin-bottom: 0.1rem;*/
 }
 .panel-body{
 }
 .panel-body h6{
 	color: #F0BB12;
-	margin-bottom: 0.1rem;
 }
 .panel-body p{
+	font-size: 14px!important;
 	margin-bottom: 0px;
 }
 .panel-body ul{
@@ -152,9 +159,9 @@ p{
 }
 .panel .row{
 	margin: 0 !important;
-	padding: 5px;
+	padding: 7px 0.9375rem;
 }
-.panel li:last-child .row{
+.panel li.limore{
     text-align: center;
 }
 .limore{
@@ -224,4 +231,45 @@ p{
  /*Override Snap CSS */
 .snap-content{
     /*overflow: visible;*/
+}
+
+/* ============= INSTANSI DETAIL ========= */
+.instansi .banner{
+	min-width: 100%;
+	height: 170px;
+	background-position: center center;
+	background-size: cover;
+	/*border-bottom:  3px #e1e1e1 solid;*/
+}
+.instansi h6{
+	color: #F0BB12;
+	margin: 0.5rem 0;
+	font-size: 20px;
+}
+.instansi p{
+	font-size: 15px!important;
+	margin-bottom: 15px;
+}
+.instansi .panel{
+	margin-top: 20px;
+}
+.instansi .panel h6{
+	color: #222;
+	font-size: 18px;
+}
+.instansi .panel.info ul{
+	background-color: #fff;
+}
+.instansi .panel.info li{
+	/*border: 0;*/
+	margin-bottom: 5px;
+	padding: 3px 0.9375rem;
+	font-size: 14px;
+	border: 1px #d4d4d4 solid;
+	background-color: #f2f2f2;
+
+}
+.instansi .panel-heading{
+	/*padding: 5px 10px;*/
+	border-top: 1px #e1e1e1 solid;
 }
