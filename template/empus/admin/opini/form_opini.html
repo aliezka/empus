@@ -85,7 +85,7 @@
                 <div class="small-12 medium-12 columns grid-control">
                     <ul class="breadcrumbs">
                       <li><a href="#">Admin</a></li>
-                      <li><a href="#">Instansi</a></li>
+                      <li><a href="#">Berita</a></li>
                       <li class="current"><a href="#">create</a></li>
                       <!-- <li class="unavailable"><a href="#">Gene Splicing</a></li>
                       <li class="current"><a href="#">Cloning</a></li> -->
@@ -105,15 +105,64 @@
                     <!-- end of row -->
                 </div>                
             </div>
-            <form action="" method="post" data-abide>
+            <form action="" method="" data-abide>
               <div class="row">
                 <div class="small-12 columns">
+
                     <div class="row">
                         <div class="small-3 columns">
-                                <label for="name" class="right inline">Nama</label>
+                            <label for="name" class="right">Instansi</label>
                         </div>
                         <div class="small-9 columns">
-                            <div class="name-field">
+                            <div class="jenis-field">
+                                <input type="radio" name="jenis" value="1" required> Opini
+                                <input type="radio" name="jenis" value="1" required> Pengaduan
+                                <small class="error">Jenis harus dipilih</small>
+                            </div>
+                        </div>
+                    </div><!-- end of row -->
+
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="name" class="right inline">Instansi</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <select type="text" name="name" placeholder="nama" style="height:auto">
+                                <option value="">Kelurahan Sindangsari</option>
+                                <option value="">Kelurahan Baranangsiang</option>
+                                <option value="">Kelurahan Katulampa</option>
+                                <option value="">Kelurahan Sindangrasa</option>
+                                <option value="">Kelurahan Sindangsari</option>
+                                <option value="">Kelurahan Tajur</option>
+                                <option value="">Kelurahan Sukasari</option>
+                            </select>
+                        </div>
+                    </div><!-- end of row -->
+
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="name" class="right inline">Pelayanan</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <select type="text" name="name" placeholder="nama" style="height:auto">
+                                <option value="">- pilih -</option>
+                                <option value="">Kelurahan Sindangsari</option>
+                                <option value="">Kelurahan Baranangsiang</option>
+                                <option value="">Kelurahan Katulampa</option>
+                                <option value="">Kelurahan Sindangrasa</option>
+                                <option value="">Kelurahan Sindangsari</option>
+                                <option value="">Kelurahan Tajur</option>
+                                <option value="">Kelurahan Sukasari</option>
+                            </select>
+                        </div>
+                    </div><!-- end of row -->
+
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="name" class="right inline">Judul</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <div class="name-field">  
                                 <input type="text" name="name" placeholder="nama" required>
                                 <small class="error">Nama harus diisi</small>
                             </div>
@@ -122,51 +171,15 @@
 
                     <div class="row">
                         <div class="small-3 columns">
-                          <label for="name" class="right inline">Deskripsi</label>
+                          <label for="name" class="right inline">Isi</label>
                         </div>
                         <div class="small-9 columns">
                             <div class="description-field">
                                 <textarea name="description" placeholder="deskripsi" rows="5" required></textarea>
-                                <small class="error">Deskripsi harus diisi</small>
+                                <small class="error">Isi harus diisi</small>
                             </div>
                         </div>
                     </div><!-- end of row -->
-
-                    <div class="row">
-                        <div class="small-3 columns">
-                          <label for="image" class="right">Image</label>
-                        </div>
-                        <div class="small-9 columns">
-                          <input type="file" name="image">
-                        </div>
-                    </div><!-- end of row -->
-
-                  <div class="row">
-                    <div class="small-3 columns">
-                    </div>
-                    <div class="small-9 columns">
-                        <fieldset>
-                            <legend>Pelayanan</legend>
-                            <ul>
-                                <li>
-                                    <input id="checkbox1" type="checkbox"><label for="checkbox1">Kartu Tanda Penduduk</label>        
-                                </li>
-                                <li>
-                                    <input id="checkbox1" type="checkbox"><label for="checkbox1">Kartu Keluarga</label>        
-                                </li>
-                                <li>
-                                    <input id="checkbox1" type="checkbox"><label for="checkbox1">Akta Lahir</label>
-                                </li>
-                                <li>
-                                    <input id="checkbox1" type="checkbox"><label for="checkbox1">Akta Kematian</label>
-                                </li>
-                                <li>
-                                    <input id="checkbox1" type="checkbox"><label for="checkbox1">Surat Perceraian</label>
-                                </li>
-                            </ul>
-                        </fieldset>
-                    </div>
-                  </div><!-- end of row -->
 
                   <div class="row">
                     <div class="small-3 columns">

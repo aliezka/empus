@@ -307,3 +307,8 @@ table.grid tr td:last-child .fa:before{
 .frm-ins fieldset ul li{
 	list-style: none;
 }
+
+/* ======== FORM ======= */
+select[multiple]{
+	height: 150px!important;
+}

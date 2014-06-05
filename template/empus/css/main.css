@@ -273,3 +273,10 @@ p{
 	/*padding: 5px 10px;*/
 	border-top: 1px #e1e1e1 solid;
 }
+.panel-opini .label{
+	margin-left: 0px;
+}
+.panel-opini .panel-body h6{
+	font-size: 16px;
+}
+
