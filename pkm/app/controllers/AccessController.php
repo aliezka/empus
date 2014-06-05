@@ -84,7 +84,7 @@ class AccessController extends BaseController {
 		$rules = array(
 					'name' => ' required | alpha_spaces | min:3 ',
 					'username' => ' required | email | unique:user,email',
-					'password' => ' required | min:6 | confirmed '
+					'password' => ' required | min:6 | confirmed:password_confirmation '
 				);
 		
 		$validator = Validator::make(Input::all(), $rules);
