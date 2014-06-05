@@ -10,21 +10,21 @@
 					<div class="row">
 						{{ Form::open(array('role' => 'form', 'class' => 'form-signin', 'data-abide')) }}
 							<div class="small-12 columns">
-								<div class="nama-field">
+								<div class="nama-field {{ $errors->first('name') ? 'error' : null }}">
 									{{ Form::text('name', null, array('placeholder' => 'Nama Lengkap', 'required')) }}
-									<small class="error">Nama harus diisi</small>
+									<small class="error">{{ $errors->first('name') ? $errors->first('name') : 'Nama harus diisi' }}</small>
 								</div>
-								<div class="email-field">
+								<div class="email-field {{ $errors->first('username') ? 'error' : null }}">
 									{{ Form::email('username', null, array('class' => 'form-control', 'placeholder' => 'Email address', 'autofocus', 'required')) }}
-									<small class="error">Email tidak valid</small>
+									<small class="error">{{ $errors->first('username') ? $errors->first('username') : 'Email tidak valid' }}</small>
 								</div>
-								<div class="password-field">
+								<div class="password-field {{ $errors->first('password') ? 'error' : null }}">
 									{{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password', 'required', 'id' => 'password')) }}
-									<small class="error">Password harus diisi</small>
+									<small class="error">{{ $errors->first('password') ? $errors->first('password') : 'Password harus diisi' }}</small>
 								</div>
-								<div class="password_conf-field">
+								<div class="password_conf-field {{ $errors->first('password_confirmation') ? 'error' : null }}">
 									{{ Form::password('password_confirmation', array('class' => 'form-control', 'placeholder' => 'Password Confirmation', 'required', 'data-equalto' => 'password')) }}
-									<small class="error">Tidak sesuai dengan password</small>
+									<small class="error">{{ $errors->first('password_confirmation') ? $errors->first('password_confirmation') : 'Tidak sesuai dengan password' }}</small>
 								</div>
 							</div>
 							<div class="small-12 medium-12 columns text-center">
@@ -35,12 +35,6 @@
 							</div>
 						{{ Form::close() }}
 					</div>
-					
-					@if (Session::has('message'))
-					<div class="row">
-						<small class="error">{{ Session::get('message') }}</small>
-					</div>
-					@endif
 				</div>
 			</div>
 		</div>

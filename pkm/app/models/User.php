@@ -50,7 +50,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	/*
-	Custom
+	Auth Addition
 	*/
 
 	public function getRememberToken() {
@@ -65,6 +65,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return 'remember_token';
 	}
 
+	/*
+	End Auth Addition
+	*/
+
+	/*
+	Relating Model
+	*/
+
 	public function person() {
 		return $this->belongsTo('Person', 'person_id');
 	}
@@ -72,4 +80,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function rolList() {
 		return $this->hasMany('UserRole', 'user_id', 'id');
 	}
+
+	/*
+	End Relating Model
+	*/
 }
