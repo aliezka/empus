@@ -83,7 +83,7 @@ Route::when('dashboard/*', 'auth|administrator');
 Route::get('dashboard', array('before'=>'auth|administrator', 'uses'=>'DetailController@dashboard'));
 
 // Instansi
-Route::get('dashboard/instansi', 'ListController@dInstansi');
+Route::get('dashboard/instansi', 'ListController@instansi');
 Route::get('dashboard/instansi/form', 'FormController@instansi');
 Route::post('dashboard/instansi/form', 'FormController@sInstansi');
 Route::get('dashboard/instansi/form/{id}', 'DetailController@instansi');
