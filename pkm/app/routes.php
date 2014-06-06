@@ -43,6 +43,9 @@ Route::get('opini/detail/{id}', 'DetailController@opini');
 Route::get('login', 'AccessController@login');
 Route::post('login', 'AccessController@sLogin');
 
+// Logout
+Route::get('logout', 'AccessController@logout');
+
 // Register
 Route::get('register', 'AccessController@register');
 Route::post('register', 'AccessController@sRegister');
@@ -73,8 +76,11 @@ END PUBLIC PAGE
 ADMIN PAGE
 */
 
+// Dashboard filter
+Route::when('dashboard/*', 'auth|administrator');
+
 // Dashboard
-Route::get('dashboard', 'DetailController@dashboard');
+Route::get('dashboard', array('before'=>'auth|administrator', 'uses'=>'DetailController@dashboard'));
 
 // Instansi
 Route::get('dashboard/instansi', 'ListController@dInstansi');
