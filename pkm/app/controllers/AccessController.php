@@ -60,7 +60,7 @@ class AccessController extends BaseController {
 
 			if (Auth::attempt($userData)) {
 				Debugbar::info('Logged In');
-				return Redirect::to('/');
+				return Redirect::intended('/');
 			} else {
 				Debugbar::info('Failed');
 			}
@@ -128,5 +128,10 @@ class AccessController extends BaseController {
 
 			$Renderer = Debugbar::getJavascriptRenderer();
 		}
+	}
+
+	public function logout(){
+		Auth::logout();
+		return Redirect::to('login');
 	}
 }
