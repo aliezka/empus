@@ -39,8 +39,12 @@ p{
 }
 
 /* == Top Bar == */
-.top-bar{
+.contain-to-grid{
+	background-color: #F0B212!important;
     border-bottom: 3px #DB9E00 solid;
+}
+.top-bar{
+    /*border-bottom: 3px #DB9E00 solid;*/
 }
 .top-bar .title-area a{
     color:#fff;
@@ -59,7 +63,7 @@ p{
     /*border-bottom: 1px solid black;*/
 }
 .top-bar-section ul li a{
-    height: 42px!important;
+    /*height: 42px!important;*/
 }
 .top-bar-section ul li > a {
     font-size: 0.9rem;
@@ -273,10 +277,38 @@ p{
 	/*padding: 5px 10px;*/
 	border-top: 1px #e1e1e1 solid;
 }
-.panel-opini .label{
-	margin-left: 0px;
+
+/* == Table == */
+.delbutton{
+	color: #E92500;
 }
-.panel-opini .panel-body h6{
-	font-size: 16px;
+.grid-control{
+	/*display: inline-block;*/
+}
+.grid-control a, .grid-control form{
+	display: inline-block;
+}
+table{
+	min-width: 100%;
+}
+table.grid tr td:first-child{
+	width: 5px;
+}
+table.grid tr td:last-child{
+	width: 15px;
+}
+table.grid tr td:last-child .fa:before{
+	margin-right: 0;
 }
 
+.frm-ins fieldset ul{
+	margin: 0;
+}
+.frm-ins fieldset ul li{
+	list-style: none;
+}
+
+/* ======== FORM ======= */
+select[multiple]{
+	height: 150px!important;
+}
