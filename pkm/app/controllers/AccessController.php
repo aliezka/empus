@@ -13,16 +13,9 @@ class AccessController extends BaseController {
 	public function sLogin() {
 		$rules = array(
 					'password' => 'required | min:6 ',
-					'name' => 'min:3 | alpha_spaces '
+					'name' => 'min:3 | alpha_spaces ',
+					'username' => 'required | email '
 				);
-
-		$username = 
-			empty(Input::get('name')) ? 
-				array('username' => 'required | email ') : 
-				array('username' => 'required | email | unique:user,email'); 
-		
-		$rules = $username + $rules;
-		Debugbar::info($rules);
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
@@ -33,24 +26,6 @@ class AccessController extends BaseController {
 				->withInput(Input::except('password'))
 				->withErrors($validator);
 		} else {
-			if (!empty(Input::get('name'))) {
-				$Person = new Person;
-				$Person->name = Input::get('name');
-				$Person->save();
-
-				$User = new User;
-				$User->username = $User->email = Input::get('username');
-				$User->password = Hash::make(Input::get('password'));
-				$User->person()->associate($Person);
-				$User->save();
-
-				$UserRole = new UserRole;
-				$UserRole->user()->associate($User);
-				// Citizen
-				$UserRole->role_id = 2;
-				$UserRole->Save();
-			}
-
 			$userData = array(
 					'email' => Input::get('username'),
 					'password' => Input::get('password')
@@ -59,20 +34,24 @@ class AccessController extends BaseController {
 			Debugbar::info($userData);
 
 			if (Auth::attempt($userData)) {
-				Debugbar::info('Logged In');
-				return Redirect::intended('/');
+				// Administrator
+				if (Auth::user()->roles->first()->id == 1) {
+					return Redirect::intended('dashboard');
+				} 
+				// Government
+				elseif (Auth::user()->roles->first()->id == 3) {
+					return Redirect::intended('government');
+				} 
+				// Citizen
+				else {
+					return Redirect::intended('/');
+				}
 			} else {
-				Debugbar::info('Failed');
+				return Redirect::to('login')
+					->withInput(Input::except('password'))
+					->with('message', 'Username atau password tidak cocok.');
 			}
-
-			//return  Response::json(array('status' => 'OK', 'message' => 'Logged in'));
 		}
-
-		$Renderer = Debugbar::getJavascriptRenderer();
-
-		return Redirect::to('login')
-				->withInput(Input::except('password'))
-				->with('message', 'Username atau password tidak cocok.');
 	}
 
 	public function register() {

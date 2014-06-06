@@ -76,11 +76,9 @@ END PUBLIC PAGE
 ADMIN PAGE
 */
 
-// Dashboard filter
-Route::when('dashboard/*', 'auth|administrator');
 
 // Dashboard
-Route::get('dashboard', array('before'=>'auth|administrator', 'uses'=>'DetailController@dashboard'));
+Route::get('dashboard', 'DetailController@dashboard');
 
 // Instansi
 Route::get('dashboard/instansi', 'ListController@instansi');
@@ -93,6 +91,10 @@ Route::get('dashboard/pelayanan', 'ListController@dPelayanan');
 Route::get('dashboard/pelayanan/form', 'FormController@pelayanan');
 Route::post('dashboard/pelayanan/form', 'FormController@sPelayanan');
 Route::get('dashboard/pelayanan/form/{id}', 'DetailController@pelayanan');
+
+// Pelayanan - Persyaratan
+Route::get('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@persyaratan');
+Route::post('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@sPersyaratan');
 
 // Berita
 Route::get('dashboard/berita', 'ListController@dBerita');
