@@ -26,7 +26,7 @@
 					<label for="name" class="right inline">Hal</label>
 				</div>
 				<div class="small-9 columns">
-					{{ Form::text('title', null, array('placeholder' => 'Perihal Persyaratan', 'required')) }}
+					{{ Form::text('title', null, array('placeholder' => 'Perihal Prosedur', 'required')) }}
 				</div>
 			</div><!-- end of row -->
 
@@ -35,7 +35,7 @@
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Perihal', 'id' => 'name']) }}
+					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Prosedur', 'id' => 'name']) }}
 				</div>
 			</div><!-- end of row -->
 

@@ -96,19 +96,21 @@ class FormController extends BaseController {
 		$Pelayanan = Pelayanan::find($id);
 		if ($Pelayanan) {
 			$rules = array(
-						'name' => ' required | alpha_spaces | min:3 ',
-						'desc' => ' required | min:4 ',
-						'image' => ' required | image '
+						'order' => ' required | numeric | min:0 ',
+						'title' => ' required | alpha_spaces | min:3 ',
+						'desc' => ' min:4 | unique:persyaratan,order',
+						'image' => ' image '
 					);
 			
 			$validator = Validator::make(Input::all(), $rules);
 			if ($validator->fails()) { 
-				return Redirect::to('dashboard/instansi/form')
+				Log::warning($validator->messages()->all());
+				return Redirect::to('dashboard/pelayanan/persyaratan/'.$id.'/form')
 					->withInput(Input::except('image'))
 					->withErrors($validator);
 			} else {
 				$Persyaratan = new Persyaratan;
-				$Persyaratan->name = Input::get('name');
+				$Persyaratan->fill(Input::all());
 				$Persyaratan->pelayanan()->associate($Pelayanan);
 				$Persyaratan->save();
 
@@ -120,14 +122,14 @@ class FormController extends BaseController {
 
 				$PersyaratanImg = new PersyaratanImg;
 				$PersyaratanImg->img = $FileName;
-				$PersyaratanImg->instansi()->associate($Persyaratan);
+				$PersyaratanImg->persyaratan()->associate($Persyaratan);
 				$PersyaratanImg->save();
 				// End Image
 
 				// Desc
 				$PersyaratanDesc = new PersyaratanDesc;
 				$PersyaratanDesc->desc = Input::get('desc');
-				$PersyaratanDesc->instansi()->associate($Persyaratan);
+				$PersyaratanDesc->persyaratan()->associate($Persyaratan);
 				$PersyaratanDesc->save();
 				// End Desc
 
@@ -135,6 +137,64 @@ class FormController extends BaseController {
 			}
 		} else {
 			return Redirect::to('dashboard/pelayanan');	
+		}
+	}
+
+	function prosedur($id) { 
+		$Prosedur = Pelayanan::find($id);
+		if ($Prosedur) {
+			$this->layout = View::make('layouts.admin');
+			$this->layout->content = View::make('forms.prosedur')->with('Prosedur', $Prosedur);
+		} else {
+			return Redirect::to('dashboard/prosedur');	
+		}
+	}
+
+	function sProsedur($id) {
+		$Pelayanan = Pelayanan::find($id);
+		if ($Pelayanan) {
+			$rules = array(
+						'order' => ' required | numeric | min:0 ',
+						'title' => ' required | alpha_spaces | min:3 ',
+						'desc' => ' min:4 ',
+						'image' => ' image '
+					);
+			
+			$validator = Validator::make(Input::all(), $rules);
+			if ($validator->fails()) { 
+				Log::warning($validator->messages()->all());
+				return Redirect::to('dashboard/pelayanan/prosedur/'.$id.'/form')
+					->withInput(Input::except('image'))
+					->withErrors($validator);
+			} else {
+				$Prosedur = new Prosedur ;
+				$Prosedur->fill(Input::all());
+				$Prosedur->pelayanan()->associate($Pelayanan);
+				$Prosedur->save();
+
+				// Image
+				$FileName = $Prosedur->id;
+				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
+
+				Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
+
+				$ProsedurImg = new ProsedurImg;
+				$ProsedurImg->img = $FileName;
+				$ProsedurImg->prosedur()->associate($Prosedur);
+				$ProsedurImg->save();
+				// End Image
+
+				// Desc
+				$ProsedurDesc = new ProsedurDesc;
+				$ProsedurDesc->desc = Input::get('desc');
+				$ProsedurDesc->prosedur()->associate($Prosedur);
+				$ProsedurDesc->save();
+				// End Desc
+
+				return Redirect::to('/');
+			}
+		} else {
+			return Redirect::to('dashboard/prosedur');	
 		}
 	}
 }

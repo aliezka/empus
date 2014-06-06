@@ -87,7 +87,7 @@ Route::post('dashboard/instansi/form', 'FormController@sInstansi');
 Route::get('dashboard/instansi/form/{id}', 'DetailController@instansi');
 
 // Pelayanan
-Route::get('dashboard/pelayanan', 'ListController@dPelayanan');
+Route::get('dashboard/pelayanan', 'ListController@pelayanan');
 Route::get('dashboard/pelayanan/form', 'FormController@pelayanan');
 Route::post('dashboard/pelayanan/form', 'FormController@sPelayanan');
 Route::get('dashboard/pelayanan/form/{id}', 'DetailController@pelayanan');
@@ -95,6 +95,10 @@ Route::get('dashboard/pelayanan/form/{id}', 'DetailController@pelayanan');
 // Pelayanan - Persyaratan
 Route::get('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@persyaratan');
 Route::post('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@sPersyaratan');
+
+// Pelayanan - Prosedur
+Route::get('dashboard/pelayanan/prosedur/{id}/form', 'FormController@prosedur');
+Route::post('dashboard/pelayanan/prosedur/{id}/form', 'FormController@sProsedur');
 
 // Berita
 Route::get('dashboard/berita', 'ListController@dBerita');
