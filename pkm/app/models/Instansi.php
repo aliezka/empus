@@ -6,7 +6,11 @@ class Instansi extends Eloquent {
 	public $timestamps = false;
 
 	public function pelayanan() {
-		return $this->hasMany('InstansiPelayanan', 'pelayanan_id');
+		return $this->belongsToMany('Pelayanan', 'instansi_pelayanan', 'instansi_id', 'pelayanan_id');
+	}
+
+	public function pelList() {
+		return $this->hasMany('InstansiPelayanan', 'instansi_id');
 	}
 
 	public function desc() {

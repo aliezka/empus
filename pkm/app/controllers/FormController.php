@@ -5,12 +5,20 @@ class FormController extends BaseController {
 		\Debugbar::disable();
 	}
 
-	function instansi() {
+	function instansi($id = null) {
+		$Pelayanan = Pelayanan::all();
+		$Instansi = !is_null($id) ? Instansi::find($id) : null;
+
 		$this->layout = View::make('layouts.admin');
-		$this->layout->content = View::make('forms.instansi');
+		$this->layout->content = View::make('forms.instansi')
+			->with('Pelayanan', $Pelayanan)
+			->with('Instansi', $Instansi);
 	}
 
-	function sInstansi() {
+	function sInstansi($id = null) {
+		$Pelayanan = Pelayanan::all();
+		$Instansi = !is_null($id) ? Instansi::find($id) : new Instansi;
+
 		$rules = array(
 					'name' => ' required | alpha_spaces | min:3 ',
 					'desc' => ' required | min:4 ',
@@ -19,33 +27,73 @@ class FormController extends BaseController {
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
-			return Redirect::to('dashboard/instansi/form')
+			$Path = 'dashboard/instansi/form';
+			$Path .= !is_null($id) ? '/'.$id : null;
+
+			return Redirect::to($Path)
+				->with('Pelayanan', $Pelayanan)
+				->with('Instansi', $Instansi)
 				->withInput(Input::except('image'))
 				->withErrors($validator);
 		} else {
-			$Instansi = new Instansi;
 			$Instansi->name = Input::get('name');
 			$Instansi->save();
 
 			// Image
-			$FileName = $Instansi->id;
-			$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
+			if (Input::hasFile('image')) {
+				$FileName = $Instansi->id;
+				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-			Input::file('image')->move(Config::get('empus.instansi_img'), $FileName);
-
-			$InstansiImg = new InstansiImg;
-			$InstansiImg->img = $FileName;
-			$InstansiImg->instansi()->associate($Instansi);
-			$InstansiImg->save();
+				Input::file('image')->move(Config::get('empus.instansi_img'), $FileName);
+				
+				if (!is_null($id)) {
+					InstansiImg::where('instansi_id', '=', $id)->update(['img' => $FileName]);
+				} else {
+					$InstansiImg = new InstansiImg;
+					$InstansiImg->instansi()->associate($Instansi);
+					$InstansiImg->img = $FileName;
+					$InstansiImg->save();
+				}
+			}
 			// End Image
 
 			// Desc
-			$InstansiDesc = new InstansiDesc;
-			$InstansiDesc->desc = Input::get('desc');
-			$InstansiDesc->instansi()->associate($Instansi);
-			$InstansiDesc->save();
+			if (!is_null($id)) {
+				InstansiDesc::where('instansi_id', '=', $id)->update(['desc' => Input::get('desc')]);
+			} else {
+				$InstansiDesc = new InstansiDesc;
+				$InstansiDesc->instansi()->associate($Instansi);
+				$InstansiDesc->desc = Input::get('desc');
+				$InstansiDesc->save();
+			}
 			// End Desc
 
+			// Pelayanan
+			$Pelayanan = array();
+			$RPelayanan = $Instansi->pelayanan;
+
+			foreach ($RPelayanan as $R) {
+				$Pelayanan[] = $R->id;
+			} 
+
+			$Diff = array_diff($Pelayanan, Input::get('pelayanan', array()));
+			if (count($Diff) > 0) {
+				$Instansi->pelList()->delete($Diff);
+			}
+
+			if (count(Input::get('pelayanan', array())) > 0) {
+				$pelList = new InstansiPelayanan;
+				foreach (Input::get('pelayanan') as $p) {
+					$pelList->instansi_id = $Instansi->id;
+					$pelList->pelayanan_id = $p;
+
+					if (!$pelList->where('instansi_id', '=', $Instansi->id)->where('pelayanan_id', '=', $p)->count() > 0) {
+						$pelList->save();
+					}
+				}
+			}
+			// End Pelayanan
+			
 			return Redirect::to('/');
 		}
 	}

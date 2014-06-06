@@ -82,9 +82,12 @@ Route::get('dashboard', 'DetailController@dashboard');
 
 // Instansi
 Route::get('dashboard/instansi', 'ListController@instansi');
+// New Record
 Route::get('dashboard/instansi/form', 'FormController@instansi');
 Route::post('dashboard/instansi/form', 'FormController@sInstansi');
-Route::get('dashboard/instansi/form/{id}', 'DetailController@instansi');
+// Update Record
+Route::get('dashboard/instansi/form/{id}', 'FormController@instansi');
+Route::post('dashboard/instansi/form/{id}', 'FormController@sInstansi');
 
 // Pelayanan
 Route::get('dashboard/pelayanan', 'ListController@pelayanan');
