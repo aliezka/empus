@@ -60,6 +60,18 @@ Route::filter('guest', function()
 	if (Auth::check()) return Redirect::to('/');
 });
 
+Route::filter('administrator', function(){
+	if(!Auth::User()->roles->find(1)) return Redirect::guest('login');
+});
+
+Route::filter('citizen', function(){
+	if(!Auth::User()->roles->find(2)) return Redirect::guest('login');
+});
+
+Route::filter('government', function(){
+	if(!Auth::User()->roles->find(3)) return Redirect::guest('login');
+});
+
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter
