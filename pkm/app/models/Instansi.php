@@ -1,11 +1,9 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
-class Instansi extends Eloquent implements UserInterface, RemindableInterface {
+class Instansi extends Eloquent {
 	protected $table = 'instansi';
 	protected $fillable = array('name');
+	public $timestamps = false;
 
 	public function pelayanan() {
 		return $this->hasMany('InstansiPelayanan', 'pelayanan_id');

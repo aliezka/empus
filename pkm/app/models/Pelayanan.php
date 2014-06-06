@@ -1,9 +1,6 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
-class Pelayanan extends Eloquent implements UserInterface, RemindableInterface {
+class Pelayanan extends Eloquent {
 	protected $table = 'pelayanan';
 	protected $fillable = array('name');
 }
