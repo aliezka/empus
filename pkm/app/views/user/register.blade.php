@@ -11,11 +11,11 @@
 						{{ Form::open(array('role' => 'form', 'class' => 'form-signin', 'data-abide')) }}
 							<div class="small-12 columns">
 								<div class="nama-field {{ $errors->first('name') ? 'error' : null }}">
-									{{ Form::text('name', null, array('placeholder' => 'Nama Lengkap', 'required')) }}
+									{{ Form::text('name', null, array('placeholder' => 'Nama Lengkap', 'autofocus', 'required')) }}
 									<small class="error">{{ $errors->first('name') ? $errors->first('name') : 'Nama harus diisi' }}</small>
 								</div>
 								<div class="email-field {{ $errors->first('username') ? 'error' : null }}">
-									{{ Form::email('username', null, array('class' => 'form-control', 'placeholder' => 'Email address', 'autofocus', 'required')) }}
+									{{ Form::email('username', null, array('class' => 'form-control', 'placeholder' => 'Email address', 'required')) }}
 									<small class="error">{{ $errors->first('username') ? $errors->first('username') : 'Email tidak valid' }}</small>
 								</div>
 								<div class="password-field {{ $errors->first('password') ? 'error' : null }}">

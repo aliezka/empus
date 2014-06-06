@@ -2,7 +2,7 @@
 
 class AccessController extends BaseController {
 	function __construct() {
-		\Debugbar::enable();
+		\Debugbar::disable();
 	}
 
 	public function login() {

@@ -1,13 +1,7 @@
 <?php
-
-class ListController extends BaseController{
-	function __construct(){
-
+class ListController extends BaseController {
+	function __construct() {
+		\Debugbar::disable();
 	}
-
-	public function dInstansi(){
-		echo "de instansi.";
-	}
+	
 }
-
-?>
