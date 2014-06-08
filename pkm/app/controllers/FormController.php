@@ -78,7 +78,7 @@ class FormController extends BaseController {
 
 			$Diff = array_diff($Pelayanan, Input::get('pelayanan', array()));
 			if (count($Diff) > 0) {
-				$Instansi->pelList()->delete($Diff);
+				$Instansi->pelayanan()->delete($Diff);
 			}
 
 			if (count(Input::get('pelayanan', array())) > 0) {
@@ -243,6 +243,105 @@ class FormController extends BaseController {
 			}
 		} else {
 			return Redirect::to('dashboard/prosedur');	
+		}
+	}
+
+	function opini($object, $id) {
+		// Object
+		$Associate = null;
+		switch ($object) {
+			case 'instansi_pelayanan':
+				$Associate = InstansiPelayanan::find($id);
+				break;
+			case 'instansi':
+				$Associate = Instansi::find($id);
+				break;
+			case 'pelayanan':
+				$Associate = Pelayanan::find($id);
+				break;
+			default:
+				
+				break;
+		} 
+
+		if (!$Associate) {
+			return Redirect::to('/');
+		}
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('forms.opini');
+	}
+
+	function sOpini($object, $id) { 
+		$rules = array(
+					'title' => ' required | alpha_spaces | min:3 ',
+					'type' => ' required ',
+					'desc' => ' required | min:4 ',
+					'image' => ' image '
+				);
+		
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
+			return Redirect::to('dashboard/pelayanan/prosedur/'.$id.'/form')
+				->withInput(Input::except('image'))
+				->withErrors($validator);
+		} else {
+			$Opini = new Opini;
+			$OpiniImg = new OpiniImg;
+			$OpiniDesc = new OpiniDesc;
+
+			DB::transaction(function() use ($Opini, $OpiniImg, $OpiniDesc, $object, $id) {
+				$Opini->fill(Input::all());
+				$Opini->person()->associate(Auth::user());
+				$Opini->save();
+
+				// Image
+				if (Input::hasFile('image')) {
+					$FileName = $Prosedur->id;
+					$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
+
+					Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
+
+					
+					$OpiniImg->img = $FileName;
+					$OpiniImg->opini()->associate($Opini);
+					$OpiniImg->save();
+				}
+				// End Image
+
+				// Desc
+				$OpiniDesc->desc = Input::get('desc');
+				$OpiniDesc->opini()->associate($Opini);
+				$OpiniDesc->save();
+				// End Desc
+
+				// Object
+				$Associate = $Pivot = null;
+				switch ($object) {
+					case 'instansi_pelayanan':
+						$Associate = InstansiPelayanan::find($id);
+
+						$Pivot = new OpiniInstansiPelayanan;
+						$Pivot->instansi_pelayanan()->associate($Associate);
+						break;
+					case 'instansi':
+						$Associate = Instansi::find($id);
+						break;
+					case 'pelayanan':
+						$Associate = Pelayanan::find($id);
+						break;
+					default:
+						
+						break;
+				}
+
+				$Pivot->opini()->associate($Opini);
+				$Pivot->save();
+				// End Object
+			});
+			
+			return Redirect::to('/');
 		}
 	}
 }

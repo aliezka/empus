@@ -17,7 +17,7 @@
 					<label for="name" class="right inline">Nama</label>
 				</div>
 				<div class="small-9 columns">
-					{{ Form::text('name', null, array('placeholder' => 'Nama Intansi', 'required', 'autofocus')) }}
+					{{ Form::text('name', isset($Instansi->name) ? $Instansi->name : null, array('placeholder' => 'Nama Intansi', 'required', 'autofocus')) }}
 				</div>
 			</div><!-- end of row -->
 
@@ -26,7 +26,7 @@
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Instansi', 'id' => 'name']) }}
+					{{ Form::textarea('desc', isset($Instansi->desc->desc) ? $Instansi->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Instansi', 'id' => 'name']) }}
 				</div>
 			</div><!-- end of row -->
 
@@ -36,6 +36,9 @@
 				</div>
 				<div class="small-9 columns">
 					{{ Form::file('image', [ 'id' => 'image' ]) }}
+					@if (isset($Instansi->img->img)) 
+						<label for="image" class="left">Upload gambar baru untuk mengubah gambar.</label>
+					@endif
 				</div>
 			</div><!-- end of row -->
 
@@ -46,21 +49,11 @@
 					<fieldset>
 						<legend>Pelayanan</legend>
 						<ul>
-							<li>
-								{{ Form::checkbox('pelayanan[]', 0, 0, array('id' => 'checkbox1')) }}{{ Form::label('checkbox1', 'Kartu Tanda Penduduk') }}
-							</li>
-							<li>
-								{{ Form::checkbox('pelayanan[]', 0, 0, array('id' => 'checkbox2')) }}{{ Form::label('checkbox2', 'Kartu Keluarga') }}
-							</li>
-							<li>
-								{{ Form::checkbox('pelayanan[]', 0, 0, array('id' => 'checkbox3')) }}{{ Form::label('checkbox3', 'Akta Lahir') }}
-							</li>
-							<li>
-								{{ Form::checkbox('pelayanan[]', 0, 0, array('id' => 'checkbox4')) }}{{ Form::label('checkbox4', 'Akta Kematian') }}
-							</li>
-							<li>
-								{{ Form::checkbox('pelayanan[]', 0, 0, array('id' => 'checkbox5')) }}{{ Form::label('checkbox5', 'Surat Perceraian') }}
-							</li>
+							@foreach ($Pelayanan as $List)
+								<li>
+									{{ Form::checkbox('pelayanan[]', $List->id, $Instansi->pelayanan->find($List->id) ? 1 : 0, array('id' => 'checkbox1')) }}{{ Form::label('checkbox1', $List->name) }}
+								</li>
+							@endforeach
 						</ul>
 					</fieldset>
 				</div>

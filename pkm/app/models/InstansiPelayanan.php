@@ -5,11 +5,11 @@ class InstansiPelayanan extends Eloquent {
 	protected $fillable = array('pelayanan_id');
 	public $timestamps = false;
 
-	public function insList() {
+	public function instansi() {
 		return $this->belongsTo('Instansi', 'instansi_id', 'id');
 	}
 
-	public function pelList() {
+	public function pelayanan() {
 		return $this->belongsTo('Pelayanan', 'pelayanan_id', 'id');
 	}
 }

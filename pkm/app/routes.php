@@ -118,3 +118,14 @@ Route::get('dashboard/opini/form/{id}', 'DetailController@opini');
 /*
 END ADMIN PAGE
 */
+
+/*
+CITIZEN PAGE
+*/
+
+Route::get('opini/form/{object}/{id}', 'FormController@opini');
+Route::post('opini/form/{object}/{id}', 'FormController@sOpini');
+
+/*
+END CITIZEN PAGE
+*/

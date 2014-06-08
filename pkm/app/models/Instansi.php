@@ -9,7 +9,7 @@ class Instansi extends Eloquent {
 		return $this->belongsToMany('Pelayanan', 'instansi_pelayanan', 'instansi_id', 'pelayanan_id');
 	}
 
-	public function pelList() {
+	public function pelayanan_list() {
 		return $this->hasMany('InstansiPelayanan', 'instansi_id');
 	}
 
