@@ -184,9 +184,9 @@ CREATE TABLE IF NOT EXISTS `opini` (
   PRIMARY KEY (`id`),
   KEY `FK_opini_person` (`person_id`),
   CONSTRAINT `FK_opini_person` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table empus.opini: ~0 rows (approximately)
+-- Dumping data for table empus.opini: ~2 rows (approximately)
 /*!40000 ALTER TABLE `opini` DISABLE KEYS */;
 INSERT INTO `opini` (`id`, `title`, `type`, `person_id`, `ts_created`) VALUES
 	(5, 'SDSD', 1, 17, '2014-06-08 18:18:49'),
@@ -202,9 +202,9 @@ CREATE TABLE IF NOT EXISTS `opini_desc` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `opini_id` (`opini_id`),
   CONSTRAINT `opini_desc_ibfk_1` FOREIGN KEY (`opini_id`) REFERENCES `opini` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table empus.opini_desc: ~0 rows (approximately)
+-- Dumping data for table empus.opini_desc: ~2 rows (approximately)
 /*!40000 ALTER TABLE `opini_desc` DISABLE KEYS */;
 INSERT INTO `opini_desc` (`id`, `opini_id`, `desc`) VALUES
 	(4, 5, 'adADFADFDA'),
@@ -225,6 +225,25 @@ CREATE TABLE IF NOT EXISTS `opini_img` (
 -- Dumping data for table empus.opini_img: ~0 rows (approximately)
 /*!40000 ALTER TABLE `opini_img` DISABLE KEYS */;
 /*!40000 ALTER TABLE `opini_img` ENABLE KEYS */;
+
+
+-- Dumping structure for table empus.opini_instansi_pelayanan
+CREATE TABLE IF NOT EXISTS `opini_instansi_pelayanan` (
+  `id` int(11) NOT NULL,
+  `opini_id` int(11) NOT NULL,
+  `instansi_pelayanan_id` int(11) NOT NULL,
+  PRIMARY KEY (`opini_id`,`instansi_pelayanan_id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `instansi_pelayanan_id` (`instansi_pelayanan_id`),
+  CONSTRAINT `opini_instansi_pelayanan_ibfk_1` FOREIGN KEY (`opini_id`) REFERENCES `opini` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `opini_instansi_pelayanan_ibfk_2` FOREIGN KEY (`instansi_pelayanan_id`) REFERENCES `instansi_pelayanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table empus.opini_instansi_pelayanan: ~1 rows (approximately)
+/*!40000 ALTER TABLE `opini_instansi_pelayanan` DISABLE KEYS */;
+INSERT INTO `opini_instansi_pelayanan` (`id`, `opini_id`, `instansi_pelayanan_id`) VALUES
+	(0, 6, 8);
+/*!40000 ALTER TABLE `opini_instansi_pelayanan` ENABLE KEYS */;
 
 
 -- Dumping structure for table empus.pelayanan
