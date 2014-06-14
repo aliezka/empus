@@ -126,6 +126,9 @@ CITIZEN PAGE
 Route::get('opini/form/{object}/{id}', 'FormController@opini');
 Route::post('opini/form/{object}/{id}', 'FormController@sOpini');
 
+Route::get('komentar/{opini}/form', 'FormController@komentar');
+Route::post('komentar/{opini}/form', 'FormController@sKomentar');
+
 /*
 END CITIZEN PAGE
 */

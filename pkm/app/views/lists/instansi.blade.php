@@ -10,7 +10,7 @@
 
 	<div class="row">
 		<div class="small-12 medium-6 columns grid-control">
-			<a href="form_instansi.html" class="button primary small">Create</a>
+			<a href="{{ URL::to('dashboard/instansi/form') }}" class="button primary small">Create</a>
 		</div>
 		<div class="small-12 medium-6 columns">
 			<form>
@@ -31,16 +31,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td><a href="">Kelurahan Cibinong</a></td>
-						<td class="grid-buttons"><a href="" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="">Kelurahan Sindangsari</a></td>
-						<td class="grid-buttons"><a href="" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
-					</tr>
+					@foreach ($lists as $Count => $list) 
+						<tr>
+							<td>{{ $Count + 1 }}</td>
+							<td><a href="{{ URL::to('dashboard/instansi/form/'.$list->id) }}">{{ $list->name }}</a></td>
+							<td class="grid-buttons"><a href="" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
+						</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div><!-- end of col -->
