@@ -91,9 +91,12 @@ Route::post('dashboard/instansi/form/{id}', 'FormController@sInstansi');
 
 // Pelayanan
 Route::get('dashboard/pelayanan', 'ListController@pelayanan');
+// New Record
 Route::get('dashboard/pelayanan/form', 'FormController@pelayanan');
 Route::post('dashboard/pelayanan/form', 'FormController@sPelayanan');
-Route::get('dashboard/pelayanan/form/{id}', 'DetailController@pelayanan');
+// Update Record
+Route::get('dashboard/pelayanan/form/{id}', 'FormController@pelayanan');
+Route::post('dashboard/pelayanan/form/{id}', 'FormController@sPelayanan');
 
 // Pelayanan - Persyaratan
 Route::get('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@persyaratan');
@@ -125,6 +128,9 @@ CITIZEN PAGE
 
 Route::get('opini/form/{object}/{id}', 'FormController@opini');
 Route::post('opini/form/{object}/{id}', 'FormController@sOpini');
+
+Route::get('komentar/{opini}/form', 'FormController@komentar');
+Route::post('komentar/{opini}/form', 'FormController@sKomentar');
 
 /*
 END CITIZEN PAGE

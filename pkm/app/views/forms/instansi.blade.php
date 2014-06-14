@@ -51,7 +51,7 @@
 						<ul>
 							@foreach ($Pelayanan as $List)
 								<li>
-									{{ Form::checkbox('pelayanan[]', $List->id, $Instansi->pelayanan->find($List->id) ? 1 : 0, array('id' => 'checkbox1')) }}{{ Form::label('checkbox1', $List->name) }}
+									{{ Form::checkbox('pelayanan[]', $List->id, is_object($Instansi) ? $Instansi->pelayanan->find($List->id) : null ? 1 : 0, array('id' => 'checkbox1')) }}{{ Form::label('checkbox1', $List->name) }}
 								</li>
 							@endforeach
 						</ul>

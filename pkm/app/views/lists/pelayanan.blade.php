@@ -3,7 +3,7 @@
 		<div class="small-12 medium-12 columns grid-control">
 			<ul class="breadcrumbs">
 				<li><a href="#">Admin</a></li>
-				<li class="current"><a href="#">Instansi</a></li>
+				<li class="current"><a href="#">Pelayanan</a></li>
 			</ul>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>Nama Instansi</th>
+						<th>Pelayanan</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -34,7 +34,7 @@
 					@foreach ($lists as $Count => $list) 
 						<tr>
 							<td>{{ $Count + 1 }}</td>
-							<td><a href="{{ URL::to('dashboard/instansi/form/'.$list->id) }}">{{ $list->name }}</a></td>
+							<td><a href="{{ URL::to('dashboard/pelayanan/form/'.$list->id) }}">{{ $list->name }}</a></td>
 							<td class="grid-buttons"><a href="" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
 						</tr>
 					@endforeach
