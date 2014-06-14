@@ -278,5 +278,30 @@ p{
 }
 .panel-opini .panel-body h6{
 	font-size: 16px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.panel-opini .panel-body .info{
+	margin-top: 5px;
+	line-height: 12px;
+}
+.panel-opini .panel-body .name{
+	margin-right: 5px;
+	margin-top: 5px;
+	line-height: 10px;
+}
+.panel-opini .panel-body .instansi{
+	font-size: 10px;
+	color: #999;
+}
+.panel-opini .panel-body .instansi span{
+	color: #008cba;
+
+}
+.panel-opini .panel-body .date{
+	color: #999;
+}
+.panel-opini .panel-body p{
+	margin-top: 5px;
 }
 
