@@ -5,6 +5,14 @@ class Pelayanan extends Eloquent {
 	protected $fillable = array('name');
 	public $timestamps = false;
 
+	public function berita() {
+		return $this->belongsToMany('Berita', 'berita_pelayanan', 'pelayanan_id', 'berita_id');
+	}
+
+	public function berita_list() {
+		return $this->hasMany('BeritaPelayanan', 'pelayanan_id');
+	}
+
 	public function desc() {
 		return $this->hasOne('PelayananDesc', 'pelayanan_id');
 	}

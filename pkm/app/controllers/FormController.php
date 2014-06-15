@@ -387,4 +387,79 @@ class FormController extends BaseController {
 			return Redirect::to('dashboard/prosedur');	
 		}
 	}
+
+	function berita($id = null) {
+		$Pelayanan = Pelayanan::all();
+		$Instansi = Instansi::all();
+
+		$this->layout = View::make('layouts.admin');
+		$this->layout->content = View::make('forms.berita')
+			->with('Pelayanan', $Pelayanan)
+			->with('Instansi', $Instansi);
+	}
+
+	function sBerita() {
+		$rules = array(
+					'instansi' => ' array ',
+					'pelayanan' => ' array ',
+					'title' => ' required | min:4 ',
+					'desc' => ' required | min:4 ',
+					'image' => ' image '
+				);
+
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
+			return Redirect::to('dashboard/berita/form')
+				->withInput(Input::except('image'))
+				->withErrors($validator);
+		} else {
+			$Berita = new Berita;
+			$Berita->fill(Input::all());
+			$Berita->save();
+
+			// Image
+			if (Input::hasFile('image')) {
+				$FileName = $Berita->id;
+				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
+
+				Input::file('image')->move(Config::get('empus.berita_img'), $FileName);
+
+				$BeritaImg = new BeritaImg;
+				$BeritaImg->img = $FileName;
+				$BeritaImg->berita()->associate($Berita);
+				$BeritaImg->save();
+			}
+			// End Image
+
+			// Desc
+			$BeritaDesc = new BeritaDesc;
+			$BeritaDesc->desc = Input::get('desc');
+			$BeritaDesc->berita()->associate($Berita);
+			$BeritaDesc->save();
+			// End Desc
+
+			DB::transaction(function() use($Berita) {
+				// Instansi
+				$BeritaInstansi = new BeritaInstansi;
+				$Arr = Input::get('instansi', array());
+				foreach ($Arr as $Ar) {
+					$BeritaInstansi->berita()->associate($Berita);
+					$BeritaInstansi->instansi()->associate(Instansi::find($Ar));
+					$BeritaInstansi->save();
+				}
+
+				// Pelayanan
+				$BeritaPelayanan = new BeritaPelayanan;
+				$Arr = Input::get('pelayanan');
+				foreach ($Arr as $Ar) {
+					$BeritaPelayanan->berita()->associate($Berita);
+					$BeritaPelayanan->pelayanan()->associate(Pelayanan::find($Ar));
+					$BeritaPelayanan->save();
+				}
+			});
+
+			return Redirect::to('/');
+		}
+	}
 }

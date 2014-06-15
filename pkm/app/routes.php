@@ -107,9 +107,11 @@ Route::get('dashboard/pelayanan/prosedur/{id}/form', 'FormController@prosedur');
 Route::post('dashboard/pelayanan/prosedur/{id}/form', 'FormController@sProsedur');
 
 // Berita
-Route::get('dashboard/berita', 'ListController@dBerita');
+Route::get('dashboard/berita', 'ListController@berita');
+// New Record
 Route::get('dashboard/berita/form', 'FormController@berita');
 Route::post('dashboard/berita/form', 'FormController@sBerita');
+// Update Record
 Route::get('dashboard/berita/form/{id}', 'DetailController@berita');
 
 // Opini
