@@ -34,7 +34,7 @@
 					@foreach ($lists as $Count => $list) 
 						<tr>
 							<td>{{ $Count + 1 }}</td>
-							<td><a href="{{ URL::to('dashboard/pelayanan/form/'.$list->id) }}">{{ $list->name }}</a></td>
+							<td><a href="{{ URL::to('dashboard/berita/form/'.$list->id) }}">{{ $list->title }}</a></td>
 							<td class="grid-buttons"><a href="" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
 						</tr>
 					@endforeach

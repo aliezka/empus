@@ -9,7 +9,7 @@
 		</div>
 	</div>
 
-	{{ Form::open() }}
+	{{ Form::open(['data-abide']) }}
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="row">
@@ -17,7 +17,8 @@
 					<label for="name" class="right inline">Nama</label>
 				</div>
 				<div class="small-9 columns">
-					{{ Form::text('name', null, array('placeholder' => 'Nama Pelayanan', 'required', 'autofocus')) }}
+					{{ Form::text('name', isset($Pelayanan->name) ? $Pelayanan->name : null, array('placeholder' => 'Nama Pelayanan', 'required', 'autofocus')) }}
+					<small class="error">{{ $errors->first('name') ? $errors->first('name') : 'Nama pelayanan harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
 
@@ -26,7 +27,8 @@
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'id' => 'name']) }}
+					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'required']) }}
+					<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : 'Deskripsi pelayanan harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
 

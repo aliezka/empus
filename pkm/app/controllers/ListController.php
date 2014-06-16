@@ -28,4 +28,14 @@ class ListController extends BaseController {
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('lists.pelayanan')->with('lists', $Lists);
 	}
+	
+	function berita() {
+		$Berita = new Berita;
+		$Berita->skip($this->offset)->take($this->perPage);
+
+		$Lists = $Berita->get();
+
+		$this->layout = View::make('layouts.admin');
+		$this->layout->content = View::make('lists.berita')->with('lists', $Lists);
+	}
 }
