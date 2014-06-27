@@ -16,7 +16,7 @@
 				<div class="small-3 columns">
 					<label for="name" class="right inline">Nama</label>
 				</div>
-				<div class="small-9 columns">
+				<div class="small-9 columns {{ $errors->first('name') ? 'error' : null }}">
 					{{ Form::text('name', isset($Pelayanan->name) ? $Pelayanan->name : null, array('placeholder' => 'Nama Pelayanan', 'required', 'autofocus')) }}
 					<small class="error">{{ $errors->first('name') ? $errors->first('name') : 'Nama pelayanan harus diisi' }}</small>
 				</div>
@@ -26,7 +26,7 @@
 				<div class="small-3 columns">
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
-				<div class="small-9 columns">
+				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
 					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'required']) }}
 					<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : 'Deskripsi pelayanan harus diisi' }}</small>
 				</div>

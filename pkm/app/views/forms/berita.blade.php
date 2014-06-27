@@ -50,24 +50,24 @@
 
 				<div class="row">
 					<div class="small-3 columns">
-						<label for="name" class="right inline">Judul</label>
+						<label for="title" class="right inline">Judul</label>
 					</div>
-					<div class="small-9 columns">
+					<div class="small-9 columns {{ $errors->first('title') ? 'error' : null }}">
 						<div class="name-field">
 							{{ Form::text('title', null, array('placeholder' => 'Judul', 'required')) }}
-							<small class="error">Nama harus diisi</small>
+							<small class="error">{{ $errors->first('title') ? $errors->first('title') : 'Judul harus diisi' }}</small>
 						</div>
 					</div>
 				</div><!-- end of row -->
 
 				<div class="row">
 					<div class="small-3 columns">
-						<label for="name" class="right inline">Isi</label>
+						<label for="desc" class="right inline">Isi</label>
 					</div>
-					<div class="small-9 columns">
+					<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
 						<div class="description-field">
 							{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi', 'required']) }}
-							<small class="error">Isi harus diisi</small>
+							<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : 'Isi berita harus diisi' }}</small>
 						</div>
 					</div>
 				</div><!-- end of row -->

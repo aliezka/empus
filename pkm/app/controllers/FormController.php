@@ -20,7 +20,7 @@ class FormController extends BaseController {
 		$Instansi = !is_null($id) ? Instansi::find($id) : new Instansi;
 
 		$rules = array(
-					'name' => ' required | alpha_spaces | min:3 ',
+					'name' => ' required | alpha_spaces | min:3 | unique:instansi,name',
 					'desc' => ' required | min:4 ',
 					'image' => ' required | image '
 				);
@@ -105,12 +105,13 @@ class FormController extends BaseController {
 
 	function sPelayanan() {
 		$rules = array(
-					'name' => ' required | alpha_spaces | min:3 ',
+					'name' => ' required | alpha_spaces | min:3 | unique:pelayanan,name',
 					'desc' => ' required | min:4 '
 				);
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
 			return Redirect::to('dashboard/pelayanan/form')
 				->withInput(Input::all())
 				->withErrors($validator);
@@ -146,7 +147,7 @@ class FormController extends BaseController {
 			$rules = array(
 						'order' => ' required | numeric | min:0 ',
 						'title' => ' required | alpha_spaces | min:3 ',
-						'desc' => ' min:4 | unique:persyaratan,order',
+						'desc' => ' min:4 | unique:persyaratan,order,null,null,pelayanan_id,'.$id,
 						'image' => ' image '
 					);
 			

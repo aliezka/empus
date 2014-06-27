@@ -18,6 +18,16 @@ class ListController extends BaseController {
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('lists.instansi')->with('lists', $Lists);
 	}
+
+	function pInstansi() {
+		$Instansi = new Instansi;
+		$Instansi->skip($this->offset)->take($this->perPage);
+
+		$Lists = $Instansi->get();
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.pInstansi')->with('lists', $Lists);
+	}
 	
 	function pelayanan() {
 		$Pelayanan = new Pelayanan;
@@ -27,6 +37,16 @@ class ListController extends BaseController {
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('lists.pelayanan')->with('lists', $Lists);
+	}
+	
+	function pPelayanan() {
+		$Pelayanan = new Pelayanan;
+		$Pelayanan->skip($this->offset)->take($this->perPage);
+
+		$Lists = $Pelayanan->get();
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.pPelayanan')->with('lists', $Lists);
 	}
 	
 	function berita() {
