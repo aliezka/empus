@@ -331,3 +331,70 @@ p{
 	margin: 7px 0.9375rem;
 
 }
+
+/* ========== Berita =========== */
+.berita .panel-body h6{
+	margin-bottom: 3px;
+}
+.berita .date{
+	color: #999;
+	font-size: 10px;
+	line-height: 12px;
+	margin-bottom: 3px;
+}
+.berita .tags{
+	font-size: 10px;
+	line-height: 12px;
+	color: #999;
+}
+.berita .tags .fa{
+	font-size: 8px;
+}
+.berita .tags .fa:before{
+	margin-right: 5px;
+}
+.berita li .row:last-child{
+	padding-top: 0;
+}
+.berita li .row:first-child{
+	padding-bottom: 3px;
+}
+
+/* ========= Berita Detail ======== */
+.berita-detail .banner{
+	min-width: 100%;
+	height: 170px;
+	background-position: center center;
+	background-size: cover;
+}
+.berita-detail h6{
+	color: #F0BB12;
+	margin: 0.5rem 0;
+	font-size: 20px;
+	line-height: 20px;
+}
+.berita-detail p{
+	font-size: 15px!important;
+	margin-bottom: 15px;
+}
+.berita-detail .panel{
+	margin-top: 20px;
+}
+.berita-detail .panel h6{
+	color: #222;
+	font-size: 18px;
+}
+.berita-detail .panel.info ul{
+	background-color: #fff;
+}
+.berita-detail .panel.info li{
+	margin-bottom: 5px;
+	padding: 3px 0.9375rem;
+	font-size: 14px;
+	border: 1px #d4d4d4 solid;
+	background-color: #f2f2f2;
+
+}
+.berita-detail .panel-heading{
+	border-top: 1px #e1e1e1 solid;
+}
