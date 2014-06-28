@@ -9,24 +9,30 @@
 		</div>
 	</div>
 
-	{{ Form::open(array('files'=> true)) }}
+	{{ Form::open(array('files'=> true, 'data-abide')) }}
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="row">
 				<div class="small-3 columns">
 					<label for="name" class="right inline">Nama</label>
 				</div>
-				<div class="small-9 columns">
-					{{ Form::text('name', isset($Instansi->name) ? $Instansi->name : null, array('placeholder' => 'Nama Intansi', 'required', 'autofocus')) }}
+				<div class="small-9 columns {{ $errors->first('name') ? 'error' : null }}">
+					<div class="name-field">
+						{{ Form::text('name', isset($Instansi->name) ? $Instansi->name : null, array('placeholder' => 'Nama Intansi', 'required', 'autofocus')) }}
+						<small class="error">{{ $errors->first('name') ? $errors->first('name') : 'Nama harus diisi' }}</small>
+					</div>
 				</div>
 			</div><!-- end of row -->
 
 			<div class="row">
 				<div class="small-3 columns">
-					<label for="name" class="right inline">Deskripsi</label>
+					<label for="name" class="right inline">Isi</label>
 				</div>
-				<div class="small-9 columns">
-					{{ Form::textarea('desc', isset($Instansi->desc->desc) ? $Instansi->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Instansi', 'id' => 'name']) }}
+				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
+					<div class="description-field">
+						{{ Form::textarea('desc', isset($Instansi->desc->desc) ? $Instansi->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Instansi', 'required']) }}
+						<small class="error">Isi harus diisi</small>
+					</div>
 				</div>
 			</div><!-- end of row -->
 
@@ -34,10 +40,12 @@
 				<div class="small-3 columns">
 					<label for="image" class="right">Image</label>
 				</div>
-				<div class="small-9 columns">
-					{{ Form::file('image', [ 'id' => 'image' ]) }}
+				<div class="small-9 columns {{ $errors->first('image') ? 'image' : null }}">
+					{{ Form::file('image', [ isset($Instansi->img->img) ? null : 'required' ]) }}
 					@if (isset($Instansi->img->img)) 
 						<label for="image" class="left">Upload gambar baru untuk mengubah gambar.</label>
+					@else 
+						<small class="error">File harus diisi</small>
 					@endif
 				</div>
 			</div><!-- end of row -->

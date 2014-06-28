@@ -27,13 +27,13 @@
 			<div class="snap-drawer snap-drawer-left">
 				<aside class="">
 					<ul class="off-canvas-list">
-						<li><a href="index.html"><i class="fa fa-home"></i>Beranda</a></li>
-						<li><a href="#"><i class="fa fa-building-o"></i>Instansi</a></li>
-						<li><a href="#"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
-						<li><a href="#"><i class="fa fa-bullhorn"></i>Berita</a></li>
-						<li><a href="#"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
-						<li><a href="#"><i class="fa fa-cog"></i>Pengaturan</a></li>
-						<li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
+						<li><a href="{{ URL::to('dashboard') }}"><i class="fa fa-home"></i>Beranda</a></li>
+						<li><a href="{{ URL::to('dashboard/instansi') }}"><i class="fa fa-building-o"></i>Instansi</a></li>
+						<li><a href="{{ URL::to('dashboard/pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
+						<li><a href="{{ URL::to('dashboard/berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
+						<li><a href="{{ URL::to('dashboard/opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
+						<li><a href="{{ URL::to('dashboard/pengaturan') }}"><i class="fa fa-cog"></i>Pengaturan</a></li>
+						<li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-in"></i>Logout</a></li>
 					</ul>
 				</aside>
 			</div> 
@@ -62,21 +62,20 @@
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name">
-						<hi><a href="index.html">EMPUS</a></hi>
+						<hi><a href="{{ URL::to('dashboard') }}">EMPUS</a></hi>
 					</li>
 				</ul>
 				<section class="top-bar-section">
 					<ul class="left">
-						<li><a href="">Instansi</a></li>
-						<li><a href="">Pelayanan</a></li>
-						<li><a href="">Berita</a></li>
-						<li><a href="">Opini</a></li>
-						<li><a href=""></a></li>
+						<li><a href="{{ URL::to('dashboard/instansi') }}">Instansi</a></li>
+						<li><a href="{{ URL::to('dashboard/pelayanan') }}">Pelayanan</a></li>
+						<li><a href="{{ URL::to('dashboard/berita') }}">Berita</a></li>
+						<li><a href="{{ URL::to('dashboard/opini') }}">Opini</a></li>
 					</ul>
 				</section>
 				<section class="top-bar-section">
 					<ul class="right">
-						<li><a href="#" >Login</a></li>
+						<li><a href="{{ URL::to('logout') }}" >Logout</a></li>
 					</ul>
 				</section>
 			</nav>
@@ -86,7 +85,6 @@
 		{{ !empty($content) ? $content : null }}
 		<!-- END CONTENT -->
 		
-		<script src="{{ asset('assets/js/vendor/jquery.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/fastclick.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/iscroll.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/snap.js') }}"></script>
