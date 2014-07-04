@@ -24,11 +24,11 @@ PUBLIC PAGE
 Route::get('home', 'ListController@index');
 
 // Instansi
-Route::get('instansi', 'ListController@instansi');
+Route::get('instansi', 'ListController@pInstansi');
 Route::get('instansi/detail/{id}', 'DetailController@instansi');
 
 // Pelayanan
-Route::get('pelayanan', 'ListController@pelayanan');
+Route::get('pelayanan', 'ListController@pPelayanan');
 Route::get('pelayanan/detail/{id}', 'DetailController@pelayanan');
 
 // Berita

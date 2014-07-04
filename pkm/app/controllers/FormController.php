@@ -20,17 +20,20 @@ class FormController extends BaseController {
 		$Instansi = !is_null($id) ? Instansi::find($id) : new Instansi;
 
 		$rules = array(
-					'name' => ' required | alpha_spaces | min:3 | unique:instansi,name',
 					'desc' => ' required | min:4 ',
 					'image' => ' required | image '
 				);
+
+		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
+
+		$rules += $rule_name;
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			$Path = 'dashboard/instansi/form';
 			$Path .= !is_null($id) ? '/'.$id : null;
 
-			return Redirect::to($Path)
+			return Redirect::to(Route::current())
 				->with('Pelayanan', $Pelayanan)
 				->with('Instansi', $Instansi)
 				->withInput(Input::except('image'))
@@ -98,33 +101,45 @@ class FormController extends BaseController {
 		}
 	}
 
-	function pelayanan() {
+	function pelayanan($id = null) {
+		$Pelayanan = !is_null($id) ? Pelayanan::find($id) : null;
+
 		$this->layout = View::make('layouts.admin');
-		$this->layout->content = View::make('forms.pelayanan');
+		$this->layout->content = View::make('forms.pelayanan')
+			->with('Pelayanan', $Pelayanan);
 	}
 
-	function sPelayanan() {
+	function sPelayanan($id = null) {
+		$Pelayanan = !is_null($id) ? Pelayanan::find($id) : new Pelayanan;
+
 		$rules = array(
-					'name' => ' required | alpha_spaces | min:3 | unique:pelayanan,name',
 					'desc' => ' required | min:4 '
 				);
+
+		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Pelayanan->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
+
+		$rules += $rule_name; 
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			Log::warning($validator->messages()->all());
 			return Redirect::to('dashboard/pelayanan/form')
+				->with('Pelayanan', $Pelayanan)
 				->withInput(Input::all())
 				->withErrors($validator);
 		} else {
-			$Pelayanan = new Pelayanan;
 			$Pelayanan->name = Input::get('name');
 			$Pelayanan->save();
 
 			// Desc
-			$PelayananDesc = new PelayananDesc;
-			$PelayananDesc->desc = Input::get('desc');
-			$PelayananDesc->pelayanan()->associate($Pelayanan);
-			$PelayananDesc->save();
+			if (!is_null($id)) {
+				PelayananDesc::where('pelayanan_id', '=', $id)->update(['desc' => Input::get('desc')]);
+			} else {
+				$PelayananDesc = new PelayananDesc;
+				$PelayananDesc->desc = Input::get('desc');
+				$PelayananDesc->pelayanan()->associate($Pelayanan);
+				$PelayananDesc->save();
+			}
 			// End Desc
 
 			return Redirect::to('/');

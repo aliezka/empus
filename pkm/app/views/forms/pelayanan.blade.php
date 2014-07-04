@@ -27,7 +27,7 @@
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'required']) }}
+					{{ Form::textarea('desc', isset($Pelayanan->desc->desc) ? $Pelayanan->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'required']) }}
 					<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : 'Deskripsi pelayanan harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
