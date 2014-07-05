@@ -112,7 +112,8 @@ Route::get('dashboard/berita', 'ListController@berita');
 Route::get('dashboard/berita/form', 'FormController@berita');
 Route::post('dashboard/berita/form', 'FormController@sBerita');
 // Update Record
-Route::get('dashboard/berita/form/{id}', 'DetailController@berita');
+Route::get('dashboard/berita/form/{id}', 'FormController@berita');
+Route::post('dashboard/berita/form/{id}', 'FormController@sBerita');
 
 // Opini
 Route::get('dashboard/opini', 'ListController@dOpini');

@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="small-12 medium-12 columns grid-control">
 			<ul class="breadcrumbs">
-				<li><a href="#">Admin</a></li>
+				<li><a href="{{ URL::to('dashboard') }}">Admin</a></li>
 				<li><a href="#">Berita</a></li>
 				<li class="current"><a href="#">create</a></li>
 			</ul>

@@ -407,14 +407,16 @@ class FormController extends BaseController {
 	function berita($id = null) {
 		$Pelayanan = Pelayanan::all();
 		$Instansi = Instansi::all();
+		$Berita = !is_null($id) ? Berita::find($id) : null;
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('forms.berita')
 			->with('Pelayanan', $Pelayanan)
-			->with('Instansi', $Instansi);
+			->with('Instansi', $Instansi)
+			->with('Berita', $Berita);
 	}
 
-	function sBerita() {
+	function sBerita($id) {
 		$rules = array(
 					'instansi' => ' array ',
 					'pelayanan' => ' array ',
@@ -423,6 +425,8 @@ class FormController extends BaseController {
 					'image' => ' image '
 				);
 
+		$Berita = !is_null($id) ? Berita::find($id) : new Berita;
+
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			Log::warning($validator->messages()->all());
@@ -430,7 +434,6 @@ class FormController extends BaseController {
 				->withInput(Input::except('image'))
 				->withErrors($validator);
 		} else {
-			$Berita = new Berita;
 			$Berita->fill(Input::all());
 			$Berita->save();
 
@@ -441,39 +444,79 @@ class FormController extends BaseController {
 
 				Input::file('image')->move(Config::get('empus.berita_img'), $FileName);
 
-				$BeritaImg = new BeritaImg;
-				$BeritaImg->img = $FileName;
-				$BeritaImg->berita()->associate($Berita);
-				$BeritaImg->save();
+				if (!is_null($id)) {
+					BeritaImg::where('berita_id', '=', $id)->update(['img' => $FileName]);
+				} else {
+					$BeritaImg = new BeritaImg;
+					$BeritaImg->img = $FileName;
+					$BeritaImg->berita()->associate($Berita);
+					$BeritaImg->save();
+				}
 			}
 			// End Image
 
 			// Desc
-			$BeritaDesc = new BeritaDesc;
-			$BeritaDesc->desc = Input::get('desc');
-			$BeritaDesc->berita()->associate($Berita);
-			$BeritaDesc->save();
+			if (!is_null($id)) {
+				BeritaDesc::where('berita_id', '=', $id)->update(['desc' => Input::get('desc')]);
+			} else {
+				$BeritaDesc = new BeritaDesc;
+				$BeritaDesc->desc = Input::get('desc');
+				$BeritaDesc->berita()->associate($Berita);
+				$BeritaDesc->save();
+			}
 			// End Desc
 
-			DB::transaction(function() use($Berita) {
-				// Instansi
-				$BeritaInstansi = new BeritaInstansi;
-				$Arr = Input::get('instansi', array());
-				foreach ($Arr as $Ar) {
-					$BeritaInstansi->berita()->associate($Berita);
-					$BeritaInstansi->instansi()->associate(Instansi::find($Ar));
-					$BeritaInstansi->save();
-				}
+			// Pelayanan
+			$Pelayanan = array();
+			$RPelayanan = $Berita->pelayanan;
 
-				// Pelayanan
-				$BeritaPelayanan = new BeritaPelayanan;
-				$Arr = Input::get('pelayanan');
-				foreach ($Arr as $Ar) {
-					$BeritaPelayanan->berita()->associate($Berita);
-					$BeritaPelayanan->pelayanan()->associate(Pelayanan::find($Ar));
-					$BeritaPelayanan->save();
+			foreach ($RPelayanan as $R) {
+				$Pelayanan[] = $R->id;
+			} 
+
+			$Diff = array_diff($Pelayanan, Input::get('pelayanan', array()));
+			if (count($Diff) > 0) {
+				$Berita->pelayanan_list()->delete($Diff);
+			}
+
+			if (count(Input::get('pelayanan', array())) > 0) {
+				foreach (Input::get('pelayanan') as $Ar) {
+					$BeritaPelayanan = new BeritaPelayanan;
+					if ($BeritaPelayanan->where('berita_id', '=', $Berita->id)->where('pelayanan_id', '=', $Ar)->count() == 0) {
+						$BeritaPelayanan->berita()->associate($Berita);
+						$BeritaPelayanan->pelayanan()->associate(Pelayanan::find($Ar));
+
+						$BeritaPelayanan->save();
+					}
 				}
-			});
+			}
+			// End Pelayanan
+
+			// Instansi
+			$Instansi = array();
+			$RInstansi = $Berita->instansi;
+
+			foreach ($RInstansi as $R) {
+				$Instansi[] = $R->id;
+			} 
+
+			$Diff = array_diff($Instansi, Input::get('instansi', array()));
+			if (count($Diff) > 0) {
+				$Berita->instansi_list()->delete($Diff);
+			}
+
+			if (count(Input::get('instansi', array())) > 0) {
+				foreach (Input::get('instansi') as $Ar) {
+					$BeritaInstansi = new BeritaInstansi;
+					if ($BeritaInstansi->where('berita_id', '=', $Berita->id)->where('instansi_id', '=', $Ar)->count() == 0) {
+						$BeritaInstansi->berita()->associate($Berita);
+						$BeritaInstansi->instansi()->associate(Instansi::find($Ar));
+
+						$BeritaInstansi->save();
+					}
+				}
+			}
+			// End Instansi
 
 			return Redirect::to('/');
 		}
