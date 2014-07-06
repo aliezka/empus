@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="small-12 medium-12 columns grid-control">
 			<ul class="breadcrumbs">
-				<li><a href="#">Admin</a></li>
-				<li><a href="#">Instansi</a></li>
+				<li><a href="{{ URL::to('dashboard') }}">Admin</a></li>
+				<li><a href="{{ URL::to('dashboard/instansi') }}">Instansi</a></li>
 				<li class="current"><a href="#">create</a></li>
 			</ul>
 		</div>
@@ -40,10 +40,14 @@
 				<div class="small-3 columns">
 					<label for="image" class="right">Image</label>
 				</div>
-				<div class="small-9 columns {{ $errors->first('image') ? 'image' : null }}">
+				<div class="small-9 columns {{ $errors->first('image') ? 'error' : null }}">
 					{{ Form::file('image', [ isset($Instansi->img->img) ? null : 'required' ]) }}
 					@if (isset($Instansi->img->img)) 
-						<label for="image" class="left">Upload gambar baru untuk mengubah gambar.</label>
+						@if ($errors->first('image')) 
+							<small class="error">{{ $errors->first('image') }}</small>
+						@else
+							<label for="image" class="left">Upload gambar baru untuk mengubah gambar.</label>
+						@endif
 					@else 
 						<small class="error">File harus diisi</small>
 					@endif

@@ -3,11 +3,12 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#instansi").select2({
+
+		$("#instansi"){{ !is_null($Berita) ? '.val('.json_encode($Berita->instansi->lists('id')).')' : null }}.select2({
 			// multiple:true
 		});
 
-		$("#pelayanan").select2({
+		$("#pelayanan"){{ !is_null($Berita) ? '.val('.json_encode($Berita->pelayanan->lists('id')).')' : null }}.select2({
 			// multiple:true
 		});
 	});
@@ -17,13 +18,12 @@
 	<div class="row">
 		<div class="small-12 medium-12 columns grid-control">
 			<ul class="breadcrumbs">
-				<li><a href="#">Admin</a></li>
-				<li><a href="#">Berita</a></li>
-				<li class="current"><a href="#">create</a></li>
+				<li><a href="{{ URL::to('dashboard') }}">Admin</a></li>
+				<li><a href="{{ URL::to('dashboard/berita') }}">Berita</a></li>
+				<li class="current">{{ isset($Berita->title) ? $Berita->title : 'Create' }}</li>
 			</ul>
 		</div>
 	</div>
-
 	{{ Form::open(array('files'=> true, 'data-abide')) }}
 		<div class="row">
 			<div class="small-12 columns">
@@ -54,7 +54,7 @@
 					</div>
 					<div class="small-9 columns {{ $errors->first('title') ? 'error' : null }}">
 						<div class="name-field">
-							{{ Form::text('title', null, array('placeholder' => 'Judul', 'required')) }}
+							{{ Form::text('title', isset($Berita->title) ? $Berita->title : null, array('placeholder' => 'Judul', 'required')) }}
 							<small class="error">{{ $errors->first('title') ? $errors->first('title') : 'Judul harus diisi' }}</small>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 					</div>
 					<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
 						<div class="description-field">
-							{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi', 'required']) }}
+							{{ Form::textarea('desc', isset($Berita->desc->desc) ? $Berita->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi', 'required']) }}
 							<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : 'Isi berita harus diisi' }}</small>
 						</div>
 					</div>

@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="small-12 medium-12 columns grid-control">
 			<ul class="breadcrumbs">
-				<li><a href="#">Admin</a></li>
-				<li><a href="#">Pelayanan</a></li>
+				<li><a href="{{ URL::to('dashboard') }}">Admin</a></li>
+				<li><a href="{{ URL::to('dashboard/pelayanan') }}">Pelayanan</a></li>
 				<li class="current"><a href="#">create</a></li>
 			</ul>
 		</div>
@@ -27,7 +27,7 @@
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'required']) }}
+					{{ Form::textarea('desc', isset($Pelayanan->desc->desc) ? $Pelayanan->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Pelayanan', 'required']) }}
 					<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : 'Deskripsi pelayanan harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->

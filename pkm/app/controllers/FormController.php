@@ -20,17 +20,20 @@ class FormController extends BaseController {
 		$Instansi = !is_null($id) ? Instansi::find($id) : new Instansi;
 
 		$rules = array(
-					'name' => ' required | alpha_spaces | min:3 | unique:instansi,name',
 					'desc' => ' required | min:4 ',
 					'image' => ' required | image '
 				);
+
+		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
+
+		$rules += $rule_name;
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			$Path = 'dashboard/instansi/form';
 			$Path .= !is_null($id) ? '/'.$id : null;
 
-			return Redirect::to($Path)
+			return Redirect::to(Route::current())
 				->with('Pelayanan', $Pelayanan)
 				->with('Instansi', $Instansi)
 				->withInput(Input::except('image'))
@@ -98,33 +101,45 @@ class FormController extends BaseController {
 		}
 	}
 
-	function pelayanan() {
+	function pelayanan($id = null) {
+		$Pelayanan = !is_null($id) ? Pelayanan::find($id) : null;
+
 		$this->layout = View::make('layouts.admin');
-		$this->layout->content = View::make('forms.pelayanan');
+		$this->layout->content = View::make('forms.pelayanan')
+			->with('Pelayanan', $Pelayanan);
 	}
 
-	function sPelayanan() {
+	function sPelayanan($id = null) {
+		$Pelayanan = !is_null($id) ? Pelayanan::find($id) : new Pelayanan;
+
 		$rules = array(
-					'name' => ' required | alpha_spaces | min:3 | unique:pelayanan,name',
 					'desc' => ' required | min:4 '
 				);
+
+		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Pelayanan->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
+
+		$rules += $rule_name; 
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			Log::warning($validator->messages()->all());
 			return Redirect::to('dashboard/pelayanan/form')
+				->with('Pelayanan', $Pelayanan)
 				->withInput(Input::all())
 				->withErrors($validator);
 		} else {
-			$Pelayanan = new Pelayanan;
 			$Pelayanan->name = Input::get('name');
 			$Pelayanan->save();
 
 			// Desc
-			$PelayananDesc = new PelayananDesc;
-			$PelayananDesc->desc = Input::get('desc');
-			$PelayananDesc->pelayanan()->associate($Pelayanan);
-			$PelayananDesc->save();
+			if (!is_null($id)) {
+				PelayananDesc::where('pelayanan_id', '=', $id)->update(['desc' => Input::get('desc')]);
+			} else {
+				$PelayananDesc = new PelayananDesc;
+				$PelayananDesc->desc = Input::get('desc');
+				$PelayananDesc->pelayanan()->associate($Pelayanan);
+				$PelayananDesc->save();
+			}
 			// End Desc
 
 			return Redirect::to('/');
@@ -392,14 +407,16 @@ class FormController extends BaseController {
 	function berita($id = null) {
 		$Pelayanan = Pelayanan::all();
 		$Instansi = Instansi::all();
+		$Berita = !is_null($id) ? Berita::find($id) : null;
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('forms.berita')
 			->with('Pelayanan', $Pelayanan)
-			->with('Instansi', $Instansi);
+			->with('Instansi', $Instansi)
+			->with('Berita', $Berita);
 	}
 
-	function sBerita() {
+	function sBerita($id) {
 		$rules = array(
 					'instansi' => ' array ',
 					'pelayanan' => ' array ',
@@ -408,6 +425,8 @@ class FormController extends BaseController {
 					'image' => ' image '
 				);
 
+		$Berita = !is_null($id) ? Berita::find($id) : new Berita;
+
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			Log::warning($validator->messages()->all());
@@ -415,7 +434,6 @@ class FormController extends BaseController {
 				->withInput(Input::except('image'))
 				->withErrors($validator);
 		} else {
-			$Berita = new Berita;
 			$Berita->fill(Input::all());
 			$Berita->save();
 
@@ -426,39 +444,79 @@ class FormController extends BaseController {
 
 				Input::file('image')->move(Config::get('empus.berita_img'), $FileName);
 
-				$BeritaImg = new BeritaImg;
-				$BeritaImg->img = $FileName;
-				$BeritaImg->berita()->associate($Berita);
-				$BeritaImg->save();
+				if (!is_null($id)) {
+					BeritaImg::where('berita_id', '=', $id)->update(['img' => $FileName]);
+				} else {
+					$BeritaImg = new BeritaImg;
+					$BeritaImg->img = $FileName;
+					$BeritaImg->berita()->associate($Berita);
+					$BeritaImg->save();
+				}
 			}
 			// End Image
 
 			// Desc
-			$BeritaDesc = new BeritaDesc;
-			$BeritaDesc->desc = Input::get('desc');
-			$BeritaDesc->berita()->associate($Berita);
-			$BeritaDesc->save();
+			if (!is_null($id)) {
+				BeritaDesc::where('berita_id', '=', $id)->update(['desc' => Input::get('desc')]);
+			} else {
+				$BeritaDesc = new BeritaDesc;
+				$BeritaDesc->desc = Input::get('desc');
+				$BeritaDesc->berita()->associate($Berita);
+				$BeritaDesc->save();
+			}
 			// End Desc
 
-			DB::transaction(function() use($Berita) {
-				// Instansi
-				$BeritaInstansi = new BeritaInstansi;
-				$Arr = Input::get('instansi', array());
-				foreach ($Arr as $Ar) {
-					$BeritaInstansi->berita()->associate($Berita);
-					$BeritaInstansi->instansi()->associate(Instansi::find($Ar));
-					$BeritaInstansi->save();
-				}
+			// Pelayanan
+			$Pelayanan = array();
+			$RPelayanan = $Berita->pelayanan;
 
-				// Pelayanan
-				$BeritaPelayanan = new BeritaPelayanan;
-				$Arr = Input::get('pelayanan');
-				foreach ($Arr as $Ar) {
-					$BeritaPelayanan->berita()->associate($Berita);
-					$BeritaPelayanan->pelayanan()->associate(Pelayanan::find($Ar));
-					$BeritaPelayanan->save();
+			foreach ($RPelayanan as $R) {
+				$Pelayanan[] = $R->id;
+			} 
+
+			$Diff = array_diff($Pelayanan, Input::get('pelayanan', array()));
+			if (count($Diff) > 0) {
+				$Berita->pelayanan_list()->delete($Diff);
+			}
+
+			if (count(Input::get('pelayanan', array())) > 0) {
+				foreach (Input::get('pelayanan') as $Ar) {
+					$BeritaPelayanan = new BeritaPelayanan;
+					if ($BeritaPelayanan->where('berita_id', '=', $Berita->id)->where('pelayanan_id', '=', $Ar)->count() == 0) {
+						$BeritaPelayanan->berita()->associate($Berita);
+						$BeritaPelayanan->pelayanan()->associate(Pelayanan::find($Ar));
+
+						$BeritaPelayanan->save();
+					}
 				}
-			});
+			}
+			// End Pelayanan
+
+			// Instansi
+			$Instansi = array();
+			$RInstansi = $Berita->instansi;
+
+			foreach ($RInstansi as $R) {
+				$Instansi[] = $R->id;
+			} 
+
+			$Diff = array_diff($Instansi, Input::get('instansi', array()));
+			if (count($Diff) > 0) {
+				$Berita->instansi_list()->delete($Diff);
+			}
+
+			if (count(Input::get('instansi', array())) > 0) {
+				foreach (Input::get('instansi') as $Ar) {
+					$BeritaInstansi = new BeritaInstansi;
+					if ($BeritaInstansi->where('berita_id', '=', $Berita->id)->where('instansi_id', '=', $Ar)->count() == 0) {
+						$BeritaInstansi->berita()->associate($Berita);
+						$BeritaInstansi->instansi()->associate(Instansi::find($Ar));
+
+						$BeritaInstansi->save();
+					}
+				}
+			}
+			// End Instansi
 
 			return Redirect::to('/');
 		}

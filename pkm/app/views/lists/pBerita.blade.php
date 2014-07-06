@@ -10,7 +10,7 @@
 
 	<div class="row">
 		<div class="small-12 medium-6 columns grid-control">
-			<a href="{{ URL::to('dashboard/berita/form') }}" class="button primary small">Create</a>
+			<a href="{{ URL::to('dashboard/instansi/form') }}" class="button primary small">Create</a>
 		</div>
 		<div class="small-12 medium-6 columns">
 			<form>

@@ -24,11 +24,11 @@ PUBLIC PAGE
 Route::get('home', 'ListController@index');
 
 // Instansi
-Route::get('instansi', 'ListController@instansi');
+Route::get('instansi', 'ListController@pInstansi');
 Route::get('instansi/detail/{id}', 'DetailController@instansi');
 
 // Pelayanan
-Route::get('pelayanan', 'ListController@pelayanan');
+Route::get('pelayanan', 'ListController@pPelayanan');
 Route::get('pelayanan/detail/{id}', 'DetailController@pelayanan');
 
 // Berita
@@ -112,7 +112,8 @@ Route::get('dashboard/berita', 'ListController@berita');
 Route::get('dashboard/berita/form', 'FormController@berita');
 Route::post('dashboard/berita/form', 'FormController@sBerita');
 // Update Record
-Route::get('dashboard/berita/form/{id}', 'DetailController@berita');
+Route::get('dashboard/berita/form/{id}', 'FormController@berita');
+Route::post('dashboard/berita/form/{id}', 'FormController@sBerita');
 
 // Opini
 Route::get('dashboard/opini', 'ListController@dOpini');

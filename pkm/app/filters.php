@@ -95,5 +95,5 @@ Route::filter('csrf', function()
 /*
 Custom Filter
 */
-
+Route::when('dashboard', 'auth|administrator');
 Route::when('dashboard/*', 'auth|administrator');
