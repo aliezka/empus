@@ -278,6 +278,12 @@ p{
 	border-top: 1px #e1e1e1 solid;
 }
 
+
+/* === Pelayanan ==== */
+ol{
+	font-size: 0.9rem;
+}
+
 /* == Table == */
 .delbutton{
 	color: #E92500;
