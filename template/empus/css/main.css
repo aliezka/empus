@@ -245,10 +245,21 @@ p{
 .panel-opini .label{
 	margin-left: 0px;
 }
+.panel-opini .panel-heading span{
+	margin: 0.5rem 0;
+	display: inline-block;
+}
+.panel-opini .panel-heading .add{
+	font-size: 12px;
+	float: right;
+	margin: 2px;
+
+}
 .panel-opini .panel-body h6{
-	font-size: 14px;
-	margin-top: 0;
-	margin-bottom: 3px;
+	font-size: 16px;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	color: #F0BB12;
 }
 .panel-opini .panel-body .info{
 	margin-bottom: 3px;
@@ -264,9 +275,17 @@ p{
 }
 .panel-opini .panel-body .date{
 	color: #999;
+	margin-top: 2px;
 }
-.panel-opini .panel-body p{
-	
+/* form opini */
+.panel-opini form{
+	padding: 7px 0.9375rem;
+}
+.panel-opini textarea{
+	overflow: hidden;
+	outline: none;
+	resize: none;
+	min-height: 0;
 }
 
 /* =========== OPINI DETAIL ========== */
@@ -397,4 +416,11 @@ p{
 }
 .berita-detail .panel-heading{
 	border-top: 1px #e1e1e1 solid;
+}
+
+
+/* === HELPER === */
+.label.inprogress {
+background-color:#F0BB12;;
+color: white;
 }
