@@ -26,12 +26,36 @@
 
 			<div class="row">
 				<div class="small-3 columns">
-					<label for="name" class="right inline">Isi</label>
+					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }}">
 					<div class="description-field">
 						{{ Form::textarea('desc', isset($Instansi->desc->desc) ? $Instansi->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Instansi', 'required']) }}
-						<small class="error">Isi harus diisi</small>
+						<small class="error">Deskripsi harus diisi</small>
+					</div>
+				</div>
+			</div><!-- end of row -->
+			
+			<div class="row">
+				<div class="small-3 columns">
+					<label for="name" class="right inline">Telepon</label>
+				</div>
+				<div class="small-9 columns {{ $errors->first('name') ? 'error' : null }}">
+					<div class="name-field">
+						{{ Form::text('telepon', $InstansiProfileTelepon, array('placeholder' => 'Telepon')) }}
+						<small class="error">{{ $errors->first('telepon') ? $errors->first('telepon') : 'Isi dengan benar' }}</small>
+					</div>
+				</div>
+			</div><!-- end of row -->
+			
+			<div class="row">
+				<div class="small-3 columns">
+					<label for="name" class="right inline">Alamat</label>
+				</div>
+				<div class="small-9 columns {{ $errors->first('alamat') ? 'error' : null }}">
+					<div class="description-field">
+						{{ Form::textarea('alamat', $InstansiProfileAlamat, ['rows' => '5', 'placeholder' => 'Alamat Instansi']) }}
+						<small class="error">{{ $errors->first('alamat') ? $errors->first('alamat') : 'Isi dengan benar' }}</small>
 					</div>
 				</div>
 			</div><!-- end of row -->

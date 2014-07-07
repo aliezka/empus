@@ -17,7 +17,7 @@
 					<label for="name" class="right inline">Urutan</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('order') ? 'error' : null }} ">
-					{{ Form::text('order', null, array('placeholder' => 'Urutan', 'required', 'autofocus')) }}
+					{{ Form::text('order', isset($Persyaratan->order) ? $Persyaratan->order : null, array('placeholder' => 'Urutan', 'required', 'autofocus')) }}
 					<small class="error">{{ $errors->first('order') ? $errors->first('order') : 'Nomor Urutan harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
@@ -27,7 +27,7 @@
 					<label for="name" class="right inline">Hal</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('title') ? 'error' : null }} ">
-					{{ Form::text('title', null, array('placeholder' => 'Perihal Persyaratan', 'required')) }}
+					{{ Form::text('title', isset($Persyaratan->title) ? $Persyaratan->title : null, array('placeholder' => 'Perihal Persyaratan', 'required')) }}
 					<small class="error">{{ $errors->first('title') ? $errors->first('title') : 'Hal harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
@@ -37,7 +37,7 @@
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }} ">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Perihal']) }}
+					{{ Form::textarea('desc', isset($Persyaratan->desc->desc) ? $Persyaratan->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Perihal']) }}
 					<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : null }}</small>
 				</div>
 			</div><!-- end of row -->

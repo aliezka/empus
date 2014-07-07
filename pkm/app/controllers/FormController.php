@@ -9,10 +9,18 @@ class FormController extends BaseController {
 		$Pelayanan = Pelayanan::all();
 		$Instansi = !is_null($id) ? Instansi::find($id) : null;
 
+		$InstansiProfileTelepon = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 1)->first() : null;
+		$InstansiProfileAlamat = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 4)->first() : null;
+
+		$InstansiProfileTelepon = isset($InstansiProfileTelepon->text) ? $InstansiProfileTelepon->text : null;
+		$InstansiProfileAlamat = isset($InstansiProfileAlamat->text) ? $InstansiProfileAlamat->text : null;
+
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('forms.instansi')
 			->with('Pelayanan', $Pelayanan)
-			->with('Instansi', $Instansi);
+			->with('Instansi', $Instansi)
+			->with('InstansiProfileTelepon', $InstansiProfileTelepon)
+			->with('InstansiProfileAlamat', $InstansiProfileAlamat);
 	}
 
 	function sInstansi($id = null) {
@@ -21,7 +29,9 @@ class FormController extends BaseController {
 
 		$rules = array(
 					'desc' => ' required | min:4 ',
-					'image' => ' required | image '
+					'image' => ' required | image ',
+					'alamat' => ' min:4 ',
+					'telepon' => ' min:3 '
 				);
 
 		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
@@ -33,7 +43,7 @@ class FormController extends BaseController {
 			$Path = 'dashboard/instansi/form';
 			$Path .= !is_null($id) ? '/'.$id : null;
 
-			return Redirect::to(Route::current())
+			return Redirect::to($Path)
 				->with('Pelayanan', $Pelayanan)
 				->with('Instansi', $Instansi)
 				->withInput(Input::except('image'))
@@ -42,6 +52,40 @@ class FormController extends BaseController {
 			$Instansi->name = Input::get('name');
 			$Instansi->save();
 
+			// Alamat
+			if (Input::get('alamat')) {
+				if ($InstansiProfile = InstansiProfile::where('instansi_id', '=', $Instansi->id)->where('profile_id', '=', 4)->first()) {
+					$InstansiProfile->text = Input::get('alamat'); 
+					$InstansiProfile->save();
+				} else {
+					$InstansiProfile = new InstansiProfile;
+
+					$InstansiProfile->instansi()->associate($Instansi);
+					$InstansiProfile->profile()->associate(Profile::find(4));
+					$InstansiProfile->text = Input::get('alamat'); 
+					
+					$InstansiProfile->save();
+				}
+			}
+			// End Alamat
+
+			// Telepon
+			if (Input::get('telepon')) {
+				if ($InstansiProfile = InstansiProfile::where('instansi_id', '=', $Instansi->id)->where('profile_id', '=', 1)->first()) {
+					$InstansiProfile->text = Input::get('telepon'); 
+					$InstansiProfile->save();
+				} else {
+					$InstansiProfile = new InstansiProfile;
+
+					$InstansiProfile->instansi()->associate($Instansi);
+					$InstansiProfile->profile()->associate(Profile::find(1));
+					$InstansiProfile->text = Input::get('telepon'); 
+					
+					$InstansiProfile->save();
+				}
+			}
+			// End Telepon
+			
 			// Image
 			if (Input::hasFile('image')) {
 				$FileName = $Instansi->id;
@@ -103,10 +147,14 @@ class FormController extends BaseController {
 
 	function pelayanan($id = null) {
 		$Pelayanan = !is_null($id) ? Pelayanan::find($id) : null;
+		$Persyaratan = isset($Pelayanan->id) ? Persyaratan::where('pelayanan_id', '=', $Pelayanan->id)->orderBy('order', 'asc')->get() : new Persyaratan;
+		$Prosedur = isset($Pelayanan->id) ? Prosedur::where('pelayanan_id', '=', $Pelayanan->id)->orderBy('order', 'asc')->get() : new Prosedur;
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('forms.pelayanan')
-			->with('Pelayanan', $Pelayanan);
+			->with('Pelayanan', $Pelayanan)
+			->with('Persyaratan', $Persyaratan)
+			->with('Prosedur', $Prosedur);
 	}
 
 	function sPelayanan($id = null) {
@@ -146,119 +194,135 @@ class FormController extends BaseController {
 		}
 	}
 
-	function persyaratan($id) {
-		$Pelayanan = Pelayanan::find($id);
-		if ($Pelayanan) {
-			$this->layout = View::make('layouts.admin');
-			$this->layout->content = View::make('forms.persyaratan')->with('Pelayanan', $Pelayanan);
-		} else {
-			return Redirect::to('dashboard/pelayanan');	
-		}
+	function persyaratan($pelayanan_id, $persyaratan_id = null) {
+		$Pelayanan = Pelayanan::findOrFail($pelayanan_id);
+		$Persyaratan = !is_null($persyaratan_id) ? Persyaratan::findOrFail($persyaratan_id) : new Persyaratan;
+
+		$this->layout = View::make('layouts.admin');
+		$this->layout->content = View::make('forms.persyaratan')
+			->with('Pelayanan', $Pelayanan)
+			->with('Persyaratan', $Persyaratan);
 	}
 
-	function sPersyaratan($id) {
-		$Pelayanan = Pelayanan::find($id);
-		if ($Pelayanan) {
-			$rules = array(
-						'order' => ' required | numeric | min:0 ',
-						'title' => ' required | alpha_spaces | min:3 ',
-						'desc' => ' min:4 | unique:persyaratan,order,null,null,pelayanan_id,'.$id,
-						'image' => ' image '
-					);
-			
-			$validator = Validator::make(Input::all(), $rules);
-			if ($validator->fails()) { 
-				Log::warning($validator->messages()->all());
-				return Redirect::to('dashboard/pelayanan/persyaratan/'.$id.'/form')
-					->withInput(Input::except('image'))
-					->withErrors($validator);
-			} else {
-				$Persyaratan = new Persyaratan;
-				$Persyaratan->fill(Input::all());
-				$Persyaratan->pelayanan()->associate($Pelayanan);
-				$Persyaratan->save();
+	function sPersyaratan($pelayanan_id, $persyaratan_id = null) {
+		$Pelayanan = Pelayanan::findOrFail($pelayanan_id);
+		$Persyaratan = !is_null($persyaratan_id) ? Persyaratan::findOrFail($persyaratan_id) : new Persyaratan;
 
-				// Image
+		$rules = array(
+					'title' => ' required | alpha_spaces | min:3 ',
+					'desc' => ' min:4 ',
+					'image' => ' image '
+				);
+
+		$rules += $Persyaratan->order == Input::get('order') ? array('order' => ' required | numeric | min:0 ') : array('order' => ' required | numeric | min:0 | unique:persyaratan,order,null,null,pelayanan_id,'.$pelayanan_id);
+		
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
+			return Redirect::to('dashboard/pelayanan/'.$pelayanan_id.'/persyaratan/'.(!is_null($persyaratan_id) ? $persyaratan_id : 'form'))
+				->withInput(Input::except('image'))
+				->withErrors($validator);
+		} else {
+			$Persyaratan->fill(Input::all());
+			$Persyaratan->pelayanan()->associate($Pelayanan);
+			$Persyaratan->save();
+
+			// Image
+			if (Input::hasFile('image')) {
 				$FileName = $Persyaratan->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
 				Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
-
-				$PersyaratanImg = new PersyaratanImg;
-				$PersyaratanImg->img = $FileName;
-				$PersyaratanImg->persyaratan()->associate($Persyaratan);
-				$PersyaratanImg->save();
-				// End Image
-
-				// Desc
-				$PersyaratanDesc = new PersyaratanDesc;
-				$PersyaratanDesc->desc = Input::get('desc');
-				$PersyaratanDesc->persyaratan()->associate($Persyaratan);
-				$PersyaratanDesc->save();
-				// End Desc
-
-				return Redirect::to('/');
+				
+				if (!is_null($persyaratan_id)) {
+					PersyaratanImg::where('persyaratan_id', '=', $persyaratan_id)->update(['img' => $FileName]);
+				} else {
+					$PersyaratanImg = new PersyaratanImg;
+					$PersyaratanImg->persyaratan()->associate($Persyaratan);
+					$PersyaratanImg->img = $FileName;
+					$PersyaratanImg->save();
+				}
 			}
-		} else {
-			return Redirect::to('dashboard/pelayanan');	
-		}
-	}
+			// End Image
 
-	function prosedur($id) { 
-		$Prosedur = Pelayanan::find($id);
-		if ($Prosedur) {
-			$this->layout = View::make('layouts.admin');
-			$this->layout->content = View::make('forms.prosedur')->with('Prosedur', $Prosedur);
-		} else {
-			return Redirect::to('dashboard/prosedur');	
-		}
-	}
-
-	function sProsedur($id) {
-		$Pelayanan = Pelayanan::find($id);
-		if ($Pelayanan) {
-			$rules = array(
-						'order' => ' required | numeric | min:0 ',
-						'title' => ' required | alpha_spaces | min:3 ',
-						'desc' => ' min:4 ',
-						'image' => ' image '
-					);
-			
-			$validator = Validator::make(Input::all(), $rules);
-			if ($validator->fails()) { 
-				Log::warning($validator->messages()->all());
-				return Redirect::to('dashboard/pelayanan/prosedur/'.$id.'/form')
-					->withInput(Input::except('image'))
-					->withErrors($validator);
+			// Desc
+			if (!is_null($persyaratan_id)) {
+				PersyaratanDesc::where('persyaratan_id', '=', $persyaratan_id)->update(['desc' => Input::get('desc')]);
 			} else {
-				$Prosedur = new Prosedur ;
-				$Prosedur->fill(Input::all());
-				$Prosedur->pelayanan()->associate($Pelayanan);
-				$Prosedur->save();
+				$PersyaratanDesc = new PersyaratanDesc;
+				$PersyaratanDesc->persyaratan()->associate($Persyaratan);
+				$PersyaratanDesc->desc = Input::get('desc');
+				$PersyaratanDesc->save();
+			}
+			// End Desc
 
-				// Image
+			return Redirect::to('/');
+		}
+	}
+
+	function prosedur($pelayanan_id, $prosedur_id = null) {
+		$Pelayanan = Pelayanan::findOrFail($pelayanan_id);
+		$Prosedur = !is_null($prosedur_id) ? Prosedur::findOrFail($prosedur_id) : new Prosedur;
+
+		$this->layout = View::make('layouts.admin');
+		$this->layout->content = View::make('forms.prosedur')
+			->with('Pelayanan', $Pelayanan)
+			->with('Prosedur', $Prosedur);
+	}
+
+	function sProsedur($pelayanan_id, $prosedur_id = null) {
+		$Pelayanan = Pelayanan::findOrFail($pelayanan_id);
+		$Prosedur = !is_null($prosedur_id) ? Prosedur::findOrFail($prosedur_id) : new Prosedur;
+
+		$rules = array(
+					'title' => ' required | alpha_spaces | min:3 ',
+					'desc' => ' min:4 ',
+					'image' => ' image '
+				);
+
+		$rules += $Prosedur->order == Input::get('order') ? array('order' => ' required | numeric | min:0 ') : array('order' => ' required | numeric | min:0 | unique:prosedur,order,null,null,pelayanan_id,'.$pelayanan_id);
+		
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
+			return Redirect::to('dashboard/pelayanan/'.$pelayanan_id.'/prosedur/'.(!is_null($prosedur_id) ? $prosedur_id : 'form'))
+				->withInput(Input::except('image'))
+				->withErrors($validator);
+		} else {
+			$Prosedur->fill(Input::all());
+			$Prosedur->pelayanan()->associate($Pelayanan);
+			$Prosedur->save();
+
+			// Image
+			if (Input::hasFile('image')) {
 				$FileName = $Prosedur->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
-
-				$ProsedurImg = new ProsedurImg;
-				$ProsedurImg->img = $FileName;
-				$ProsedurImg->prosedur()->associate($Prosedur);
-				$ProsedurImg->save();
-				// End Image
-
-				// Desc
-				$ProsedurDesc = new ProsedurDesc;
-				$ProsedurDesc->desc = Input::get('desc');
-				$ProsedurDesc->prosedur()->associate($Prosedur);
-				$ProsedurDesc->save();
-				// End Desc
-
-				return Redirect::to('/');
+				Input::file('image')->move(Config::get('empus.prosedur_img'), $FileName);
+				
+				if (!is_null($prosedur_id)) {
+					ProsedurImg::where('prosedur_id', '=', $prosedur_id)->update(['img' => $FileName]);
+				} else {
+					$ProsedurImg = new ProsedurImg;
+					$ProsedurImg->prosedur()->associate($Prosedur);
+					$ProsedurImg->img = $FileName;
+					$ProsedurImg->save();
+				}
 			}
-		} else {
-			return Redirect::to('dashboard/prosedur');	
+			// End Image
+
+			// Desc
+			if (!is_null($prosedur_id)) {
+				ProsedurDesc::where('prosedur_id', '=', $prosedur_id)->update(['desc' => Input::get('desc')]);
+			} else {
+				$ProsedurDesc = new ProsedurDesc;
+				$ProsedurDesc->prosedur()->associate($Prosedur);
+				$ProsedurDesc->desc = Input::get('desc');
+				$ProsedurDesc->save();
+			}
+			// End Desc
+
+			return Redirect::to('/');
 		}
 	}
 

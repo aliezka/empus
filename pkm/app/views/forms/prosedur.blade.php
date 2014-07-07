@@ -9,15 +9,16 @@
 		</div>
 	</div>
 
-	{{ Form::open(array('files'=> true)) }}
+	{{ Form::open(array('files'=> true, 'data-abide')) }}
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="row">
 				<div class="small-3 columns">
 					<label for="name" class="right inline">Urutan</label>
 				</div>
-				<div class="small-9 columns">
-					{{ Form::text('order', null, array('placeholder' => 'Urutan', 'required', 'autofocus')) }}
+				<div class="small-9 columns {{ $errors->first('order') ? 'error' : null }} ">
+					{{ Form::text('order', isset($Prosedur->order) ? $Prosedur->order : null, array('placeholder' => 'Urutan', 'required', 'autofocus')) }}
+					<small class="error">{{ $errors->first('order') ? $errors->first('order') : 'Nomor Urutan harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
 
@@ -25,8 +26,9 @@
 				<div class="small-3 columns">
 					<label for="name" class="right inline">Hal</label>
 				</div>
-				<div class="small-9 columns">
-					{{ Form::text('title', null, array('placeholder' => 'Perihal Prosedur', 'required')) }}
+				<div class="small-9 columns {{ $errors->first('title') ? 'error' : null }} ">
+					{{ Form::text('title', isset($Prosedur->title) ? $Prosedur->title : null, array('placeholder' => 'Perihal Prosedur', 'required')) }}
+					<small class="error">{{ $errors->first('title') ? $errors->first('title') : 'Hal harus diisi' }}</small>
 				</div>
 			</div><!-- end of row -->
 
@@ -34,8 +36,9 @@
 				<div class="small-3 columns">
 					<label for="name" class="right inline">Deskripsi</label>
 				</div>
-				<div class="small-9 columns">
-					{{ Form::textarea('desc', null, ['rows' => '5', 'placeholder' => 'Deskripsi Prosedur', 'id' => 'name']) }}
+				<div class="small-9 columns {{ $errors->first('desc') ? 'error' : null }} ">
+					{{ Form::textarea('desc', isset($Prosedur->desc->desc) ? $Prosedur->desc->desc : null, ['rows' => '5', 'placeholder' => 'Deskripsi Prosedur', 'id' => 'name']) }}
+					<small class="error">{{ $errors->first('desc') ? $errors->first('desc') : null }}</small>
 				</div>
 			</div><!-- end of row -->
 
@@ -45,6 +48,7 @@
 				</div>
 				<div class="small-9 columns">
 					{{ Form::file('image', [ 'id' => 'image' ]) }}
+					<small class="error">{{ $errors->first('image') ? $errors->first('image') : null }}</small>
 				</div>
 			</div><!-- end of row -->
 

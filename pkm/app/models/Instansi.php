@@ -13,12 +13,20 @@ class Instansi extends Eloquent {
 		return $this->belongsToMany('Berita', 'berita_instansi', 'instansi_id', 'berita_id');
 	}
 
+	public function profile() {
+		return $this->belongsToMany('Profile', 'instansi_profile', 'instansi_id', 'profile_id');
+	}
+
 	public function pelayanan_list() {
 		return $this->hasMany('InstansiPelayanan', 'instansi_id');
 	}
 
 	public function berita_list() {
 		return $this->hasMany('BeritaInstansi', 'instansi_id');
+	}
+
+	public function profile_list() {
+		return $this->hasMany('InstansiProfile', 'instansi_id');
 	}
 
 	public function desc() {

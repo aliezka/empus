@@ -27,13 +27,13 @@
 			<div class="snap-drawer snap-drawer-left">
 				<aside class="">
 					<ul class="off-canvas-list">
-						<li><a href="index.html"><i class="fa fa-home"></i>Beranda</a></li>
-						<li><a href="#"><i class="fa fa-building-o"></i>Instansi</a></li>
-						<li><a href="#"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
-						<li><a href="#"><i class="fa fa-bullhorn"></i>Berita</a></li>
-						<li><a href="#"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
-						<li><a href="#"><i class="fa fa-cog"></i>Pengaturan</a></li>
-						<li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
+						<li><a href="{{ URL::to('/') }}"><i class="fa fa-home"></i>Beranda</a></li>
+						<li><a href="{{ URL::to('instansi') }}"><i class="fa fa-building-o"></i>Instansi</a></li>
+						<li><a href="{{ URL::to('pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
+						<li><a href="{{ URL::to('berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
+						<li><a href="{{ URL::to('opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
+						<li><a href="{{ URL::to('setting') }}"><i class="fa fa-cog"></i>Pengaturan</a></li>
+						<li><a href="{{ URL::to('login') }}"><i class="fa fa-sign-in"></i>Login</a></li>
 					</ul>
 				</aside>
 			</div> 
@@ -62,21 +62,21 @@
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name">
-						<hi><a href="index.html">EMPUS</a></hi>
+						<hi><a href="{{ URL::to('/') }}">EMPUS</a></hi>
 					</li>
 				</ul>
 				<section class="top-bar-section">
 					<ul class="left">
-						<li><a href="">Instansi</a></li>
-						<li><a href="">Pelayanan</a></li>
-						<li><a href="">Berita</a></li>
-						<li><a href="">Opini</a></li>
+						<li><a href="{{ URL::to('instansi') }}">Instansi</a></li>
+						<li><a href="{{ URL::to('pelayanan') }}">Pelayanan</a></li>
+						<li><a href="{{ URL::to('berita') }}">Berita</a></li>
+						<li><a href="{{ URL::to('opini') }}">Opini</a></li>
 						<li><a href=""></a></li>
 					</ul>
 				</section>
 				<section class="top-bar-section">
 					<ul class="right">
-						<li><a href="#" >Login</a></li>
+						<li><a href="{{ URL::to('login') }}" >Login</a></li>
 					</ul>
 				</section>
 			</nav>

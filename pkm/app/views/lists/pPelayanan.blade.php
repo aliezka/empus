@@ -12,7 +12,7 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<h6>{{ $list->name }}</h6>
-											<p>{{ $list->desc->desc }}</p>
+											<p>{{ nl2br($list->desc->desc) }}</p>
 										</div>
 									</div>
 								</a>

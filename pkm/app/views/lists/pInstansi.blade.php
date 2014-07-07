@@ -8,7 +8,7 @@
 					<ul>
 						@foreach ($lists as $Count => $list)
 							<li>
-								<a href="{{ URL::to('dashboard/instansi/form/'.$list->id) }}">
+								<a href="{{ URL::to('instansi/'.$list->id) }}">
 									<div class="row">
 										<div class="small-3 columns">
 											<img src="{{ asset('assets/img/instansi/'.$list->img->img) }}">

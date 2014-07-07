@@ -46,4 +46,33 @@
 		</div>
 	</div>
 	{{ Form::close() }}
+
+	<div class="row">
+		<div class="small-3 columns">
+		</div>
+		<div class="small-9 columns">
+			<fieldset>
+				<legend>Persyaratan</legend>
+				<ol>
+					@foreach ($Persyaratan as $PersyaratanL)
+						<li>
+							<a href="{{ URL::to('dashboard/pelayanan/'.$Pelayanan->id.'/persyaratan/'.$PersyaratanL->id) }}">{{ $PersyaratanL->title }}</a>
+						</li>
+					@endforeach
+				</ol>
+				<a href="{{ URL::to('dashboard/pelayanan/'.$Pelayanan->id.'/persyaratan/form') }}" class="button secondary tiny">Tambah</a>
+			</fieldset>
+			<fieldset>
+				<legend>Prosedur</legend>
+				<ol>
+					@foreach ($Prosedur as $ProsedurL)
+						<li>
+							<a href="{{ URL::to('dashboard/pelayanan/'.$Pelayanan->id.'/prosedur/'.$ProsedurL->id) }}">{{ $ProsedurL->title }}</a>
+						</li>
+					@endforeach
+				</ol>
+				<a href="{{ URL::to('dashboard/pelayanan/'.$Pelayanan->id.'/prosedur/form') }}" class="button secondary tiny">Tambah</a>
+			</fieldset>
+		</div>
+	</div><!-- end of row -->
 </section>

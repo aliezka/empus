@@ -25,7 +25,7 @@ Route::get('home', 'ListController@index');
 
 // Instansi
 Route::get('instansi', 'ListController@pInstansi');
-Route::get('instansi/detail/{id}', 'DetailController@instansi');
+Route::get('instansi/{id}', 'DetailController@instansi');
 
 // Pelayanan
 Route::get('pelayanan', 'ListController@pPelayanan');
@@ -99,12 +99,20 @@ Route::get('dashboard/pelayanan/form/{id}', 'FormController@pelayanan');
 Route::post('dashboard/pelayanan/form/{id}', 'FormController@sPelayanan');
 
 // Pelayanan - Persyaratan
-Route::get('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@persyaratan');
-Route::post('dashboard/pelayanan/persyaratan/{id}/form', 'FormController@sPersyaratan');
+// New Record
+Route::get('dashboard/pelayanan/{pelayanan_id}/persyaratan/form', 'FormController@persyaratan');
+Route::post('dashboard/pelayanan/{pelayanan_id}/persyaratan/form', 'FormController@sPersyaratan');
+// Update Record
+Route::get('dashboard/pelayanan/{pelayanan_id}/persyaratan/{persyaratan_id}', 'FormController@persyaratan');
+Route::post('dashboard/pelayanan/{pelayanan_id}/persyaratan/{persyaratan_id}', 'FormController@sPersyaratan');
 
 // Pelayanan - Prosedur
-Route::get('dashboard/pelayanan/prosedur/{id}/form', 'FormController@prosedur');
-Route::post('dashboard/pelayanan/prosedur/{id}/form', 'FormController@sProsedur');
+// New Record
+Route::get('dashboard/pelayanan/{pelayanan_id}/prosedur/form', 'FormController@prosedur');
+Route::post('dashboard/pelayanan/{pelayanan_id}/prosedur/form', 'FormController@sProsedur');
+// Update Record
+Route::get('dashboard/pelayanan/{pelayanan_id}/prosedur/{prosedur_id}', 'FormController@prosedur');
+Route::post('dashboard/pelayanan/{pelayanan_id}/prosedur/{prosedur_id}', 'FormController@sProsedur');
 
 // Berita
 Route::get('dashboard/berita', 'ListController@berita');

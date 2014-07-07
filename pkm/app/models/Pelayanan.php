@@ -20,4 +20,8 @@ class Pelayanan extends Eloquent {
 	public function persyaratan() {
 		return $this->hasMany('Persyaratan', 'pelayanan_id');
 	}
+
+	public function prosedur() {
+		return $this->hasMany('Prosedur', 'pelayanan_id');
+	}
 }
