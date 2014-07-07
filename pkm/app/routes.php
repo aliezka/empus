@@ -29,7 +29,7 @@ Route::get('instansi/{id}', 'DetailController@instansi');
 
 // Pelayanan
 Route::get('pelayanan', 'ListController@pPelayanan');
-Route::get('pelayanan/detail/{id}', 'DetailController@pelayanan');
+Route::get('pelayanan/{id}', 'DetailController@pelayanan');
 
 // Berita
 Route::get('berita', 'ListController@berita');
