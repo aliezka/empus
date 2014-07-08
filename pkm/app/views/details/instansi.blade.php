@@ -51,7 +51,8 @@
 
 			<div class="panel panel-opini">
 				<div class="panel-heading">
-					<h6><i class="fa fa-comment-o"></i>Opini Publik</h6>
+					<span class="header"><i class="fa fa-comment-o"></i>Opini Publik</span>
+					<a href="instansi-tambah-opini.html" class="add button tiny">Tambah</a>
 				</div>
 				<div class="panel-body">
 					<ul>
@@ -62,7 +63,6 @@
 										<img src="img/profile-picture.jpg" width="50">
 									</div>
 									<div class="small-9 columns">
-
 										<h6>Petugas kelurahan ramah</h6>
 										<span class="radius label">Opini</span>
 										<span class="secondary radius label"><small class="fa fa-comment"></small>4</span>

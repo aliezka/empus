@@ -55,6 +55,16 @@ class ListController extends BaseController {
 
 		$Lists = $Berita->get();
 
+		$this->layout = View::make('layouts.admin');
+		$this->layout->content = View::make('lists.berita')->with('lists', $Lists);
+	}
+	
+	function pBerita() {
+		$Berita = new Berita;
+		$Berita->skip($this->offset)->take($this->perPage);
+
+		$Lists = $Berita->get();
+
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('lists.pBerita')->with('lists', $Lists);
 	}

@@ -32,7 +32,7 @@ Route::get('pelayanan', 'ListController@pPelayanan');
 Route::get('pelayanan/{id}', 'DetailController@pelayanan');
 
 // Berita
-Route::get('berita', 'ListController@berita');
+Route::get('berita', 'ListController@pBerita');
 Route::get('berita/{id}', 'DetailController@berita');
 
 // Opini

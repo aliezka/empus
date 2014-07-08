@@ -32,8 +32,12 @@
 						<li><a href="{{ URL::to('pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
 						<li><a href="{{ URL::to('berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
 						<li><a href="{{ URL::to('opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
-						<li><a href="{{ URL::to('setting') }}"><i class="fa fa-cog"></i>Pengaturan</a></li>
-						<li><a href="{{ URL::to('login') }}"><i class="fa fa-sign-in"></i>Login</a></li>
+						@if (Auth::user()) 
+							<li><a href="{{ URL::to('setting') }}"><i class="fa fa-cog"></i>Pengaturan</a></li>
+							<li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-in"></i>Logout</a></li>
+						@else
+							<li><a href="{{ URL::to('login') }}"><i class="fa fa-sign-in"></i>Login</a></li>
+						@endif
 					</ul>
 				</aside>
 			</div> 
@@ -49,7 +53,7 @@
 				</a>
 			</section>
 			<section class="middle tab-bar-section">
-				<h1 class="title">Login</h1>
+				<h1 class="title"></h1>
 			</section>
 
 			<section class="right-small">
@@ -76,7 +80,11 @@
 				</section>
 				<section class="top-bar-section">
 					<ul class="right">
-						<li><a href="{{ URL::to('login') }}" >Login</a></li>
+						@if (Auth::user()) 
+							<li><a href="{{ URL::to('pengaturan') }}" >Pengaturan</a></li>
+						@else
+							<li><a href="{{ URL::to('login') }}" >Login</a></li>
+						@endif
 					</ul>
 				</section>
 			</nav>
