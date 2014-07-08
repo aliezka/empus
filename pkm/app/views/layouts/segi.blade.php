@@ -94,7 +94,6 @@
 		{{ !empty($content) ? $content : null }}
 		<!-- END CONTENT -->
 		
-		<script src="{{ asset('assets/js/vendor/jquery.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/fastclick.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/iscroll.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/snap.js') }}"></script>
