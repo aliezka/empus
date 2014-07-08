@@ -13,6 +13,10 @@ class Pelayanan extends Eloquent {
 		return $this->hasMany('BeritaPelayanan', 'pelayanan_id');
 	}
 
+	public function instansi_list() {
+		return $this->hasMany('InstansiPelayanan', 'pelayanan_id');
+	}
+
 	public function desc() {
 		return $this->hasOne('PelayananDesc', 'pelayanan_id');
 	}

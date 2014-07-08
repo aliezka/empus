@@ -18,11 +18,14 @@ class DetailController extends BaseController{
 		$InstansiProfileTelepon = isset($InstansiProfileTelepon->text) ? $InstansiProfileTelepon->text : null;
 		$InstansiProfileAlamat = isset($InstansiProfileAlamat->text) ? $InstansiProfileAlamat->text : null;
 
+		$InstansiPelayanan = InstansiPelayanan::where('instansi_id', '=', $id)->get();
+
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('details.instansi')
 			->with('Instansi', $Instansi)
 			->with('InstansiProfileTelepon', $InstansiProfileTelepon)
-			->with('InstansiProfileAlamat', $InstansiProfileAlamat);
+			->with('InstansiProfileAlamat', $InstansiProfileAlamat)
+			->with('InstansiPelayanan', $InstansiPelayanan);
 	}
 
 	public function pelayanan($id) {

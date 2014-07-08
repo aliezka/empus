@@ -93,7 +93,12 @@ Route::filter('csrf', function()
 
 
 /*
-Custom Filter
+Administrator
 */
 Route::when('dashboard', 'auth|administrator');
 Route::when('dashboard/*', 'auth|administrator');
+
+/*
+Citizen
+*/
+Route::when('opini/*/*/form', 'auth|citizen');

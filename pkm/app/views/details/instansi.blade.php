@@ -28,7 +28,7 @@
 	</div>
 	<div class="row">
 		<div class="small-12 columns wide-panel">
-			<div class="panel">
+			<!--<div class="panel">
 				<div class="panel-heading">
 					<h6><i class="fa fa-smile-o"></i>Pelayanan</h6>
 				</div>
@@ -45,6 +45,28 @@
 						@endforeach
 					</ul>
 				</div>
+			</div>!-->
+			
+			<div class="panel">
+				<div class="panel-heading">
+					<h6><i class="fa fa-smile-o"></i>Pelayanan</h6>
+				</div>
+				<div class="panel-body">
+					<dl class="accordion" data-accordion>
+						@foreach ($InstansiPelayanan as $List)
+						<dd class="accordion-navigation">
+							<a href="#panel2">{{ $List->pelayanan->name }}</a>
+							<div id="panel2" class="content">
+								{{ nl2br($List->pelayanan->desc->desc) }}
+								<br>
+								<br>
+								<a href="{{ URL::to('pelayanan/'.$Pelayanan->id) }}" class="add button tiny">Detail</a>
+								<a href="{{ URL::to('opini/instansi_pelayanan/'.$List->id.'/form') }}" class="add button tiny">Tambah Opini</a>
+							</div>
+						</dd>
+						@endforeach
+					</dl>
+				</div>
 				<!-- end of panel body -->
 			</div>
 			<!-- end of panel -->
@@ -52,7 +74,7 @@
 			<div class="panel panel-opini">
 				<div class="panel-heading">
 					<span class="header"><i class="fa fa-comment-o"></i>Opini Publik</span>
-					<a href="instansi-tambah-opini.html" class="add button tiny">Tambah</a>
+					<a href="{{ URL::to('opini/instansi/') }}" class="add button tiny">Tambah</a>
 				</div>
 				<div class="panel-body">
 					<ul>

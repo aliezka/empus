@@ -55,13 +55,6 @@ Route::get('user', 'ProfileController@detail');
 Route::get('user/{id}', 'ProfileController@detail');
 
 // Whoami
-// Route::get('/whoami', function() {
-// 			if (Auth::user())
-// 				return  'Login as ' . Auth::user()->email .' '. Auth::user()->roles->first()->role ;
-// 			else return 'Not yet login.';
-// 		}
-// 	);
-
 Route::get('/whoami', array('before' => 'auth',function() {
 			if (Auth::user())
 				return  'Login as ' . Auth::user()->email .' '. Auth::user()->roles->first()->role ;
@@ -137,8 +130,9 @@ END ADMIN PAGE
 CITIZEN PAGE
 */
 
-Route::get('opini/form/{object}/{id}', 'FormController@opini');
-Route::post('opini/form/{object}/{id}', 'FormController@sOpini');
+// Opni - Instansi Pelayanan
+Route::get('opini/{object}/{id}/form', 'FormController@opini');
+Route::post('opini/{object}/{id}/form', 'FormController@sOpini');
 
 Route::get('komentar/{opini}/form', 'FormController@komentar');
 Route::post('komentar/{opini}/form', 'FormController@sKomentar');
