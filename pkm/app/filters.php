@@ -102,3 +102,8 @@ Route::when('dashboard/*', 'auth|administrator');
 Citizen
 */
 Route::when('opini/*/*/form', 'auth|citizen');
+
+/*
+Guest
+*/
+Route::when('register', 'auth|guest');

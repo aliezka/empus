@@ -326,36 +326,46 @@ class FormController extends BaseController {
 		}
 	}
 
-	function opini($object, $id) {
-		// Object
+	function opiniAssociate($object, $id) {
 		$Associate = null;
 		switch ($object) {
 			case 'instansi_pelayanan':
-				$Associate = InstansiPelayanan::find($id);
+				$Associate = InstansiPelayanan::findOrFail($id);
 				break;
 			case 'instansi':
-				$Associate = Instansi::find($id);
+				$Associate = Instansi::findOrFail($id);
 				break;
 			case 'pelayanan':
-				$Associate = Pelayanan::find($id);
+				$Associate = Pelayanan::findOrFail($id);
 				break;
 			default:
 				
 				break;
-		} 
-
-		if (!$Associate) {
-			return Redirect::to('/');
 		}
 
+		return $Associate;
+	}
+
+	function opini($object, $id) {
+		// Object
+		$Associate = $this->opiniAssociate($object, $id);
+
 		$this->layout = View::make('layouts.segi');
-		$this->layout->content = View::make('forms.opini');
+		$this->layout->content = View::make('forms.opini')
+			->with('Object', $Associate)
+			->with('Type', $object)
+
+			->with('Berita', null)
+			->with('Instansi', null);
 	}
 
 	function sOpini($object, $id) { 
+		// Object
+		$Associate = $this->opiniAssociate($object, $id);
+
 		$rules = array(
 					'title' => ' required | alpha_spaces | min:3 ',
-					'type' => ' required ',
+					'type' => ' required | numeric ',
 					'desc' => ' required | min:4 ',
 					'image' => ' image '
 				);
@@ -363,7 +373,7 @@ class FormController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
 			Log::warning($validator->messages()->all());
-			return Redirect::to('dashboard/pelayanan/prosedur/'.$id.'/form')
+			return Redirect::to('opini/'.$object.'/'.$id.'/form')
 				->withInput(Input::except('image'))
 				->withErrors($validator);
 		} else {
@@ -371,19 +381,18 @@ class FormController extends BaseController {
 			$OpiniImg = new OpiniImg;
 			$OpiniDesc = new OpiniDesc;
 
-			DB::transaction(function() use ($Opini, $OpiniImg, $OpiniDesc, $object, $id) {
+			DB::transaction(function() use ($Associate, $Opini, $OpiniImg, $OpiniDesc, $object, $id) {
 				$Opini->fill(Input::all());
 				$Opini->person()->associate(Auth::user());
 				$Opini->save();
 
 				// Image
 				if (Input::hasFile('image')) {
-					$FileName = $Prosedur->id;
+					$FileName = $Opini->id;
 					$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
 					Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
 
-					
 					$OpiniImg->img = $FileName;
 					$OpiniImg->opini()->associate($Opini);
 					$OpiniImg->save();
