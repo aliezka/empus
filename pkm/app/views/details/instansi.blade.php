@@ -4,21 +4,23 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="small-12 columns wide-panel">
+		<div class="small-12 columns">
 			<h6>{{ $Instansi->name }}</h6>
 			<p>{{ nl2br($Instansi->desc->desc) }}</p>
 			<div class="panel info"> 
-				<div class="panel-body">
+				<div class="panel-body kontak">
 					<ul>
 						@if (!is_null($InstansiProfileAlamat))
 						<li>
-							<i class="fa fa-map-marker"></i><span>{{ nl2br($InstansiProfileAlamat) }}</span>
+							<div class="icon"><i class="fa fa-map-marker"></i></div>
+							<div>{{ nl2br($InstansiProfileAlamat) }}</div>
 						</li>
 						@endif
 
 						@if (!is_null($InstansiProfileTelepon))
 						<li>
-							<i class="fa fa-phone"></i><span>{{ $InstansiProfileTelepon }}</span>
+							<div class="icon"><i class="fa fa-phone"></i></div>
+							<div>{{ $InstansiProfileTelepon }}</div>
 						</li>
 						@endif
 					</ul>

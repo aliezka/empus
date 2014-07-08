@@ -232,12 +232,16 @@ p{
 	font-size: 14px;
 	border: 1px #d4d4d4 solid;
 	background-color: #f2f2f2;
-
 }
 .instansi .panel-heading{
 	border-top: 1px #e1e1e1 solid;
 }
-
+.instansi .kontak ul li div{
+	display: inline-block;
+}
+.instansi .kontak .icon{
+	vertical-align: top;
+}
 /* ======= OPINI LIST ======= */
 .panel-opini .panel-body .row{
 	line-height: 12px;
