@@ -1,61 +1,33 @@
-<section id="content" class="main-content snap-content">
+<section id="content" class="main-content snap-content berita">
 	<div class="row">
-		<div class="small-12 medium-12 columns grid-control">
-			<ul class="breadcrumbs">
-				<li><a href="#">Admin</a></li>
-				<li class="current"><a href="#">Berita</a></li>
-			</ul>
+		<div class="small-12 medium-6 columns wide-panel">
+			<div class="panel"> 
+				<div class="panel-body">
+					<ul>
+						@foreach ($lists as $list) 
+						<li>
+							<a href="{{ URL::to('berita/'.$list->id) }}">
+								<div class="row">
+									<div class="small-3 columns">
+										<img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+									</div>
+									<div class="small-9 columns">
+										<h6>{{ $list->title }}</h6>
+										<div class="date">{{ $list->created_at }}</div>
+										<div class="tags"><i class="fa fa-tags"></i>Kelurahan Menteng</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-12 columns">
+										<p>{{ $list->desc->desc or null }}</p>
+									</div>
+								</div>
+							</a>
+						</li>
+						@endforeach
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="small-12 medium-6 columns grid-control">
-			<a href="{{ URL::to('dashboard/instansi/form') }}" class="button primary small">Create</a>
-		</div>
-		<div class="small-12 medium-6 columns">
-			<form>
-				<div class="small-6 medium-5 right">
-					<input type="text" name="search" placeholder="search">
-				</div>   
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 medium-12 columns">
-			<table class="grid">
-				<thead>
-					<tr>
-						<th>No</th>
-						<th>Judul</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach ($lists as $Count => $list) 
-						<tr>
-							<td>{{ $Count + 1 }}</td>
-							<td><a href="{{ URL::to('dashboard/berita/form/'.$list->id) }}">{{ $list->title }}</a></td>
-							<td class="grid-buttons"><a href="" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
-						</tr>
-					@endforeach
-				</tbody>
-			</table>
-		</div><!-- end of col -->
-	</div><!-- end of row -->
-	
-	<div class="row">
-		<div class="small-12 medium-6 medium-centered columns">
-			<ul class="pagination">
-				<li class="arrow unavailable"><a href="">&laquo;</a></li>
-				<li class="current"><a href="">1</a></li>
-				<li><a href="">2</a></li>
-				<li><a href="">3</a></li>
-				<li><a href="">4</a></li>
-				<li class="unavailable"><a href="">&hellip;</a></li>
-				<li><a href="">12</a></li>
-				<li><a href="">13</a></li>
-				<li class="arrow"><a href="">&raquo;</a></li>
-			</ul>
-		</div><!-- end of col -->
-	</div><!-- end of row -->
-</section>  
+</section>

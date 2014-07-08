@@ -1,22 +1,3 @@
-/* 
-Yellow: #F0B212;
- */
-
-/*html, body, body > .page, 
-.off-canvas-wrap { 	height:100%; } 
-.off-canvas-wrap {  overflow-y: scroll; } 
-.inner-wrap {  min-height: 100%; }*/
-/*
-body,html{
-    height:100%;
-    width:100%;
-}
-.off-canvas-wrap,.inner-wrap{
-    height:100%;   
-}*/
-/*.page{
-    height:100%;   
-}*/
 *{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-tap-highlight-color: transparent;
@@ -56,7 +37,6 @@ p{
 }
 .top-bar-section ul{
     background:#F0B212;
-    /*border-bottom: 1px solid black;*/
 }
 .top-bar-section ul li a{
     height: 42px!important;
@@ -94,7 +74,6 @@ p{
 }
 
 .tab-bar .right-small .fa:before{
-	/*margin-right: 10px;
 	margin-left: 15px;*/
 	color: #fff;
 }
@@ -124,7 +103,6 @@ p{
 	background-color: #f2f2f2;
 	padding: 5px 13px 5px 13px;
 	border-bottom: 1px #d4d4d4 solid;
-	/*margin-bottom: 0.1rem;*/
 }
 .panel-body{
 }
@@ -150,8 +128,6 @@ p{
 	background-color: #f2f2f2;
 }
 .panel-body img{
-	/*width: 190px;*/
-	/*height: 75px;*/
 	padding-right: 0.5rem;
 }
 .panel .columns{
@@ -165,8 +141,6 @@ p{
     text-align: center;
 }
 .limore{
-    /*float: right;*/
-    /*color: #d4d4d4;*/
     font-size: 14px;
 }
 .tab-bar .left-small .fa:before, .tab-bar .right-small .fa:before{
@@ -184,8 +158,6 @@ p{
 }
 
 .tab-bar .right-small .fa:before{
-	/*margin-right: 10px;
-	margin-left: 15px;*/
 	color: #fff;
 }
 .tab-bar .fa{}
@@ -223,14 +195,9 @@ p{
 .divider{
 	color:#888;
 }
-/*.panel{
-	border:none;
-	background-color: #eee;
-}*/
 
  /*Override Snap CSS */
 .snap-content{
-    /*overflow: visible;*/
 }
 
 /* ============= INSTANSI DETAIL ========= */
@@ -239,7 +206,6 @@ p{
 	height: 170px;
 	background-position: center center;
 	background-size: cover;
-	/*border-bottom:  3px #e1e1e1 solid;*/
 }
 .instansi h6{
 	color: #F0BB12;
@@ -261,7 +227,6 @@ p{
 	background-color: #fff;
 }
 .instansi .panel.info li{
-	/*border: 0;*/
 	margin-bottom: 5px;
 	padding: 3px 0.9375rem;
 	font-size: 14px;
@@ -270,13 +235,192 @@ p{
 
 }
 .instansi .panel-heading{
-	/*padding: 5px 10px;*/
 	border-top: 1px #e1e1e1 solid;
+}
+
+/* ======= OPINI LIST ======= */
+.panel-opini .panel-body .row{
+	line-height: 12px;
 }
 .panel-opini .label{
 	margin-left: 0px;
 }
+.panel-opini .panel-heading span{
+	margin: 0.5rem 0;
+	display: inline-block;
+}
+.panel-opini .panel-heading .add{
+	font-size: 12px;
+	float: right;
+	margin: 2px;
+
+}
 .panel-opini .panel-body h6{
 	font-size: 16px;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	color: #F0BB12;
+}
+.panel-opini .panel-body .info{
+	margin-bottom: 3px;
+	line-height: 12px;
+}
+.panel-opini .panel-body .name{
+	color: #008cba;
+}
+.panel-opini .panel-body .instansi{
+	font-size: 10px;
+	color: #999;
+	margin-bottom: 3px;
+}
+.panel-opini .panel-body .date{
+	color: #999;
+	margin-top: 2px;
+}
+/* form opini */
+.panel-opini form{
+	padding: 7px 0.9375rem;
+}
+.panel-opini textarea{
+	overflow: hidden;
+	outline: none;
+	resize: none;
+	min-height: 0;
 }
 
+/* =========== OPINI DETAIL ========== */
+
+
+/* =========== KOMENTAR ========== */
+.komentar .komentar-head{
+	padding: 7px 0.9375rem;
+	border-top: 1px #e1e1e1 solid;
+	border-bottom: 1px #e1e1e1 solid;
+	color: 999px;
+	font-size: 12px;
+}
+.komentar .komentar-head .num{
+	margin-bottom: 5px;
+}
+.komentar .komentar-head textarea, 
+.komentar .komentar-head form{
+	margin-bottom: 0!important;
+}
+.komentar .komentar-head textarea{
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    min-height: 0;
+}
+.komentar .columns{
+	padding: 0;
+}
+.komentar .columns:last-child{
+	padding-left: 10px;
+}
+.komentar ul{
+	padding-top: 10px;
+	margin: 0;
+}
+.komentar li{
+	list-style: none;
+	border-bottom: 1px #e1e1e1 solid;
+}
+.komentar li > .row{
+	margin-bottom: 0;
+}
+.komentar .info{
+	line-height: 12px;
+}
+.komentar p{
+	font-size: 13px;
+	line-height: 16px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.komentar .date{
+	color: #999;
+}
+.komentar .name{
+	line-height: 12px;
+	margin-top: 10px;
+	color: #008cba;
+}
+.komentar ul li > .row{
+	margin: 7px 0.9375rem;
+
+}
+
+/* ========== Berita =========== */
+.berita .panel-body h6{
+	margin-bottom: 3px;
+}
+.berita .date{
+	color: #999;
+	font-size: 10px;
+	line-height: 12px;
+	margin-bottom: 3px;
+}
+.berita .tags{
+	font-size: 10px;
+	line-height: 12px;
+	color: #999;
+}
+.berita .tags .fa{
+	font-size: 8px;
+}
+.berita .tags .fa:before{
+	margin-right: 5px;
+}
+.berita li .row:last-child{
+	padding-top: 0;
+}
+.berita li .row:first-child{
+	padding-bottom: 3px;
+}
+
+/* ========= Berita Detail ======== */
+.berita-detail .banner{
+	min-width: 100%;
+	height: 170px;
+	background-position: center center;
+	background-size: cover;
+}
+.berita-detail h6{
+	color: #F0BB12;
+	margin: 0.5rem 0;
+	font-size: 20px;
+	line-height: 20px;
+}
+.berita-detail p{
+	font-size: 15px!important;
+	margin-bottom: 15px;
+}
+.berita-detail .panel{
+	margin-top: 20px;
+}
+.berita-detail .panel h6{
+	color: #222;
+	font-size: 18px;
+}
+.berita-detail .panel.info ul{
+	background-color: #fff;
+}
+.berita-detail .panel.info li{
+	margin-bottom: 5px;
+	padding: 3px 0.9375rem;
+	font-size: 14px;
+	border: 1px #d4d4d4 solid;
+	background-color: #f2f2f2;
+
+}
+.berita-detail .panel-heading{
+	border-top: 1px #e1e1e1 solid;
+}
+
+
+/* === HELPER === */
+.label.inprogress {
+background-color:#F0BB12;;
+color: white;
+}

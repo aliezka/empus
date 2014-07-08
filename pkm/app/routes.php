@@ -33,7 +33,7 @@ Route::get('pelayanan/{id}', 'DetailController@pelayanan');
 
 // Berita
 Route::get('berita', 'ListController@berita');
-Route::get('berita/detail/{id}', 'DetailController@berita');
+Route::get('berita/{id}', 'DetailController@berita');
 
 // Opini
 Route::get('opini', 'ListController@opini');

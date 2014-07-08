@@ -28,4 +28,8 @@ class Berita extends Eloquent {
 	public function img() {
 		return $this->hasOne('BeritaImg', 'berita_id');
 	}
+
+	public function tag() {
+		return $this->hasOne('BeritaTag', 'berita_id');
+	}
 }

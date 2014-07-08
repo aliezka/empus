@@ -32,6 +32,14 @@ class DetailController extends BaseController{
 		$this->layout->content = View::make('details.pelayanan')
 			->with('Pelayanan', $Pelayanan);
 	}
+
+	public function berita($id) {
+		$Berita = Berita::findOrFail($id);
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('details.berita')
+			->with('Berita', $Berita);
+	}
 }
 
 ?>
