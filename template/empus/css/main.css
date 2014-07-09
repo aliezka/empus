@@ -383,6 +383,7 @@ p{
 	padding-bottom: 3px;
 }
 
+
 /* ========= Berita Detail ======== */
 .berita-detail .banner{
 	min-width: 100%;
@@ -395,6 +396,13 @@ p{
 	margin: 0.5rem 0;
 	font-size: 20px;
 	line-height: 20px;
+}
+.berita-detail .date{
+	color: #999;
+	font-size: 12px;
+	line-height: 12px;
+	margin-bottom: 5px;
+	display: inline-block;
 }
 .berita-detail p{
 	font-size: 15px!important;
@@ -412,14 +420,21 @@ p{
 }
 .berita-detail .panel.info li{
 	margin-bottom: 5px;
-	padding: 3px 0.9375rem;
+	padding: 0px 0rem 0px 0;
 	font-size: 14px;
 	border: 1px #d4d4d4 solid;
 	background-color: #f2f2f2;
 
 }
+.berita-detail .panel.info li a:hover .row{
+	background-color: #e6e6e6;
+}
+.berita-detail .panel.info li:hover{
+
+}
 .berita-detail .panel-heading{
 	border-top: 1px #e1e1e1 solid;
+	margin-bottom: 5px;
 }
 
 /* === PROFILE === */
