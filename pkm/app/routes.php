@@ -34,7 +34,7 @@ Route::get('berita/{id}', 'DetailController@berita');
 
 // Opini
 Route::get('opini', 'ListController@opini');
-Route::get('opini/detail/{id}', 'DetailController@opini');
+Route::get('opini/{id}', 'DetailController@opini');
 
 // Login
 Route::get('login', 'AccessController@login');
@@ -131,6 +131,9 @@ CITIZEN PAGE
 // Opni - Instansi Pelayanan
 Route::get('opini/{object}/{id}/form', 'FormController@opini');
 Route::post('opini/{object}/{id}/form', 'FormController@sOpini');
+
+// Komentar
+Route::post('opini/{id}/komentar', 'FromController@komentar');
 
 Route::get('komentar/{opini}/form', 'FormController@komentar');
 Route::post('komentar/{opini}/form', 'FormController@sKomentar');

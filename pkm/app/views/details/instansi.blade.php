@@ -78,11 +78,12 @@
 					<span class="header"><i class="fa fa-comment-o"></i>Opini Publik</span>
 					<a href="{{ URL::to('opini/instansi/') }}" class="add button tiny">Tambah</a>
 				</div>
+
 				<div class="panel-body">
 					<ul>
 						@foreach ($OpiniTag as $Opini) 
 						<li>
-							<a href="#">
+							<a href="{{ URL::to('opini/'.$Opini->opini->id) }}">
 								<div class="row">
 									<div class="small-3 columns">
 										<img src="img/profile-picture.jpg" width="50">

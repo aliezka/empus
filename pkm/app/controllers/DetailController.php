@@ -51,6 +51,14 @@ class DetailController extends BaseController{
 		$this->layout->content = View::make('details.berita')
 			->with('Berita', $Berita);
 	}
+
+	public function opini($id) {
+		$Opini = Opini::findOrFail($id);
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('details.opini')
+			->with('Opini', $Opini);
+	}
 }
 
 ?>

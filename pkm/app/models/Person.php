@@ -7,4 +7,8 @@ class Person extends Eloquent {
 	public function user() {
 		return $this->hasOne('User', 'person_id');
 	}
+
+	public function opini() {
+		return $this->hasMany('Opini', 'person_id', 'id');
+	}
 }
