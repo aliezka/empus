@@ -149,8 +149,6 @@ END CITIZEN PAGE
 GOV PAGE
 */
 
-Route::get('gov/');
-
 /*
 END GOV PAGE
 */

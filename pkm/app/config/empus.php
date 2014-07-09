@@ -11,7 +11,7 @@ return array(
 		'kelurahan_img' => asset('assets/img/kelurahan.png'),
 		'kelurahan_thumb_img' => asset('assets/img/kelurahan-thumb.png'),
 		'berita_img' => asset('assets/img/berita.png'),
-		'berita_thumb_img' => asset('assets/img/berita-thumb.png')
+		'berita_thumb_img' => asset('assets/img/berita-thumb.png'),
 
 		'opini_type' => array(1 => 'Opini', 2 => 'Pengaduan', 3 => 'Testimonial'),
 		'opini_status' => array(1 => 'Open', 2 => 'In Progress', 3 => 'Resolved', 4 => 'Invalid'),
