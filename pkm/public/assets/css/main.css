@@ -383,6 +383,7 @@ p{
 	padding-bottom: 3px;
 }
 
+
 /* ========= Berita Detail ======== */
 .berita-detail .banner{
 	min-width: 100%;
@@ -395,6 +396,13 @@ p{
 	margin: 0.5rem 0;
 	font-size: 20px;
 	line-height: 20px;
+}
+.berita-detail .date{
+	color: #999;
+	font-size: 12px;
+	line-height: 12px;
+	margin-bottom: 5px;
+	display: inline-block;
 }
 .berita-detail p{
 	font-size: 15px!important;
@@ -412,17 +420,56 @@ p{
 }
 .berita-detail .panel.info li{
 	margin-bottom: 5px;
-	padding: 3px 0.9375rem;
+	padding: 0px 0rem 0px 0;
 	font-size: 14px;
 	border: 1px #d4d4d4 solid;
 	background-color: #f2f2f2;
 
 }
+.berita-detail .panel.info li a:hover .row{
+	background-color: #e6e6e6;
+}
+.berita-detail .panel.info li:hover{
+
+}
 .berita-detail .panel-heading{
 	border-top: 1px #e1e1e1 solid;
+	margin-bottom: 5px;
 }
 
-
+/* === PROFILE === */
+.profile .panel-heading span{
+	display: inline-block;
+	margin-top: 0.3125rem;
+	margin-bottom: 0.3125rem;
+	vertical-align: middle;
+	font-size: 1.125rem;
+}
+.profile .fa-pencil:before,
+.profile .fa-list:before{
+	margin-right: 0;
+}
+.profile .button.tiny{
+	padding-top: 0.6rem;
+    padding-right: 0.9rem;
+    padding-bottom: 0.6rem;
+    padding-left: 0.9rem;
+    font-size: 0.6875rem;
+    margin-bottom: 0;
+}
+.profile .panel-body h6{
+	margin-bottom: 3px;
+	margin-top: 3px;
+}
+.profile .panel-body small{
+	color:#999;
+}
+.profile .panel-body p span{
+	color:#008cba;
+}
+.profile .panel-body .opini-label{
+	color: #f0bb12;
+}
 /* === HELPER === */
 .label.inprogress {
 background-color:#F0BB12;;

@@ -9,6 +9,20 @@ class ListController extends BaseController {
 		$this->offset = Input::get('offset', 0);
 	}
 	
+	function pBeranda(){
+		$Instansi  = Instansi::orderBy('ts_created', 'desc')->take(3)->get();
+		$Pelayanan = Pelayanan::orderBy('ts_created', 'desc')->take(3)->get();
+		$Berita    = Berita::orderBy('created_at', 'desc')->take(3)->get();
+		$Opini     = Opini::orderBy('created_at', 'desc')->take(3)->get();
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.pBeranda')
+			->with('Instansi', $Instansi)
+			->with('Pelayanan', $Pelayanan)
+			->with('Berita', $Berita)	
+			->with('Opini', $Opini);	
+	}
+
 	function instansi() {
 		$Instansi = new Instansi;
 		$Instansi->skip($this->offset)->take($this->perPage);
