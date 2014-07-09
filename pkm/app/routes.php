@@ -72,6 +72,7 @@ ADMIN PAGE
 
 // Dashboard
 Route::get('dashboard', 'DetailController@dashboard');
+Route::get('getAnalytics', 'DetailController@getAnalytics');
 
 // Instansi
 Route::get('dashboard/instansi', 'ListController@instansi');

@@ -6,7 +6,12 @@ class DetailController extends BaseController{
 	}
 
 	public function dashboard(){
-		echo "Dashboard.";
+		$this->layout = View::make('layouts.admin');
+		$this->layout->content = View::make('details.dashboard');
+	}
+
+	public function getAnalytics(){
+		getAnalytics();	
 	}
 
 	public function instansi($id) {
