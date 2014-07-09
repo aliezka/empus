@@ -36,4 +36,8 @@ class Instansi extends Eloquent {
 	public function img() {
 		return $this->hasOne('InstansiImg', 'instansi_id');
 	}
+
+	public function person() {
+		return $this->belongsTo('Person', 'person_id');
+	}
 }

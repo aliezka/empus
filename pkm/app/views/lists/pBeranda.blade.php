@@ -39,7 +39,7 @@
                             <ul>
                                 @foreach ($Pelayanan as $pelayanan)
                                 <li>
-                                    <a href="{{ URL::to('pelayanan/',$pelayanan->id) }}" >
+                                    <a href="{{ URL::to('pelayanan',$pelayanan->id) }}" >
                                          <div class="row">
                                             
                                             <div class="small-12 columns">
@@ -64,7 +64,7 @@
                             <ul>
                                 @foreach($Berita as $berita)
                                 <li>
-                                    <a href="#" >
+                                    <a href="{{ URL::to('berita', $berita->id)}}">
                                         <div class="row">
                                             <div class="small-3 columns">
                                                 <img src="{{!is_null($berita->img) ? $berita->img->img:""}}" alt="" height="75" height="75">
@@ -90,7 +90,7 @@
                             <ul>
                                 @foreach($Opini as $opini)
                                 <li>
-                                    <a href="{{ URL::to('opini/',$opini->id)}}" >
+                                    <a href="{{ URL::to('opini', $opini->id)}}">
                                         <div class="row">
                                             <div class="small-3 columns">
                                                 <img src="img/profile-picture.jpg" width="75">

@@ -14,8 +14,13 @@
 							</div>
 							<h6>{{ $Opini->title }}</h6>
 							<div class="instansi">{{ opiniTag($Opini->id) }}</div>
-							<?php $Type = Config::get('empus.opini_type'); ?>
+							<?php 
+								$Type = Config::get('empus.opini_type'); 
+								$Status = Config::get('empus.opini_status');
+								$Color = Config::get('empus.opini_color');
+							?>
 							<span class="radius label {{ $Opini->type == 3 ? 'success' : null }} {{ $Opini->type == 2 ? 'alert' : null }} ">{{ $Type[$Opini->type] }}</span>
+							<span class="radius label {{ $Color[$Opini->status] }} ">{{ $Status[$Opini->status] }}</span>
 						</div>
 					</div>
 					<div class="row">
@@ -28,7 +33,28 @@
 		</div>
 	</div>
 
-	
+	@if (Auth::user())
+		@if (Auth::user()->roles->contains(3))
+			@if (isset(Auth::user()->person->instansi->id) && Auth::user()->person->instansi->id == $Opini->tag->instansi_id ) 
+			<div class="row">
+				<div class="small-12 medium-6 columns wide-panel komentar">
+					<div class="komentar-head">
+						<div class="num">{{ $Opini->komentar->count() }} komentar</div>
+						{{ Form::open(array('data-abide', 'url' => 'opini/'.$Opini->id.'/status')) }}
+							<div class="description-field">
+								{{ Form::select('status', Config::get('empus.opini_status'), $Opini->status) }}
+							</div>
+
+							<div class="description-field">
+								{{ Form::submit('Save', ['id' => 'submit', 'class' => 'button primary tiny']) }}
+							</div>
+						{{ Form::close() }}
+					</div>
+				</div>
+			</div>
+			@endif
+		@endif
+	@endif
 
 	<div class="row">
 		<div class="small-12 medium-6 columns wide-panel komentar">

@@ -7,6 +7,7 @@
 	</div>
 	<div class="row">
 		<div class="small-12 columns wide-panel">
+			@if ($Pelayanan->persyaratan->count() > 0)
 			<div class="panel">
 				<div class="panel-heading">
 					<h6><i class="fa fa-files-o"></i>Persyaratan</h6>
@@ -27,7 +28,9 @@
 				<!-- end of panel body -->
 			</div>
 			<!-- end of panel -->
+			@endif
 
+			@if ($Pelayanan->prosedur->count() > 0)
 			<div class="panel">
 				<div class="panel-heading">
 					<h6><i class="fa fa-check-square-o"></i>Prosedur</h6>
@@ -48,6 +51,8 @@
 				<!-- end of panel body -->
 			</div>
 			<!-- end of panel -->
+			@endif
+
 		</div>
 		<!-- end of col -->
 	</div>

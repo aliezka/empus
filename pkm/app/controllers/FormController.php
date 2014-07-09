@@ -438,7 +438,7 @@ class FormController extends BaseController {
 		if (Request::segment(1) == 'opini' && Request::segment(3) == 'komentar') {
 			return Redirect::to('opini/'.Request::segment(2));
 		}
-		
+
 		$Opini = Opini::find($opini);
 		if ($Opini) {
 			$this->layout = View::make('layouts.segi');
@@ -472,6 +472,23 @@ class FormController extends BaseController {
 			// End Desc
 
 			return Redirect::to('/');
+		}
+	}
+
+	function sStatus($opini) {
+		$Opini = Opini::findOrFail($opini);
+		$rules = array('status' => ' required | numeric ');
+
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
+			return Redirect::to('opini/'.$opini)
+				->withErrors($validator);
+		} else {
+			$Opini->status = Input::get('status');
+			$Opini->save();
+
+			return Redirect::to('opini/'.$opini);
 		}
 	}
 

@@ -110,3 +110,4 @@ Route::when('opini/*/komentar', 'auth');
 Guest
 */
 Route::when('register', 'guest');
+Route::when('login', 'guest');

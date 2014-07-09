@@ -8,6 +8,10 @@ class Person extends Eloquent {
 		return $this->hasOne('User', 'person_id');
 	}
 
+	public function instansi() {
+		return $this->hasOne('Instansi', 'person_id');
+	}
+
 	public function opini() {
 		return $this->hasMany('Opini', 'person_id', 'id');
 	}
