@@ -30,6 +30,6 @@ class Berita extends Eloquent {
 	}
 
 	public function tag() {
-		return $this->hasOne('BeritaTag', 'berita_id');
+		return $this->hasMany('BeritaTag', 'berita_id');
 	}
 }

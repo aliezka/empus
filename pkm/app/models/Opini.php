@@ -14,7 +14,7 @@ class Opini extends Eloquent {
 	}
 
 	public function person() {
-		return $this->belongsTo('Person');
+		return $this->belongsTo('Person', 'person_id', 'id');
 	}
 
 	public function desc() {
