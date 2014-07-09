@@ -24,4 +24,8 @@ class Opini extends Eloquent {
 	public function img() {
 		return $this->hasOne('OpiniImg', 'opini_id');
 	}
+
+	public function tag() {
+		return $this->hasOne('OpiniTag', 'opini_id');
+	}
 }
