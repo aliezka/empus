@@ -101,9 +101,12 @@ Route::when('dashboard/*', 'auth|administrator');
 /*
 Citizen
 */
+// Add Opini
 Route::when('opini/*/*/form', 'auth|citizen');
+// Add Komentar
+Route::when('opini/*/komentar', 'auth');
 
 /*
 Guest
 */
-Route::when('register', 'auth|guest');
+Route::when('register', 'guest');

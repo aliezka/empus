@@ -435,6 +435,10 @@ class FormController extends BaseController {
 	}
 
 	function komentar($opini) { 
+		if (Request::segment(1) == 'opini' && Request::segment(3) == 'komentar') {
+			return Redirect::to('opini/'.Request::segment(2));
+		}
+		
 		$Opini = Opini::find($opini);
 		if ($Opini) {
 			$this->layout = View::make('layouts.segi');
@@ -445,35 +449,29 @@ class FormController extends BaseController {
 	}
 
 	function sKomentar($opini) {
-		$Opini = Opini::find($opini);
-		if ($Opini) {
-			$rules = array(
-						'desc' => ' required | min:4 '
-					);
-			
-			$validator = Validator::make(Input::all(), $rules);
-			if ($validator->fails()) { 
-				Log::warning($validator->messages()->all());
-				return Redirect::to('komentar/'.$opini.'/form')
-					->withInput(Input::except('image'))
-					->withErrors($validator);
-			} else {
-				$Komentar = new Komentar;
-				$Komentar->opini()->associate($Opini);
-				$Komentar->person()->associate(Auth::user()->person);
-				$Komentar->save();
+		$Opini = Opini::findOrFail($opini);
+		$rules = array('desc' => ' required | min:4 ');
 
-				// Desc
-				$KomentarDesc = new KomentarDesc;
-				$KomentarDesc->desc = Input::get('desc');
-				$KomentarDesc->komentar()->associate($Komentar);
-				$KomentarDesc->save();
-				// End Desc
-
-				return Redirect::to('/');
-			}
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) { 
+			Log::warning($validator->messages()->all());
+			return Redirect::to('komentar/'.$opini.'/form')
+				->withInput(Input::except('image'))
+				->withErrors($validator);
 		} else {
-			return Redirect::to('dashboard/prosedur');	
+			$Komentar = new Komentar;
+			$Komentar->opini()->associate($Opini);
+			$Komentar->person()->associate(Auth::user()->person);
+			$Komentar->save();
+
+			// Desc
+			$KomentarDesc = new KomentarDesc;
+			$KomentarDesc->desc = Input::get('desc');
+			$KomentarDesc->komentar()->associate($Komentar);
+			$KomentarDesc->save();
+			// End Desc
+
+			return Redirect::to('/');
 		}
 	}
 

@@ -30,24 +30,6 @@
 	</div>
 	<div class="row">
 		<div class="small-12 columns wide-panel">
-			<!--<div class="panel">
-				<div class="panel-heading">
-					<h6><i class="fa fa-smile-o"></i>Pelayanan</h6>
-				</div>
-				<div class="panel-body">
-					<ul>
-						@foreach ($Instansi->pelayanan as $Pelayanan)
-							<li>
-								<a href="#">
-									<div class="row">
-										<span>{{ $Pelayanan->name }}</span>
-									</div>
-								</a>
-							</li>
-						@endforeach
-					</ul>
-				</div>
-			</div>!-->
 			
 			<div class="panel">
 				<div class="panel-heading">
@@ -62,7 +44,7 @@
 								{{ nl2br($List->pelayanan->desc->desc) }}
 								<br>
 								<br>
-								<a href="{{ URL::to('pelayanan/'.$Pelayanan->id) }}" class="add button tiny">Detail</a>
+								<a href="{{ URL::to('pelayanan/'.$List->pelayanan_id) }}" class="add button tiny">Detail</a>
 								<a href="{{ URL::to('opini/instansi_pelayanan/'.$List->id.'/form') }}" class="add button tiny">Tambah Opini</a>
 							</div>
 						</dd>
@@ -92,7 +74,7 @@
 										<h6>{{ $Opini->opini->title }}</h6>
 										<?php $Type = Config::get('empus.opini_type'); ?>
 										<span class="radius label {{ $Opini->opini->type == 3 ? 'success' : null }} {{ $Opini->opini->type == 2 ? 'alert' : null }} ">{{ $Type[$Opini->opini->type] }}</span>
-										<span class="secondary radius label"><small class="fa fa-comment"></small>4</span>
+										<span class="secondary radius label"><small class="fa fa-comment"></small>{{ $Opini->opini->komentar->count() }}</span>
 										<small>{{ $Opini->opini->created_at }}</small>
 										<p>{{ $Opini->opini->desc->desc }}</p>
 									</div>
