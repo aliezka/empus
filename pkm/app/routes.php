@@ -55,7 +55,7 @@ Route::get('user', 'ProfileController@detail');
 Route::get('user/{id}', 'ProfileController@detail');
 
 // Whoami
-Route::get('/whoami', array('before' => 'auth',function() {
+Route::get('/whoami', array(function() {
 			if (Auth::user())
 				return  'Login as ' . Auth::user()->email .' '. Auth::user()->roles->first()->role ;
 			else return 'Not yet login.';

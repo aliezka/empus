@@ -57,8 +57,8 @@
 					<dl class="accordion" data-accordion>
 						@foreach ($InstansiPelayanan as $List)
 						<dd class="accordion-navigation">
-							<a href="#panel2">{{ $List->pelayanan->name }}</a>
-							<div id="panel2" class="content">
+							<a href="#panel{{ $List->pelayanan->id }}">{{ $List->pelayanan->name }}</a>
+							<div id="panel{{ $List->pelayanan->id }}" class="content">
 								{{ nl2br($List->pelayanan->desc->desc) }}
 								<br>
 								<br>
@@ -80,6 +80,7 @@
 				</div>
 				<div class="panel-body">
 					<ul>
+						@foreach ($OpiniTag as $Opini) 
 						<li>
 							<a href="#">
 								<div class="row">
@@ -87,31 +88,17 @@
 										<img src="img/profile-picture.jpg" width="50">
 									</div>
 									<div class="small-9 columns">
-										<h6>Petugas kelurahan ramah</h6>
-										<span class="radius label">Opini</span>
+										<h6>{{ $Opini->opini->title }}</h6>
+										<?php $Type = Config::get('empus.opini_type'); ?>
+										<span class="radius label {{ $Opini->opini->type == 3 ? 'success' : null }} {{ $Opini->opini->type == 2 ? 'alert' : null }} ">{{ $Type[$Opini->opini->type] }}</span>
 										<span class="secondary radius label"><small class="fa fa-comment"></small>4</span>
-										<small>24 Mei 2014</small>
-										<p>Petugas kelurahan ramah dan santun. Mereka dengan senang hati membantu keperluan kami.</p>
+										<small>{{ $Opini->opini->created_at }}</small>
+										<p>{{ $Opini->opini->desc->desc }}</p>
 									</div>
 								</div>
 							</a>
 						</li>
-						<li>
-							<a href="#">
-								<div class="row">
-									<div class="small-3 columns">
-										<img src="img/profile-picture.jpg" width="50">
-									</div>
-									<div class="small-9 columns">
-										<h6>Petugas kelurahan ramah</h6>
-										<span class="radius alert label">Pengaduan</span>
-										<span class="secondary radius label"><small class="fa fa-comment"></small>4</span>
-										<small>24 Mei 2014</small>
-										<p>Petugas kelurahan ramah dan santun. Mereka dengan senang hati membantu keperluan kami.</p>
-									</div>
-								</div>
-							</a>
-						</li>
+						@endforeach
 					</ul>
 				</div>
 			</div>

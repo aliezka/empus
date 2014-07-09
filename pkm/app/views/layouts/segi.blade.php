@@ -81,7 +81,7 @@
 				<section class="top-bar-section">
 					<ul class="right">
 						@if (Auth::user()) 
-							<li><a href="{{ URL::to('pengaturan') }}" >Pengaturan</a></li>
+							<li><a href="{{ URL::to('logout') }}">Logout</a></li>
 						@else
 							<li><a href="{{ URL::to('login') }}" >Login</a></li>
 						@endif
