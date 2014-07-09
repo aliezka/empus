@@ -70,3 +70,28 @@
 	 
 		return 'closure';
 	}
+
+	function humanTiming ($time)
+	{
+
+	    $time = time() - $time; // to get the time since that moment
+
+	    $tokens = array (
+	        31536000 => 'tahun',
+	        2592000 => 'bulan',
+	        604800 => 'minggu',
+	        86400 => 'hari',
+	        3600 => 'jam',
+	        60 => 'menit',
+	        1 => 'detik'
+	    );
+
+	    foreach ($tokens as $unit => $text) {
+	        if ($time < $unit) continue;
+	        if ($time > 604800) 
+		        return date("Y-m-d", $time);
+	        $numberOfUnits = floor($time / $unit);
+	        return $numberOfUnits.' '.$text;
+	    }
+
+	}

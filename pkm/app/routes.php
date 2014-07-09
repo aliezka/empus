@@ -50,6 +50,7 @@ Route::post('register', 'AccessController@sRegister');
 // User
 Route::get('user', 'ProfileController@detail');
 Route::get('user/{id}', 'ProfileController@detail');
+Route::get('user/{id}/opini', 'ListController@cOpini');
 
 // Whoami
 Route::get('/whoami', array(function() {
@@ -140,4 +141,14 @@ Route::post('komentar/{opini}/form', 'FormController@sKomentar');
 
 /*
 END CITIZEN PAGE
+*/
+
+/*
+GOV PAGE
+*/
+
+Route::get('gov/');
+
+/*
+END GOV PAGE
 */

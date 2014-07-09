@@ -82,4 +82,12 @@ class ListController extends BaseController {
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('lists.pBerita')->with('lists', $Lists);
 	}
+
+	function cOpini(){
+		$Opini = Opini::where('person_id','=',Auth::user()->person->id)
+						->orderBy('created_at','desc')
+						->get();
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.cOpini')->with('Opini', $Opini);
+	}
 }

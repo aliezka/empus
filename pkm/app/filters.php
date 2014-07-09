@@ -104,6 +104,13 @@ Citizen
 Route::when('opini/*/*/form', 'auth|citizen');
 
 /*
+User
+*/
+Route::when('user','auth|citizen');
+Route::when('user/','auth|citizen');
+Route::when('user/*','auth|citizen');
+
+/*
 Guest
 */
-Route::when('register', 'auth|guest');
+Route::when('register', 'guest');
