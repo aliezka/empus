@@ -17,6 +17,21 @@
 		return $Return;
 	}
 
+	function opiniTag($Id) {
+		$OpiniTag = OpiniTag::where('opini_id', '=', $Id)->firstOrFail();
+		$Return = null;
+
+		if ($OpiniTag->type == 'instansi_pelayanan') {
+			$Res = InstansiPelayanan::find($OpiniTag->tag_id)->pelayanan_id;
+			$Res = Pelayanan::find($Res)->name;
+		} 
+
+		$Instansi = Instansi::find($OpiniTag->instansi_id)->name;
+		$Res = is_null($Res) ? $Instansi : $Instansi.' - '.$Res;
+
+		return $Res;
+	}
+
 	function getAnalytics(){
 		$ga = new Gapi\Gapi('empusid@gmail.com','empus123456');
 

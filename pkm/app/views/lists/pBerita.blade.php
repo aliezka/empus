@@ -14,7 +14,13 @@
 									<div class="small-9 columns">
 										<h6>{{ $list->title }}</h6>
 										<div class="date">{{ $list->created_at }}</div>
-										<div class="tags"><i class="fa fa-tags"></i>Kelurahan Menteng</div>
+										
+										<?php $tag = beritaTag($list->id); ?>
+										@if (!empty($tag))
+										<div class="tags"><i class="fa fa-tags"></i>
+											{{ $tag }}
+										</div>
+										@endif
 									</div>
 								</div>
 								<div class="row">

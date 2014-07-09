@@ -134,7 +134,9 @@ Route::get('opini/{object}/{id}/form', 'FormController@opini');
 Route::post('opini/{object}/{id}/form', 'FormController@sOpini');
 
 // Komentar
-Route::post('opini/{id}/komentar', 'FromController@komentar');
+Route::get('opini/{id}/komentar', 'FormController@komentar');
+Route::post('opini/{id}/komentar', 'FormController@sKomentar');
+Route::post('opini/{id}/status', 'FormController@sStatus');
 
 Route::get('komentar/{opini}/form', 'FormController@komentar');
 Route::post('komentar/{opini}/form', 'FormController@sKomentar');

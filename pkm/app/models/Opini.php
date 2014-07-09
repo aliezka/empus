@@ -13,6 +13,10 @@ class Opini extends Eloquent {
 		return $this->hasMany('OpiniInstansiPelayanan', 'opini_id');
 	}
 
+	public function komentar() {
+		return $this->hasMany('Komentar', 'opini_id');
+	}
+
 	public function person() {
 		return $this->belongsTo('Person', 'person_id', 'id');
 	}
