@@ -312,3 +312,17 @@ table.grid tr td:last-child .fa:before{
 select[multiple]{
 	height: 150px!important;
 }
+
+/* ====== Dashboard ===== */
+.dashboard .panel-heading{
+	text-align: center;
+}
+.dashboard .panel-body{
+	font-size: 1.25rem;
+	text-align: center;
+	padding: 10px;
+}
+.dashboard .panel-body:first-child{
+	padding: 0;
+	margin-bottom: 10px;
+}

@@ -21,7 +21,7 @@
 		<script src="{{ asset('assets/js/foundation/foundation.js') }}"></script>
 		<!-- END JS -->
 	</head>
-	<body>
+	<body id="{{routeClass()}}">
 		<!-- DRAWERS -->
 		<div class="snap-drawers">
 			<div class="snap-drawer snap-drawer-left">
@@ -109,7 +109,11 @@
 				disable: 'right'
 			});
 		</script>
+		
+		<!-- modules -->
+		<script src="{{ asset('assets/js/module/admin-dashboard.js') }}"></script>
 
 		<script src="{{ asset('assets/js/main.js') }}"></script>
+
 	</body>
 </html>

@@ -26,3 +26,10 @@ addEvent(document.getElementById('open-left'), 'click', function(){
         }, !1)
     }
 })(document, window.navigator, "standalone");
+
+/* load modules */
+
+switch($("body").attr('id')){
+    case "detail-dashboard":
+        AdminDashboard.init();console.log("e");break;
+}
