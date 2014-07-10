@@ -20,6 +20,7 @@
 	function opiniTag($Id) {
 		$OpiniTag = OpiniTag::where('opini_id', '=', $Id)->firstOrFail();
 		$Return = null;
+		$Res = null;
 
 		if ($OpiniTag->type == 'instansi_pelayanan') {
 			$Res = InstansiPelayanan::find($OpiniTag->tag_id)->pelayanan_id;
@@ -109,4 +110,18 @@
 	        return $numberOfUnits.' '.$text;
 	    }
 
+	}
+
+	function checkImage ($img, $type='') {
+		if(!is_null($img) && file_exists(asset("assets/img/{$type}/{$img}"))) 
+			return asset("assets/img/{$type}/{$img}");
+		else
+			return Config::get("empus.{$type}_img");
+	}
+
+	function checkImageThumb ($img, $type='') {
+		if(!is_null($img) && file_exists(asset("assets/img/{$type}/{$img}"))) 
+			return asset("assets/img/{$type}/{$img}");
+		else
+			return Config::get("empus.{$type}_thumb_img");
 	}

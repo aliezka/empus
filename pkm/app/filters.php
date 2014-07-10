@@ -114,6 +114,13 @@ Route::when('user/','auth|citizen');
 Route::when('user/*','auth|citizen');
 
 /*
+Gov
+*/
+Route::when('gov','auth|government');
+Route::when('gov/','auth|government');
+Route::when('gov/*','auth|government');
+
+/*
 Guest
 */
 Route::when('register', 'guest');

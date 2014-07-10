@@ -1,6 +1,6 @@
 <section id="content" class="main-content snap-content instansi">
 	<div class="row">
-		<div class="banner" style="background-image: url({{ asset('assets/img/instansi/'.$Instansi->img->img) }})">
+		<div class="banner" style="background-image: url({{ checkImage(!is_null($Instansi->img)? $Instansi->img->img : null,'kelurahan') }})">
 		</div>
 	</div>
 	<div class="row">
@@ -58,7 +58,7 @@
 			<div class="panel panel-opini">
 				<div class="panel-heading">
 					<span class="header"><i class="fa fa-comment-o"></i>Opini Publik</span>
-					<a href="{{ URL::to('opini/instansi/') }}" class="add button tiny">Tambah</a>
+					<a href="{{ URL::to('opini/instansi/'.$Instansi->id.'/form') }}" class="add button tiny">Tambah</a>
 				</div>
 
 				<div class="panel-body">

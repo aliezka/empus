@@ -40,7 +40,7 @@ class AccessController extends BaseController {
 				} 
 				// Government
 				elseif (Auth::user()->roles->first()->id == 3) {
-					return Redirect::intended('government');
+					return Redirect::intended('gov');
 				} 
 				// Citizen
 				else {

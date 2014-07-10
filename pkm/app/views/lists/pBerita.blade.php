@@ -9,7 +9,7 @@
 							<a href="{{ URL::to('berita/'.$list->id) }}">
 								<div class="row">
 									<div class="small-3 columns">
-										<img src="img/kantor-camat1-small.jpg" alt="" height="75" height="75">
+										<img src="{{ checkImageThumb(!is_null($list->img) ? $list->img->img : null,'berita') }}" alt="" height="75" height="75">
 									</div>
 									<div class="small-9 columns">
 										<h6>{{ $list->title }}</h6>
