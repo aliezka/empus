@@ -16,7 +16,8 @@
                                     <a href="{{ URL::to('instansi/'.$instansi->id) }}">
                                         <div class="row">
                                             <div class="small-3 columns">
-                                                <img src="{{ !is_null($instansi->img) ? $instansi->img->img :"" }}" alt="" height="75" height="75">
+                                                <?php $kelurahan_img = Config::get('empus.kelurahan_thumb_img')?>
+                                                <img src="{{$kelurahan_img}}" alt="" height="75" height="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$instansi->name}}</h6>
@@ -66,8 +67,9 @@
                                 <li>
                                     <a href="{{ URL::to('berita', $berita->id)}}">
                                         <div class="row">
+                                        <?php $berita_img = Config::get('empus.berita_thumb_img')?>
                                             <div class="small-3 columns">
-                                                <img src="{{!is_null($berita->img) ? $berita->img->img:""}}" alt="" height="75" height="75">
+                                                <img src="{{$berita_img}}" alt="" height="75" height="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$berita->title}}</h6>
@@ -93,7 +95,8 @@
                                     <a href="{{ URL::to('opini', $opini->id)}}">
                                         <div class="row">
                                             <div class="small-3 columns">
-                                                <img src="img/profile-picture.jpg" width="75">
+                                            <?php $profile_img = Config::get('empus.profile_img') ?>
+                                                <img src="{{$profile_img}}" width="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$opini->title}}</h6>
@@ -108,4 +111,4 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>  
