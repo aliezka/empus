@@ -383,7 +383,7 @@ class FormController extends BaseController {
 
 			DB::transaction(function() use ($Associate, $Opini, $OpiniImg, $OpiniDesc, $object, $id) {
 				$Opini->fill(Input::all());
-				$Opini->person()->associate(Auth::user());
+				$Opini->person()->associate(Auth::user()->person);
 				$Opini->save();
 
 				// Image
@@ -416,6 +416,9 @@ class FormController extends BaseController {
 						break;
 					case 'instansi':
 						$Associate = Instansi::find($id);
+
+						$Pivot = new OpiniInstansi;
+						$Pivot->instansi()->associate($Associate);
 						break;
 					case 'pelayanan':
 						$Associate = Pelayanan::find($id);
@@ -424,7 +427,6 @@ class FormController extends BaseController {
 						
 						break;
 				}
-
 				$Pivot->opini()->associate($Opini);
 				$Pivot->save();
 				// End Object
@@ -501,7 +503,7 @@ class FormController extends BaseController {
 			->with('Berita', $Berita);
 	}
 
-	function sBerita($id) {
+	function sBerita($id=null) {
 		$rules = array(
 					'instansi' => ' array ',
 					'pelayanan' => ' array ',

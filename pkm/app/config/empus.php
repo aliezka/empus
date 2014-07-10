@@ -8,6 +8,7 @@ return array(
 		'berita_img' => public_path('assets/img/berita'),
 
 		'profile_img' => asset('assets/img/profile-picture.jpg'),
+		'profile_thumb_img' => asset('assets/img/profile-picture.jpg'),
 		'kelurahan_img' => asset('assets/img/kelurahan.png'),
 		'kelurahan_thumb_img' => asset('assets/img/kelurahan-thumb.png'),
 		'berita_img' => asset('assets/img/berita.png'),

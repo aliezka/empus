@@ -149,6 +149,9 @@ END CITIZEN PAGE
 GOV PAGE
 */
 
+Route::get('gov', 'ProfileController@gDetail');
+Route::get('gov/{id}', 'ProfileController@gDetail');
+Route::get('gov/{id}/opini', 'ListController@gOpini');
 /*
 END GOV PAGE
 */

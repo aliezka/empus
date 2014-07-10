@@ -16,8 +16,7 @@
                                     <a href="{{ URL::to('instansi/'.$instansi->id) }}">
                                         <div class="row">
                                             <div class="small-3 columns">
-                                                <?php $kelurahan_img = Config::get('empus.kelurahan_thumb_img')?>
-                                                <img src="{{$kelurahan_img}}" alt="" height="75" height="75">
+                                                <img src="{{checkImageThumb(!is_null($instansi->img) ? $instansi->img->img : null,'kelurahan')}}" alt="" height="75" height="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$instansi->name}}</h6>
@@ -67,9 +66,8 @@
                                 <li>
                                     <a href="{{ URL::to('berita', $berita->id)}}">
                                         <div class="row">
-                                        <?php $berita_img = Config::get('empus.berita_thumb_img')?>
                                             <div class="small-3 columns">
-                                                <img src="{{$berita_img}}" alt="" height="75" height="75">
+                                                <img src="{{checkImageThumb(!is_null($berita->img) ? $berita->img->img : null,'berita')}}" alt="" height="75" height="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$berita->title}}</h6>
@@ -95,8 +93,7 @@
                                     <a href="{{ URL::to('opini', $opini->id)}}">
                                         <div class="row">
                                             <div class="small-3 columns">
-                                            <?php $profile_img = Config::get('empus.profile_img') ?>
-                                                <img src="{{$profile_img}}" width="75">
+                                                <img src="{{checkImageThumb(!is_null($opini->person->img) ? $opini->person->img->img : null,'profile')}}" width="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$opini->title}}</h6>

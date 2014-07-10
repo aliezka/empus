@@ -21,6 +21,26 @@ class ProfileController extends BaseController{
 			->with('Opini',$Opini)
 			->with('User',$User);
 	}
+
+	function gDetail($id=null){
+		$User = Auth::user();
+
+		if ($id != Auth::user()->id) {
+			return Redirect::to('gov/'.Auth::user()->id);
+		}
+
+		$Opini = $User->person->opini()
+							  ->take(5)
+							  ->orderBy('created_at','desc')
+							  ->get();
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('profiles.gDetail')
+			->with('Opini',$Opini)
+			->with('User',$User);
+	}
+
+
 }
 
 ?>
