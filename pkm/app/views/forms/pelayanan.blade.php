@@ -57,7 +57,6 @@
 				<ol>
 
 					@foreach ($Persyaratan as $PersyaratanL)
-					{{dd($Pelayanan)}}
 						<li>
 							<a href="{{ URL::to('dashboard/pelayanan/'.$Pelayanan->id.'/persyaratan/'.$PersyaratanL->id) }}">{{ $PersyaratanL->title }}</a>
 						</li>
