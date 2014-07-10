@@ -47,6 +47,7 @@
 	</div>
 	{{ Form::close() }}
 
+	@if(!is_null($Pelayanan))
 	<div class="row">
 		<div class="small-3 columns">
 		</div>
@@ -54,7 +55,9 @@
 			<fieldset>
 				<legend>Persyaratan</legend>
 				<ol>
+
 					@foreach ($Persyaratan as $PersyaratanL)
+					{{dd($Pelayanan)}}
 						<li>
 							<a href="{{ URL::to('dashboard/pelayanan/'.$Pelayanan->id.'/persyaratan/'.$PersyaratanL->id) }}">{{ $PersyaratanL->title }}</a>
 						</li>
@@ -75,4 +78,5 @@
 			</fieldset>
 		</div>
 	</div><!-- end of row -->
+	@endif
 </section>
