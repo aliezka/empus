@@ -70,6 +70,8 @@ class AccessController extends BaseController {
 		if ($validator->fails()) { 
 			Debugbar::info($validator->messages()->all());
 			$Renderer = Debugbar::getJavascriptRenderer();
+
+			Log::warning($validator->messages()->all());
 			
 			return Redirect::to('register')
 				->withInput(Input::except('password'))
@@ -106,6 +108,51 @@ class AccessController extends BaseController {
 			}
 
 			$Renderer = Debugbar::getJavascriptRenderer();
+		}
+	}
+
+	public function edit() {
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('user.edit')
+			->with('User', Auth::user());
+	}
+
+	public function sEdit() {
+		$rules = array(
+					'name' => ' required | alpha_spaces | min:3 ',
+					'name' => ' required | min:6 ',
+					'old-password' => ' min:6 | old_password ',
+					'new-password' => ' min:6 | required_with:old-password '
+				);
+
+		if (Input::get('username') != Auth::user()->username) {
+			$rules += array('username' => ' required | email | unique:user,email');
+		}
+
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->fails()) {
+			Debugbar::info($validator->messages()->all());
+			$Renderer = Debugbar::getJavascriptRenderer();
+			
+			Log::warning($validator->messages()->all());
+			
+			return Redirect::to('user-edit')
+				->withInput(Input::except('password'))
+				->withErrors($validator);
+		} else { 
+			Person::findOrFail(Auth::user()->person_id)->update(array('name' => Input::get('name')));
+
+			$User = Auth::user();
+			$User->username = $User->email = Input::get('username');
+
+			$User->password = $User->password;
+			if (!empty(Input::get('new-password'))) {
+				$User->password = Hash::make(Input::get('new-password'));
+			} $User->password = Hash::make(Input::get('new-password'));
+
+			$User->save();
+
+			return Redirect::to('user-edit');
 		}
 	}
 

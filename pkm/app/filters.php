@@ -112,6 +112,7 @@ User
 Route::when('user','auth|citizen');
 Route::when('user/','auth|citizen');
 Route::when('user/*','auth|citizen');
+Route::when('user-edit','auth|citizen');
 
 /*
 Gov

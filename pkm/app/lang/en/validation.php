@@ -104,5 +104,10 @@ return array(
 	/*
 	Alphabetic with Space
 	*/
-	"alpha_spaces"         => "The :attribute may only contain letters and spaces.",
+	"alpha_spaces"			=> "The :attribute may only contain letters and spaces.",
+
+	/*
+	Old password
+	*/
+	'old_password'			=> "The :attribute does not match."
 );
