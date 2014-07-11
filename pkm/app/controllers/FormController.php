@@ -15,8 +15,16 @@ class FormController extends BaseController {
 		$InstansiProfileTelepon = isset($InstansiProfileTelepon->text) ? $InstansiProfileTelepon->text : null;
 		$InstansiProfileAlamat = isset($InstansiProfileAlamat->text) ? $InstansiProfileAlamat->text : null;
 
+		$Users = User::whereHas('roles', function($query){
+							$query->where('role_id','=','3');})->with('person')->get();
+		$PersonArray = array(''=>'Pilih User');
+		foreach ($Users as $User) {
+			$PersonArray[$User->person->id] = $User->person->name;
+		}
+
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('forms.instansi')
+			->with('PersonArray', $PersonArray)
 			->with('Pelayanan', $Pelayanan)
 			->with('Instansi', $Instansi)
 			->with('InstansiProfileTelepon', $InstansiProfileTelepon)
@@ -31,7 +39,8 @@ class FormController extends BaseController {
 					'desc' => ' required | min:4 ',
 					'image' => ' required | image ',
 					'alamat' => ' min:4 ',
-					'telepon' => ' min:3 '
+					'telepon' => ' min:3 ',
+					'person_id' => ' required | numeric'
 				);
 
 		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
@@ -50,6 +59,7 @@ class FormController extends BaseController {
 				->withErrors($validator);
 		} else {
 			$Instansi->name = Input::get('name');
+			$Instansi->person_id = Input::get('person_id');
 			$Instansi->save();
 
 			// Alamat
@@ -143,6 +153,17 @@ class FormController extends BaseController {
 			
 			return Redirect::to('/');
 		}
+	}
+
+	function jsonPerson(){
+		$res = array();
+		foreach (Person::All() as $key => $person) {
+			$email=!is_null($person->user)? $person->user->email : null;
+			$res[] = array(
+				"{$person->id}" => "{$person->name} ({$email})"
+				);
+		}
+		echo json_encode($res);
 	}
 
 	function pelayanan($id = null) {

@@ -96,8 +96,24 @@
                                                 <img src="{{checkImageThumb(!is_null($opini->person->img) ? $opini->person->img->img : null,'profile')}}" width="75">
                                             </div>
                                             <div class="small-9 columns">
+                                                <div class="info">
+                                                    <small class="name">{{$opini->person->name}} </small>
+                                                    <small class="date right">{{$opini->created_at}}</small>
+                                                </div>
                                                 <h6>{{$opini->title}}</h6>
-                                                <p>{{!is_null($opini->desc) ? $opini->desc->desc:""}}</p>
+                                                <?php 
+                                                    $Type = Config::get('empus.opini_type'); 
+                                                    $Status = Config::get('empus.opini_status'); 
+                                                    $Color = Config::get('empus.opini_color'); 
+                                                ?>
+                                                <span class="secondary radius label"><small class="fa fa-comment"></small>{{ $opini->komentar->count() }}</span>
+                                                <span class="radius label {{ $opini->type == 3 ? 'success' : null }} {{ $opini->type == 2 ? 'alert' : null }} ">{{ $Type[$opini->type] }}</span>
+                                                <span class="label radius {{$Color[$opini->status]}}">{{$Status[$opini->status]}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <p>{{ $opini->desc->desc }}</p>
                                             </div>
                                         </div>
                                     </a>

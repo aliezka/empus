@@ -1,7 +1,7 @@
 <section id="content" class="main-content snap-content instansi">
 	<div class="row">
 		<div class="small-12 medium-12 columns">
-		@if($Object->table == 'instansi_pelayanan')
+		@if(get_class($Object) == 'InstansiPelayanan')
 			<h6>{{ $Object->pelayanan->name }}</h6>
 			<p>{{ nl2br($Object->pelayanan->desc->desc) }}</p>
 		@else

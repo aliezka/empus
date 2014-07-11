@@ -97,6 +97,18 @@
 
 			<div class="row">
 				<div class="small-3 columns">
+					<label for="image" class="right inline">User</label>
+				</div>
+				<div class="small-9 columns {{ $errors->first('person_id') ? 'error' : null }}">
+					<div class="name-field">
+						{{ Form::select('person_id', $PersonArray, is_object($Instansi) ? $Instansi->person_id : null, array('placeholder' => 'Telepon','id'=>'person_id')) }}
+						<small class="error">{{ $errors->first('person_id') ? $errors->first('person_id') : 'Isi dengan benar' }}</small>
+					</div>
+				</div>
+			</div><!-- end of row -->
+
+			<div class="row">
+				<div class="small-3 columns">
 				</div>
 				<div class="small-9 columns">
 					{{ Form::submit('Save', [ 'class' => 'button primary small' ]) }}

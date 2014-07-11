@@ -5,7 +5,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="small-3 columns">
-							<img src="img/profile-picture.jpg" alt="" width="65" height="65">
+							<img src="{{checkImageThumb(!is_null($Opini->person->img) ? $Opini->person->img->img:null,'profile')}}" alt="" width="65" height="65">
 						</div>
 						<div class="small-9 columns">
 							<div class="info">
@@ -39,7 +39,6 @@
 			<div class="row">
 				<div class="small-12 medium-6 columns wide-panel komentar">
 					<div class="komentar-head">
-						<div class="num">{{ $Opini->komentar->count() }} komentar</div>
 						{{ Form::open(array('data-abide', 'url' => 'opini/'.$Opini->id.'/status')) }}
 							<div class="description-field">
 								{{ Form::select('status', Config::get('empus.opini_status'), $Opini->status) }}
@@ -60,23 +59,23 @@
 		<div class="small-12 medium-6 columns wide-panel komentar">
 			<div class="komentar-head">
 				<div class="num">{{ $Opini->komentar->count() }} komentar</div>
-				{{ Form::open(array('data-abide', 'url' => 'opini/'.$Opini->id.'/komentar')) }}
-					<div class="description-field">
-						{{ Form::textarea('desc', null, ['rows' => '1', 'placeholder' => 'Deskripsi Opini', 'required']) }}
-						<small class="error">Komentar harus diisi</small>
-					</div>
+			{{ Form::open(array('data-abide', 'url' => 'opini/'.$Opini->id.'/komentar')) }}
+				<div class="description-field">
+					{{ Form::textarea('desc', null, ['rows' => '1', 'placeholder' => 'Komentar', 'required', 'class'=>'form-control']) }}
+					<small class="error">Komentar harus diisi</small>
+				</div>
 
-					<div class="description-field">
-						{{ Form::submit('Save', ['id' => 'submit', 'class' => 'button primary tiny']) }}
-					</div>
-				{{ Form::close() }}
+				<div class="description-field">
+					{{ Form::submit('Save', ['id' => 'submit', 'class' => 'button primary tiny']) }}
+				</div>
+			{{ Form::close() }}
 			</div>
 			<ul>
 				@foreach ($Opini->komentar->all() as $Komentar)
 				<li>
 					<div class="row">
 						<div class="small-2 columns">
-							<img src="img/profile-picture.jpg" alt="" width="65" height="65">
+							<img src="{{checkImageThumb(!is_null($Komentar->person->img) ? $Komentar->person->img->img:null,'profile')}}" alt="" width="65" height="65">
 						</div>
 						<div class="small-10 columns">
 							<div class="info">

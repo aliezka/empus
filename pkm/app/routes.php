@@ -80,6 +80,8 @@ Route::post('dashboard/instansi/form', 'FormController@sInstansi');
 // Update Record
 Route::get('dashboard/instansi/form/{id}', 'FormController@instansi');
 Route::post('dashboard/instansi/form/{id}', 'FormController@sInstansi');
+// json
+Route::get('dashboard/instansi/jsonPerson', 'FormController@jsonPerson');
 
 // Pelayanan
 Route::get('dashboard/pelayanan', 'ListController@pelayanan');

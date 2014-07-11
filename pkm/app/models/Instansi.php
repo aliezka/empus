@@ -2,7 +2,7 @@
 
 class Instansi extends Eloquent {
 	protected $table = 'instansi';
-	protected $fillable = array('name');
+	protected $fillable = array('name,person_id');
 	public $timestamps = false;
 
 	public function pelayanan() {

@@ -29,25 +29,25 @@
             <div class="panel">
                 <div class="panel-heading">
                     <span><i class="fa fa-comments-o"></i>Opini</span>
-                    <a href="{{URL::to('user/'.$User->id.'/opini')}}" class="button secondary tiny right"><i class="fa fa-list"></i></a>
+                    <a href="{{URL::to('gov/'.$User->id.'/opini')}}" class="button secondary tiny right"><i class="fa fa-list"></i></a>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        @foreach($Opini as $opini)
+                        @foreach($OpiniTag as $Opini)
                         <li>
-                            <a href="{{URL::to('opini/',$opini->id)}}" >
+                            <a href="{{URL::to('opini',$Opini->opini->id)}}" >
                                 <div class="row">
                                     <div class="small-12 columns">
-                                        <small>{{humanTiming(strtotime($opini->created_at))}} yang lalu</small>
-                                        <h6>{{$opini->title}}</h6>
-                                        <span class="label secondary radius"><small class="fa fa-comment"></small>4</span>
+                                        <small>{{humanTiming(strtotime($Opini->opini->created_at))}} yang lalu</small>
+                                        <h6>{{$Opini->opini->title}}</h6>
+                                        <span class="label secondary radius"><small class="fa fa-comment"></small>{{$Opini->opini->komentar->count()}}</span>
                                         <span class="label radius">Opini</span>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         @endforeach
-                        @if(count($User->person->opini)<1)
+                        @if(empty($OpiniTag->count()))
                         <li>
                             <div class="row">
                                 <div class="small-12 columns">

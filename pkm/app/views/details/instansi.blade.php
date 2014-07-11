@@ -68,17 +68,29 @@
 							<a href="{{ URL::to('opini/'.$Opini->opini->id) }}">
 								<div class="row">
 									<div class="small-3 columns">
-										<img src="img/profile-picture.jpg" width="50">
+										<img src="{{checkImage(!is_null($Opini->person)? $Opini->person->img->img : null,'profile')}}" width="50">
 									</div>
 									<div class="small-9 columns">
+										<div class="info">
+                                            <small class="name">{{$Opini->opini->person->name}} </small>
+                                            <small class="date right">{{$Opini->opini->created_at}}</small>
+                                        </div>
 										<h6>{{ $Opini->opini->title }}</h6>
-										<?php $Type = Config::get('empus.opini_type'); ?>
-										<span class="radius label {{ $Opini->opini->type == 3 ? 'success' : null }} {{ $Opini->opini->type == 2 ? 'alert' : null }} ">{{ $Type[$Opini->opini->type] }}</span>
+										<?php 
+											$Type = Config::get('empus.opini_type'); 
+											$Status = Config::get('empus.opini_status'); 
+											$Color = Config::get('empus.opini_color'); 
+										?>
 										<span class="secondary radius label"><small class="fa fa-comment"></small>{{ $Opini->opini->komentar->count() }}</span>
-										<small>{{ $Opini->opini->created_at }}</small>
-										<p>{{ $Opini->opini->desc->desc }}</p>
+										<span class="radius label {{ $Opini->opini->type == 3 ? 'success' : null }} {{ $Opini->opini->type == 2 ? 'alert' : null }} ">{{ $Type[$Opini->opini->type] }}</span>
+										<span class="label radius {{$Color[$Opini->opini->status]}}">{{$Status[$Opini->opini->status]}}</span>
 									</div>
 								</div>
+								<div class="row">
+                                    <div class="small-12 columns">
+                                        <p>{{ $Opini->opini->desc->desc }}</p>
+                                    </div>
+                                </div>
 							</a>
 						</li>
 						@endforeach

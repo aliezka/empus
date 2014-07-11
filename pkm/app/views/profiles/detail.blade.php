@@ -35,7 +35,7 @@
                     <ul>
                         @foreach($Opini as $opini)
                         <li>
-                            <a href="{{URL::to('opini/',$opini->id)}}" >
+                            <a href="{{URL::to('opini',$opini->id)}}" >
                                 <div class="row">
                                     <div class="small-12 columns">
                                         <small>{{humanTiming(strtotime($opini->created_at))}} yang lalu</small>

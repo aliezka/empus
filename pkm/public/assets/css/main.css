@@ -306,7 +306,7 @@ p{
 .komentar .komentar-head .num{
 	margin-bottom: 5px;
 }
-.komentar .komentar-head textarea, 
+.komentar .komentar-head input,
 .komentar .komentar-head form{
 	margin-bottom: 0!important;
 }

@@ -88,6 +88,7 @@
 		<script src="{{ asset('assets/js/vendor/fastclick.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/iscroll.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/snap.js') }}"></script>
+		<script src="{{ asset('assets/js/vendor/select2/select2.js') }}"></script>
 		<script src="{{ asset('assets/js/foundation.min.js') }}"></script>
 		<script src="{{ asset('assets/js/foundation/foundation.offcanvas.js') }}"></script>
 		<script src="{{ asset('assets/js/foundation/foundation.abide.js') }}"></script>
