@@ -151,7 +151,7 @@ class FormController extends BaseController {
 			}
 			// End Pelayanan
 			
-			return Redirect::to('/');
+			return Redirect::to('dashboard/instansi');
 		}
 	}
 
@@ -211,7 +211,7 @@ class FormController extends BaseController {
 			}
 			// End Desc
 
-			return Redirect::to('/');
+			return Redirect::to('dashboard/pelayanan');
 		}
 	}
 
@@ -277,7 +277,7 @@ class FormController extends BaseController {
 			}
 			// End Desc
 
-			return Redirect::to('/');
+			return Redirect::to('dashboard/pelayanan/form/'.$pelayanan_id);
 		}
 	}
 
@@ -343,7 +343,7 @@ class FormController extends BaseController {
 			}
 			// End Desc
 
-			return Redirect::to('/');
+			return Redirect::to('dashboard/pelayanan/form/'.$pelayanan_id);
 		}
 	}
 
@@ -453,7 +453,7 @@ class FormController extends BaseController {
 				// End Object
 			});
 			
-			return Redirect::to('/');
+			return Redirect::to('opini/'.$Opini->id);
 		}
 	}
 
@@ -462,13 +462,10 @@ class FormController extends BaseController {
 			return Redirect::to('opini/'.Request::segment(2));
 		}
 
-		$Opini = Opini::find($opini);
-		if ($Opini) {
-			$this->layout = View::make('layouts.segi');
-			$this->layout->content = View::make('forms.komentar');
-		} else {
-			return Redirect::to('dashboard/prosedur');	
-		}
+		$Opini = Opini::findOrFail($opini);
+		
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('forms.komentar');
 	}
 
 	function sKomentar($opini) {
@@ -494,7 +491,7 @@ class FormController extends BaseController {
 			$KomentarDesc->save();
 			// End Desc
 
-			return Redirect::to('/');
+			return Redirect::to('opini/'.$opini);
 		}
 	}
 
@@ -536,7 +533,7 @@ class FormController extends BaseController {
 					'image' => ' image '
 				);
 
-		$Berita = !is_null($id) ? Berita::find($id) : new Berita;
+		$Berita = !is_null($id) ? Berita::findOrFail($id) : new Berita;
 
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
@@ -629,7 +626,7 @@ class FormController extends BaseController {
 			}
 			// End Instansi
 
-			return Redirect::to('/');
+			return Redirect::to('berita/'.$Berita->id);
 		}
 	}
 }

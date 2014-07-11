@@ -128,6 +128,17 @@ END ADMIN PAGE
 */
 
 /*
+AUTHENTICATED USER
+*/
+
+Route::get('user-edit', 'AccessController@edit');
+Route::post('user-edit', 'AccessController@sEdit');
+
+/*
+END AUTHENTICATED USER
+*/
+
+/*
 CITIZEN PAGE
 */
 
