@@ -5,6 +5,7 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<h6>{{ $Berita->title }}</h6>
+			<small class="date">{{ humanTiming($Berita->created_at->timestamp) }}</small>
 			<p>{{ isset($Berita->desc->desc) ? nl2br($Berita->desc->desc) : null }}</p>
 		</div>
 	</div>

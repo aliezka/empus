@@ -31,5 +31,5 @@ addEvent(document.getElementById('open-left'), 'click', function(){
 
 switch($("body").attr('id')){
     case "detail-dashboard":
-        AdminDashboard.init();console.log("e");break;
+        AdminDashboard.init();;break;
 }

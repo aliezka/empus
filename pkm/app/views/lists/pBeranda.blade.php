@@ -1,8 +1,4 @@
 <section id="content" class="main-content snap-content">
-            <!-- Topnav -->
-            <!-- <div class="fixed"> -->
-            <!-- </div>  -->
-            <!-- End of Topnav -->
             <div class="row">
                 <div class="small-12 medium-6 columns wide-panel">
                     <div class="panel">
@@ -26,6 +22,17 @@
                                     </a>
                                 </li>
                                 @endforeach
+                                @if(Instansi::all()->count()>3)
+                                <li class="limore">
+                                    <a href="{{URL::to('instansi')}}">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -49,6 +56,17 @@
                                     </a>
                                 </li>
                                 @endforeach
+                                @if(Pelayanan::all()->count()>3)
+                                <li class="limore">
+                                    <a href="{{URL::to('pelayanan')}}">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -77,6 +95,17 @@
                                     </a>
                                 </li>
                                 @endforeach
+                                @if(Berita::all()->count()>3)
+                                <li class="limore">
+                                    <a href="{{URL::to('berita')}}">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -98,7 +127,7 @@
                                             <div class="small-9 columns">
                                                 <div class="info">
                                                     <small class="name">{{$opini->person->name}} </small>
-                                                    <small class="date right">{{$opini->created_at}}</small>
+                                                    <small class="date right">{{humanTiming($opini->created_at->timestamp)}}</small>
                                                 </div>
                                                 <h6>{{$opini->title}}</h6>
                                                 <?php 
@@ -119,6 +148,17 @@
                                     </a>
                                 </li>
                                 @endforeach
+                                @if(Opini::all()->count()>3)
+                                <li class="limore">
+                                    <a href="{{URL::to('opini')}}">
+                                        <div class="row">
+                                            <div class="small-12 columns">
+                                                <span>Lihat lebih banyak</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
 						<div class="small-9 columns">
 							<div class="info">
 							<small class="name">{{ $Opini->person->name }}</small>
-								<small class="date">{{ $Opini->created_at }}</small>
+								<small class="date">{{ humanTiming($Opini->created_at->timestamp) }}</small>
 							</div>
 							<h6>{{ $Opini->title }}</h6>
 							<div class="instansi">{{ opiniTag($Opini->id) }}</div>
@@ -80,7 +80,7 @@
 						<div class="small-10 columns">
 							<div class="info">
 								<small class="name">{{ $Komentar->person->name }} </small>
-								<small class="date">{{ $Komentar->created_at }}</small>
+								<small class="date">{{ humanTiming($Komentar->created_at->timestamp) }}</small>
 							</div>
 							<p>{{ nl2br($Komentar->desc->desc) }}</p>
 						</div>

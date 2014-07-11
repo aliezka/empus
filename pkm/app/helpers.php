@@ -89,9 +89,7 @@
 
 	function humanTiming ($time)
 	{
-
-	    $time = time() - $time; // to get the time since that moment
-
+	    $diffTime = time() - $time; // to get the time since that moment
 	    $tokens = array (
 	        31536000 => 'tahun',
 	        2592000 => 'bulan',
@@ -101,13 +99,14 @@
 	        60 => 'menit',
 	        1 => 'detik'
 	    );
-
+	    $diffTime = abs($diffTime);
 	    foreach ($tokens as $unit => $text) {
-	        if ($time < $unit) continue;
-	        if ($time > 604800) 
-		        return date("Y-m-d", $time);
-	        $numberOfUnits = floor($time / $unit);
-	        return $numberOfUnits.' '.$text;
+	        if ($diffTime < $unit) continue;
+	        if ($diffTime > 604800) 
+		        return date("d M Y", $time);
+
+	        $numberOfUnits = floor($diffTime / $unit);
+	        return $numberOfUnits.' '.$text.' yang lalu';
 	    }
 
 	}

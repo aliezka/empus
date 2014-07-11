@@ -73,7 +73,7 @@
 									<div class="small-9 columns">
 										<div class="info">
                                             <small class="name">{{$Opini->opini->person->name}} </small>
-                                            <small class="date right">{{$Opini->opini->created_at}}</small>
+                                            <small class="date right">{{humanTiming($Opini->opini->created_at->timestamp)}}</small>
                                         </div>
 										<h6>{{ $Opini->opini->title }}</h6>
 										<?php 
