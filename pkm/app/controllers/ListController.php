@@ -83,6 +83,13 @@ class ListController extends BaseController {
 		$this->layout->content = View::make('lists.pBerita')->with('lists', $Lists);
 	}
 
+	function Opini(){
+		$Opini = Opini::orderBy('created_at','desc')
+						->get();
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.cOpini')->with('Opini', $Opini);
+	}
+
 	function cOpini(){
 		$Opini = Opini::where('person_id','=',Auth::user()->person->id)
 						->orderBy('created_at','desc')
@@ -95,6 +102,6 @@ class ListController extends BaseController {
 		$OpiniTag = OpiniTag::where('instansi_id','=',!is_null(Auth::user()->person->instansi)?Auth::user()->person->instansi->id:'')
 						->get();
 		$this->layout = View::make('layouts.segi');
-		$this->layout->content = View::make('lists.cOpini')->with('OpiniTag', $OpiniTag);
+		$this->layout->content = View::make('lists.gOpini')->with('OpiniTag', $OpiniTag);
 	}
 }
