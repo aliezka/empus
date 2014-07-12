@@ -37,8 +37,11 @@
 						<li><a href="{{ URL::to('pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
 						<li><a href="{{ URL::to('berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
 						<li><a href="{{ URL::to('opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
-						@if (Auth::user()) 
-							<li><a href="{{ URL::to('user-edit') }}"><i class="fa fa-cog"></i>Profil</a></li>
+						@if (Auth::user())
+							@if (Auth::user()->hasRole('Government'))
+								<li><a href="{{ URL::to('gov') }}"><i class="fa fa-cog"></i>Kelurahan</a></li>
+							@endif 
+							<li><a href="{{ URL::to('user') }}"><i class="fa fa-cog"></i>Profil</a></li>
 							<li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-in"></i>Logout</a></li>
 						@else
 							<li><a href="{{ URL::to('login') }}"><i class="fa fa-sign-in"></i>Login</a></li>

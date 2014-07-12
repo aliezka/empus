@@ -4,7 +4,7 @@
             <div class="panel">
                 <div class="panel-heading">
                     <span><i class="fa fa-user"></i>Profile</span>
-                    <a href="{{URL::to('gov/'.Auth::user()->id.'/edit')}}" class="button secondary tiny right"><i class="fa fa-pencil"></i></a>
+                    <a href="{{URL::to('gov/'.$User->person->instansi->id.'/edit')}}" class="button secondary tiny right"><i class="fa fa-pencil"></i></a>
                 </div>
                 <div class="panel-body">
                     <ul>
@@ -29,7 +29,7 @@
             <div class="panel">
                 <div class="panel-heading">
                     <span><i class="fa fa-comments-o"></i>Opini</span>
-                    <a href="{{URL::to('gov/'.$User->id.'/opini')}}" class="button secondary tiny right"><i class="fa fa-list"></i></a>
+                    <a href="{{URL::to('gov/'.$User->person->instansi->id.'/opini')}}" class="button secondary tiny right"><i class="fa fa-list"></i></a>
                 </div>
                 <div class="panel-body">
                     <ul>

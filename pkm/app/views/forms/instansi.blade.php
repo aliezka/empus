@@ -72,7 +72,8 @@
 						@if ($errors->first('image')) 
 							<small class="error">{{ $errors->first('image') }}</small>
 						@else
-							<label for="image" class="left">Upload gambar baru untuk mengubah gambar.</label>
+							<div class="left">Upload gambar baru untuk mengubah gambar.</div>
+							<img src="{{asset('assets/img/instansi/'.$Instansi->img->img)}}">
 						@endif
 					@else 
 						<small class="error">File harus diisi</small>

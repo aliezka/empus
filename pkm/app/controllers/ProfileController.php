@@ -25,15 +25,9 @@ class ProfileController extends BaseController{
 	function gDetail($id=null){
 		$User = Auth::user();
 
-		if ($id != Auth::user()->id) {
-			return Redirect::to('gov/'.Auth::user()->id);
+		if ($id != $User->person->instansi->id) {
+			return Redirect::to('gov/'.Auth::user()->person->instansi->id);
 		}
-
-		$Opini = $User->person->opini()
-							  ->take(5)
-							  ->orderBy('created_at','desc')
-							  ->get();
-		$Instansi = Instansi::find($User->person->id);
 
 		$InstansiProfileTelepon = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 1)->first() : null;
 		$InstansiProfileAlamat = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 4)->first() : null;
