@@ -58,7 +58,7 @@ Route::post('user/{id}/edit', 'AccessController@sEdit');
 // Whoami
 Route::get('/whoami', array(function() {
 			if (Auth::user())
-				return  'Login as ' . Auth::user()->email .' '. Auth::user()->roles->first()->role ;
+				return  'Login as ' . Auth::user()->email .' '. Auth::user()->role->first()->role ;
 			else return 'Not yet login.';
 		})
 	);

@@ -96,7 +96,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	*/
 	public function hasRole($r=""){
 		$array[]=array();
-		foreach($this->roles as $role)
+		foreach($this->role as $role)
 			$array[] = $role->role;
 		return in_array($r,$array);
 	}

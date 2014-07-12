@@ -110,7 +110,6 @@ Route::when('opini/*/komentar', 'auth');
 User
 */
 Route::when('user','administrator');
-Route::when('user/','auth');
 Route::when('user/*','auth');
 Route::when('user-edit','auth');
 

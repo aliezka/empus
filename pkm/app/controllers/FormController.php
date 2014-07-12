@@ -21,7 +21,7 @@ class FormController extends BaseController {
 		
 		$PersonArray = array();
 		if (Auth::user()->hasRole('Administrator')) {
-			$Users = User::whereHas('roles', function($query){
+			$Users = User::whereHas('role', function($query){
 								$query->where('role_id','=','3');
 							})->with('person')->get();
 			$PersonArray = array(''=>'Pilih User');
