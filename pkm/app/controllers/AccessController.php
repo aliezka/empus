@@ -152,6 +152,32 @@ class AccessController extends BaseController {
 
 			$User->save();
 
+			// Roles
+			$Role  = array();
+			$SRoles = $User->roles;
+
+			foreach ($SRoles as $S) {
+				$Roles[] = $S->id;
+			}
+
+			$Diff = array_diff($Roles, Input::get('roles', array()));
+			if (count($Diff) > 0) {
+				$User->rolList()->delete($Diff);
+			}
+
+			if (count(Input::get('roles', array())) > 0) {
+				foreach (Input::get('roles') as $p) {
+					$rolList = new UserRole;
+					$rolList->user()->associate($User);
+					$rolList->role_id = $p;
+
+					if (!$rolList->where('user_id', '=', $User->id)->where('role_id', '=', $p)->count() > 0) {
+						$rolList->save();
+					}
+				}
+			}
+			// End Roles
+
 			return Redirect::to('user-edit');
 		}
 	}

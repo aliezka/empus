@@ -37,11 +37,12 @@ class FormController extends BaseController {
 
 		$rules = array(
 					'desc' => ' required | min:4 ',
-					'image' => ' required | image ',
 					'alamat' => ' min:4 ',
 					'telepon' => ' min:3 ',
-					'person_id' => ' required | numeric'
+					'person_id' => ' numeric'
 				);
+
+		$rules += !is_null($id) ? array('image' => ' image ') : array('image' => ' required | image ');
 
 		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
 
@@ -59,7 +60,9 @@ class FormController extends BaseController {
 				->withErrors($validator);
 		} else {
 			$Instansi->name = Input::get('name');
-			$Instansi->person_id = Input::get('person_id');
+			if (Input::get('person_id')) {
+				$Instansi->person_id = Input::get('person_id');
+			}
 			$Instansi->save();
 
 			// Alamat
@@ -135,12 +138,13 @@ class FormController extends BaseController {
 
 			$Diff = array_diff($Pelayanan, Input::get('pelayanan', array()));
 			if (count($Diff) > 0) {
-				$Instansi->pelayanan()->delete($Diff);
+				$Instansi->pelayanan_list()->delete($Diff);
 			}
 
 			if (count(Input::get('pelayanan', array())) > 0) {
-				$pelList = new InstansiPelayanan;
+				
 				foreach (Input::get('pelayanan') as $p) {
+					$pelList = new InstansiPelayanan;
 					$pelList->instansi_id = $Instansi->id;
 					$pelList->pelayanan_id = $p;
 
@@ -230,7 +234,7 @@ class FormController extends BaseController {
 		$Persyaratan = !is_null($persyaratan_id) ? Persyaratan::findOrFail($persyaratan_id) : new Persyaratan;
 
 		$rules = array(
-					'title' => ' required | alpha_spaces | min:3 ',
+					'title' => ' required | min:3 ',
 					'desc' => ' min:4 ',
 					'image' => ' image '
 				);
@@ -296,7 +300,7 @@ class FormController extends BaseController {
 		$Prosedur = !is_null($prosedur_id) ? Prosedur::findOrFail($prosedur_id) : new Prosedur;
 
 		$rules = array(
-					'title' => ' required | alpha_spaces | min:3 ',
+					'title' => ' required | min:3 ',
 					'desc' => ' min:4 ',
 					'image' => ' image '
 				);
