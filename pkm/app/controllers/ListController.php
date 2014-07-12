@@ -25,8 +25,6 @@ class ListController extends BaseController {
 
 	function instansi() {
 		$Instansi = new Instansi;
-		$Instansi->skip($this->offset)->take($this->perPage);
-
 		$Lists = $Instansi->get();
 
 		$this->layout = View::make('layouts.admin');
@@ -35,8 +33,6 @@ class ListController extends BaseController {
 
 	function pInstansi() {
 		$Instansi = new Instansi;
-		$Instansi->skip($this->offset)->take($this->perPage);
-
 		$Lists = $Instansi->get();
 
 		$this->layout = View::make('layouts.segi');
@@ -45,8 +41,6 @@ class ListController extends BaseController {
 	
 	function pelayanan() {
 		$Pelayanan = new Pelayanan;
-		$Pelayanan->skip($this->offset)->take($this->perPage);
-
 		$Lists = $Pelayanan->get();
 
 		$this->layout = View::make('layouts.admin');
@@ -55,8 +49,6 @@ class ListController extends BaseController {
 	
 	function pPelayanan() {
 		$Pelayanan = new Pelayanan;
-		$Pelayanan->skip($this->offset)->take($this->perPage);
-
 		$Lists = $Pelayanan->get();
 
 		$this->layout = View::make('layouts.segi');
@@ -65,8 +57,6 @@ class ListController extends BaseController {
 	
 	function berita() {
 		$Berita = new Berita;
-		$Berita->skip($this->offset)->take($this->perPage);
-
 		$Lists = $Berita->get();
 
 		$this->layout = View::make('layouts.admin');
@@ -75,8 +65,6 @@ class ListController extends BaseController {
 	
 	function pBerita() {
 		$Berita = new Berita;
-		$Berita->skip($this->offset)->take($this->perPage);
-
 		$Lists = $Berita->get();
 
 		$this->layout = View::make('layouts.segi');
@@ -103,5 +91,14 @@ class ListController extends BaseController {
 						->get();
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('lists.gOpini')->with('OpiniTag', $OpiniTag);
+	}
+
+	function user() {
+		$User = new User;
+		$Lists = $User->get();
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.user')->with('Lists', $Lists);
+
 	}
 }

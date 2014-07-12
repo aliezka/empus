@@ -34,7 +34,7 @@
 	</div>
 
 	@if (Auth::user())
-		@if (Auth::user()->roles->contains(3))
+		@if (Auth::user()->role->contains(3))
 			@if (isset(Auth::user()->person->instansi->id) && Auth::user()->person->instansi->id == $Opini->tag->instansi_id ) 
 			<div class="row">
 				<div class="small-12 medium-6 columns wide-panel komentar">
