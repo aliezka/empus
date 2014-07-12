@@ -27,6 +27,10 @@ class ProfileController extends BaseController{
 	function gDetail($id=null){
 		$User = Auth::user();
 
+		if (!isset($User->person->instansi)) {
+			return Redirect::back();
+		}
+
 		if ($id != $User->person->instansi->id) {
 			return Redirect::to('gov/'.Auth::user()->person->instansi->id);
 		}
