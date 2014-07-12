@@ -35,11 +35,11 @@ class AccessController extends BaseController {
 
 			if (Auth::attempt($userData)) {
 				// Administrator
-				if (Auth::user()->roles->first()->id == 1) {
+				if (Auth::user()->role->first()->id == 1) {
 					return Redirect::intended('dashboard');
 				} 
 				// Government
-				elseif (Auth::user()->roles->first()->id == 3) {
+				elseif (Auth::user()->role->first()->id == 3) {
 					return Redirect::intended('gov');
 				} 
 				// Citizen
@@ -154,7 +154,7 @@ class AccessController extends BaseController {
 
 			// Roles
 			$Role  = array();
-			$SRoles = $User->roles;
+			$SRoles = $User->role;
 
 			foreach ($SRoles as $S) {
 				$Roles[] = $S->id;

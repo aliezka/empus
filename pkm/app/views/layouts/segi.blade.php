@@ -29,7 +29,7 @@
 					<ul class="off-canvas-list">
 						<li><a href="{{ URL::to('/') }}"><i class="fa fa-home"></i>Beranda</a></li>
 						@if (Auth::user())
-							@if (Auth::user()->roles->contains(1))
+							@if (Auth::user()->role->contains(1))
 								<li><a href="{{ URL::to('dashboard') }}"><i class="fa fa-home"></i>Dashboard</a></li>
 							@endif
 						@endif

@@ -29,14 +29,14 @@
 						</div>
 
 						@if (Auth::user())
-							@if (Auth::user()->roles->contains(1))
+							@if (Auth::user()->role->contains(1))
 								<fieldset>
 									<legend>Role</legend>
 									<ul>
 										<?php $Roles = Config::get('empus.roles', array()); ?>
 										@foreach ($Roles as $Index => $Role)
 											<li>
-												{{ Form::checkbox('roles[]', $Index, Auth::user()->roles->contains($Index), array('id' => 'checkbox1')) }} {{ Form::label('checkbox1', $Role) }}
+												{{ Form::checkbox('roles[]', $Index, Auth::user()->role->contains($Index), array('id' => 'checkbox1')) }} {{ Form::label('checkbox1', $Role) }}
 											</li>
 										@endforeach
 									</ul>
