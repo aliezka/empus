@@ -140,7 +140,7 @@ class AccessController extends BaseController {
 			
 			Log::warning($validator->messages()->all());
 			
-			return Redirect::to('user-edit')
+			return Redirect::back()
 				->withInput(Input::except('password'))
 				->withErrors($validator);
 		} else { 
@@ -180,7 +180,7 @@ class AccessController extends BaseController {
 			}
 			// End Roles
 
-			return Redirect::to('user-edit');
+			return Redirect::back();
 		}
 	}
 
