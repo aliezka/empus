@@ -109,10 +109,10 @@ Route::when('opini/*/komentar', 'auth');
 /*
 User
 */
-Route::when('user','auth|citizen');
-Route::when('user/','auth|citizen');
-Route::when('user/*','auth|citizen');
-Route::when('user-edit','auth|citizen');
+Route::when('user','administrator');
+Route::when('user/','auth');
+Route::when('user/*','auth');
+Route::when('user-edit','auth');
 
 /*
 Gov

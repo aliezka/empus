@@ -104,4 +104,13 @@ class ListController extends BaseController {
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('lists.gOpini')->with('OpiniTag', $OpiniTag);
 	}
+
+	function user() {
+		$User = new User;
+		$Lists = $User->get();
+
+		$this->layout = View::make('layouts.segi');
+		$this->layout->content = View::make('lists.user')->with('Lists', $Lists);
+
+	}
 }

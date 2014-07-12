@@ -48,9 +48,12 @@ Route::get('register', 'AccessController@register');
 Route::post('register', 'AccessController@sRegister');
 
 // User
-Route::get('user', 'ProfileController@detail');
+Route::get('user', 'ListController@user');
 Route::get('user/{id}', 'ProfileController@detail');
 Route::get('user/{id}/opini', 'ListController@cOpini');
+
+Route::get('user/{id}/edit', 'AccessController@edit');
+Route::post('user/{id}/edit', 'AccessController@sEdit');
 
 // Whoami
 Route::get('/whoami', array(function() {

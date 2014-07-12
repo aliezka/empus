@@ -36,7 +36,7 @@
 										<?php $Roles = Config::get('empus.roles', array()); ?>
 										@foreach ($Roles as $Index => $Role)
 											<li>
-												{{ Form::checkbox('roles[]', $Index, Auth::user()->role->contains($Index), array('id' => 'checkbox1')) }} {{ Form::label('checkbox1', $Role) }}
+												{{ Form::checkbox('roles[]', $Index, $User->role->contains($Index), array('id' => 'checkbox1')) }} {{ Form::label('checkbox1', $Role) }}
 											</li>
 										@endforeach
 									</ul>

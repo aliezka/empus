@@ -111,13 +111,17 @@ class AccessController extends BaseController {
 		}
 	}
 
-	public function edit() {
+	public function edit($Id = null) {
+		$User = User::findOrFail($Id);
+
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('user.edit')
-			->with('User', Auth::user());
+			->with('User', $User);
 	}
 
-	public function sEdit() {
+	public function sEdit($Id) {
+		$User = User::findOrFail($Id);
+
 		$rules = array(
 					'name' => ' required | alpha_spaces | min:3 ',
 					'name' => ' required | min:6 ',
@@ -125,7 +129,7 @@ class AccessController extends BaseController {
 					'new-password' => ' min:6 | required_with:old-password '
 				);
 
-		if (Input::get('username') != Auth::user()->username) {
+		if (Input::get('username') != $User->username) {
 			$rules += array('username' => ' required | email | unique:user,email');
 		}
 
@@ -141,14 +145,12 @@ class AccessController extends BaseController {
 				->withErrors($validator);
 		} else { 
 			Person::findOrFail(Auth::user()->person_id)->update(array('name' => Input::get('name')));
-
-			$User = Auth::user();
 			$User->username = $User->email = Input::get('username');
 
 			$User->password = $User->password;
 			if (!empty(Input::get('new-password'))) {
 				$User->password = Hash::make(Input::get('new-password'));
-			} $User->password = Hash::make(Input::get('new-password'));
+			}
 
 			$User->save();
 
@@ -162,7 +164,7 @@ class AccessController extends BaseController {
 
 			$Diff = array_diff($Roles, Input::get('roles', array()));
 			if (count($Diff) > 0) {
-				$User->rolList()->delete($Diff);
+				$User->role_list()->delete($Diff);
 			}
 
 			if (count(Input::get('roles', array())) > 0) {

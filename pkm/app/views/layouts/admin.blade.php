@@ -33,7 +33,7 @@
 						<li><a href="{{ URL::to('dashboard/pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
 						<li><a href="{{ URL::to('dashboard/berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
 						<li><a href="{{ URL::to('dashboard/opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
-						<li><a href="{{ URL::to('user-edit') }}"><i class="fa fa-cog"></i>Profil</a></li>
+						<li><a href="{{ URL::to('user/'.Auth::user()->id) }}"><i class="fa fa-cog"></i>Profil</a></li>
 						<li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-in"></i>Logout</a></li>
 					</ul>
 				</aside>

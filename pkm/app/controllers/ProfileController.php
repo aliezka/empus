@@ -5,10 +5,12 @@ class ProfileController extends BaseController{
 	}
 
 	function detail($id=null){
-		$User = Auth::user();
+		$User = User::findOrFail($id);
 
 		if ($id != Auth::user()->id) {
-			return Redirect::to('user/'.Auth::user()->id);
+			if (!Auth::user()->role->contains(1)) {
+				return Redirect::to('user/'.Auth::user()->id);
+			}
 		}
 
 		$Opini = $User->person->opini()
