@@ -1,4 +1,5 @@
 <section id="content" class="main-content snap-content frm-ins">
+	@if(Auth::user()->hasRole('Administrator'))
 	<div class="row">
 		<div class="small-12 medium-12 columns grid-control">
 			<ul class="breadcrumbs">
@@ -8,6 +9,7 @@
 			</ul>
 		</div>
 	</div>
+	@endif
 
 	{{ Form::open(array('files'=> true, 'data-abide')) }}
 	<div class="row">
@@ -94,7 +96,7 @@
 					</fieldset>
 				</div>
 			</div><!-- end of row -->
-
+			@if(Auth::user()->hasRole('Administrator'))
 			<div class="row">
 				<div class="small-3 columns">
 					<label for="image" class="right inline">User</label>
@@ -106,6 +108,7 @@
 					</div>
 				</div>
 			</div><!-- end of row -->
+			@endif
 
 			<div class="row">
 				<div class="small-3 columns">

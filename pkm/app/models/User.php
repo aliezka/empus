@@ -88,4 +88,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	/*
 	End Relating Model
 	*/
+
+	/**
+	* Check if user has role
+	* @param $r role to be checked
+	* @return boole
+	*/
+	public function hasRole($r=""){
+		$array[]=array();
+		foreach($this->roles as $role)
+			$array[] = $role->role;
+		return in_array($r,$array);
+	}
 }

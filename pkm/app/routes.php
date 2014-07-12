@@ -165,6 +165,8 @@ GOV PAGE
 Route::get('gov', 'ProfileController@gDetail');
 Route::get('gov/{id}', 'ProfileController@gDetail');
 Route::get('gov/{id}/opini', 'ListController@gOpini');
+Route::get('gov/{id}/edit', 'FormController@instansi');
+Route::post('gov/{id}/edit', 'FormController@sInstansi');
 /*
 END GOV PAGE
 */

@@ -7,22 +7,33 @@ class FormController extends BaseController {
 
 	function instansi($id = null) {
 		$Pelayanan = Pelayanan::all();
-		$Instansi = !is_null($id) ? Instansi::find($id) : null;
+
+		if(Auth::user()->hasRole('Administrator'))
+			$Instansi = !is_null($id) ? Instansi::find($id) : null;
+		else
+			$Instansi = !is_null($id) ? Instansi::where( 'person_id','=',Auth::user()->person->id )->get()->first() : null;
 
 		$InstansiProfileTelepon = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 1)->first() : null;
 		$InstansiProfileAlamat = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 4)->first() : null;
 
 		$InstansiProfileTelepon = isset($InstansiProfileTelepon->text) ? $InstansiProfileTelepon->text : null;
 		$InstansiProfileAlamat = isset($InstansiProfileAlamat->text) ? $InstansiProfileAlamat->text : null;
-
-		$Users = User::whereHas('roles', function($query){
-							$query->where('role_id','=','3');})->with('person')->get();
-		$PersonArray = array(''=>'Pilih User');
-		foreach ($Users as $User) {
-			$PersonArray[$User->person->id] = $User->person->name;
+		
+		$PersonArray = array();
+		if (Auth::user()->hasRole('Administrator')) {
+			$Users = User::whereHas('roles', function($query){
+								$query->where('role_id','=','3');
+							})->with('person')->get();
+			$PersonArray = array(''=>'Pilih User');
+			foreach ($Users as $User) {
+				$PersonArray[$User->person->id] = $User->person->name;
+			}	
 		}
 
-		$this->layout = View::make('layouts.admin');
+		if(Auth::user()->hasRole('Administrator'))
+			$this->layout = View::make('layouts.admin');
+		else
+			$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('forms.instansi')
 			->with('PersonArray', $PersonArray)
 			->with('Pelayanan', $Pelayanan)
@@ -33,24 +44,32 @@ class FormController extends BaseController {
 
 	function sInstansi($id = null) {
 		$Pelayanan = Pelayanan::all();
-		$Instansi = !is_null($id) ? Instansi::find($id) : new Instansi;
+
+		if(Auth::user()->hasRole('Administrator'))
+			$Instansi = !is_null($id) ? Instansi::find($id) : null;
+		else
+			$Instansi = !is_null($id) ? Instansi::where( 'person_id','=',Auth::user()->person->id )->get()->first() : null;
 
 		$rules = array(
 					'desc' => ' required | min:4 ',
-					'image' => ' required | image ',
+					// 'image' => ' required | image ',
 					'alamat' => ' min:4 ',
 					'telepon' => ' min:3 ',
-					'person_id' => ' required | numeric'
 				);
 
 		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
+		$rule_person = Auth::user()->hasRole('Administrator') ? array('person_id' => ' required | numeric') : array();
 
 		$rules += $rule_name;
+		$rules += $rule_person;
 		
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()) { 
-			$Path = 'dashboard/instansi/form';
-			$Path .= !is_null($id) ? '/'.$id : null;
+			if (Auth::user()->hasRole('Administrator')) {
+				$Path = 'dashboard/instansi/form';
+				$Path .= !is_null($id) ? '/'.$id : null;
+			} else
+				$Path = "gov/$id/edit";
 
 			return Redirect::to($Path)
 				->with('Pelayanan', $Pelayanan)
@@ -59,7 +78,8 @@ class FormController extends BaseController {
 				->withErrors($validator);
 		} else {
 			$Instansi->name = Input::get('name');
-			$Instansi->person_id = Input::get('person_id');
+			if(Auth::user()->hasRole('Administrator'))
+				$Instansi->person_id = Input::get('person_id');
 			$Instansi->save();
 
 			// Alamat
@@ -135,12 +155,12 @@ class FormController extends BaseController {
 
 			$Diff = array_diff($Pelayanan, Input::get('pelayanan', array()));
 			if (count($Diff) > 0) {
-				$Instansi->pelayanan()->delete($Diff);
+				$Instansi->pelayanan_list()->delete($Diff);
 			}
 
 			if (count(Input::get('pelayanan', array())) > 0) {
-				$pelList = new InstansiPelayanan;
 				foreach (Input::get('pelayanan') as $p) {
+					$pelList = new InstansiPelayanan;
 					$pelList->instansi_id = $Instansi->id;
 					$pelList->pelayanan_id = $p;
 
@@ -150,8 +170,8 @@ class FormController extends BaseController {
 				}
 			}
 			// End Pelayanan
-			
-			return Redirect::to('dashboard/instansi');
+			$url = Auth::user()->hasRole('Administrator') ? "dashboard/instansi" : "gov/$id";
+			return Redirect::to($url);
 		}
 	}
 
