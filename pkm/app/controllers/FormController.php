@@ -55,7 +55,10 @@ class FormController extends BaseController {
 					// 'image' => ' required | image ',
 					'alamat' => ' min:4 ',
 					'telepon' => ' min:3 ',
+					'person_id' => ' numeric'
 				);
+
+		$rules += !is_null($id) ? array('image' => ' image ') : array('image' => ' required | image ');
 
 		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
 		$rule_person = Auth::user()->hasRole('Administrator') ? array('person_id' => ' required | numeric') : array();
@@ -78,8 +81,11 @@ class FormController extends BaseController {
 				->withErrors($validator);
 		} else {
 			$Instansi->name = Input::get('name');
+
 			if(Auth::user()->hasRole('Administrator'))
 				$Instansi->person_id = Input::get('person_id');
+
+
 			$Instansi->save();
 
 			// Alamat
@@ -250,7 +256,7 @@ class FormController extends BaseController {
 		$Persyaratan = !is_null($persyaratan_id) ? Persyaratan::findOrFail($persyaratan_id) : new Persyaratan;
 
 		$rules = array(
-					'title' => ' required | alpha_spaces | min:3 ',
+					'title' => ' required | min:3 ',
 					'desc' => ' min:4 ',
 					'image' => ' image '
 				);
@@ -316,7 +322,7 @@ class FormController extends BaseController {
 		$Prosedur = !is_null($prosedur_id) ? Prosedur::findOrFail($prosedur_id) : new Prosedur;
 
 		$rules = array(
-					'title' => ' required | alpha_spaces | min:3 ',
+					'title' => ' required | min:3 ',
 					'desc' => ' min:4 ',
 					'image' => ' image '
 				);

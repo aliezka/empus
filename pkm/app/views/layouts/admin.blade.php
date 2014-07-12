@@ -27,12 +27,13 @@
 			<div class="snap-drawer snap-drawer-left">
 				<aside class="">
 					<ul class="off-canvas-list">
-						<li><a href="{{ URL::to('dashboard') }}"><i class="fa fa-home"></i>Beranda</a></li>
+						<li><a href="{{ URL::to('/') }}"><i class="fa fa-home"></i>Beranda</a></li>
+						<li><a href="{{ URL::to('dashboard') }}"><i class="fa fa-home"></i>Dashboard</a></li>
 						<li><a href="{{ URL::to('dashboard/instansi') }}"><i class="fa fa-building-o"></i>Instansi</a></li>
 						<li><a href="{{ URL::to('dashboard/pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
 						<li><a href="{{ URL::to('dashboard/berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
 						<li><a href="{{ URL::to('dashboard/opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
-						<li><a href="{{ URL::to('dashboard/pengaturan') }}"><i class="fa fa-cog"></i>Pengaturan</a></li>
+						<li><a href="{{ URL::to('user-edit') }}"><i class="fa fa-cog"></i>Profil</a></li>
 						<li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-in"></i>Logout</a></li>
 					</ul>
 				</aside>

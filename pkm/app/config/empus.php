@@ -1,6 +1,8 @@
 <?php
 
 return array(
+		'roles' => array(1 => 'Admin', 2 => 'Citizen', 3 => 'Government'),
+
 		'instansi_img' => public_path('assets/img/instansi'),
 		'persyaratan_img' => public_path('assets/img/persyaratan'),
 		'prosedur_img' => public_path('assets/img/prosedur'),
