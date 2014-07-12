@@ -148,7 +148,7 @@ class AccessController extends BaseController {
 			$User->username = $User->email = Input::get('username');
 
 			$User->password = $User->password;
-			if (!empty(Input::get('new-password'))) {
+			if (Input::get('new-password')) {
 				$User->password = Hash::make(Input::get('new-password'));
 			}
 
