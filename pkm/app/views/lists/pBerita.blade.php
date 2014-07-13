@@ -2,6 +2,9 @@
 	<div class="row">
 		<div class="small-12 medium-6 columns wide-panel">
 			<div class="panel"> 
+				<div class="panel-heading">
+		            <h5><i class="fa fa-bullhorn"></i>Berita</h5>
+		        </div>
 				<div class="panel-body">
 					<ul>
 						@foreach ($lists as $list) 

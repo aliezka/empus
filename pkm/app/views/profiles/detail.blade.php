@@ -40,8 +40,14 @@
                                     <div class="small-12 columns">
                                         <small>{{humanTiming(strtotime($opini->created_at))}} yang lalu</small>
                                         <h6>{{$opini->title}}</h6>
-                                        <span class="label secondary radius"><small class="fa fa-comment"></small>4</span>
-                                        <span class="label radius">Opini</span>
+                                        <?php 
+                                            $Type = Config::get('empus.opini_type'); 
+                                            $Status = Config::get('empus.opini_status'); 
+                                            $Color = Config::get('empus.opini_color'); 
+                                        ?>
+                                        <span class="label secondary radius"><small class="fa fa-comment"></small>{{$opini->komentar->count()}}</span>
+                                        <span class="radius label {{ $opini->type == 3 ? 'success' : null }} {{ $opini->type == 2 ? 'alert' : null }} ">{{ $Type[$opini->type] }}</span>
+                                        <span class="label radius {{$Color[$opini->status]}}">{{$Status[$opini->status]}}</span>
                                     </div>
                                 </div>
                             </a>

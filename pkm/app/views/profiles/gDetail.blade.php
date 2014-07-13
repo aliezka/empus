@@ -3,7 +3,7 @@
         <div class="small-12 medium-6 columns wide-panel">
             <div class="panel">
                 <div class="panel-heading">
-                    <span><i class="fa fa-user"></i>Profile</span>
+                    <span><i class="fa fa-building-o"></i>Profile Kelurahan</span>
                     <a href="{{URL::to('gov/'.$User->person->instansi->id.'/edit')}}" class="button secondary tiny right"><i class="fa fa-pencil"></i></a>
                 </div>
                 <div class="panel-body">

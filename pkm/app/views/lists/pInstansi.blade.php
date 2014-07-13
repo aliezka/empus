@@ -4,6 +4,9 @@
 	<div class="row">
 		<div class="small-12 medium-6 columns wide-panel">
 			<div class="panel"> 
+				<div class="panel-heading">
+                    <h5><i class="fa fa-building-o"></i>Instansi</h5>
+                </div>
 				<div class="panel-body">
 					<ul>
 						@foreach ($lists as $Count => $list)

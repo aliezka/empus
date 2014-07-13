@@ -4,6 +4,9 @@
 	<div class="row">
 		<div class="small-12 medium-6 columns wide-panel">
 			<div class="panel"> 
+				<div class="panel-heading">
+                    <h5><i class="fa fa-smile-o"></i>Pelayanan</h5>
+                </div>
 				<div class="panel-body">
 					<ul>
 						@foreach ($lists as $Count => $list)
@@ -12,7 +15,6 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<h6>{{ $list->name }}</h6>
-											<p>{{ nl2br($list->desc->desc) }}</p>
 										</div>
 									</div>
 								</a>

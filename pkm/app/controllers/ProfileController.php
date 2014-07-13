@@ -27,8 +27,8 @@ class ProfileController extends BaseController{
 	function gDetail($id=null){
 		$User = Auth::user();
 
-		if (!isset($User->person->instansi)) {
-			return Redirect::back();
+		if (is_null($User->person->instansi)) {
+			return Redirect::to('/');
 		}
 
 		if ($id != $User->person->instansi->id) {
@@ -45,6 +45,7 @@ class ProfileController extends BaseController{
 
 		$OpiniTag = OpiniTag::where('instansi_id','=',!is_null(Auth::user()->person->instansi)?Auth::user()->person->instansi->id:'')
 						->take(3)->get();
+
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('profiles.gDetail')
 			->with('InstansiProfileTelepon', $InstansiProfileTelepon)
