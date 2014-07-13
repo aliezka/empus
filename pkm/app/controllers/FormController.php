@@ -127,7 +127,7 @@ class FormController extends BaseController {
 				$FileName = $Instansi->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.instansi_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_instansi_img'), $FileName);
 				
 				if (!is_null($id)) {
 					InstansiImg::where('instansi_id', '=', $id)->update(['img' => $FileName]);
@@ -141,7 +141,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($id)) {
+			if (InstansiDesc::where('instansi_id', '=', $id)->count() > 0) {
 				InstansiDesc::where('instansi_id', '=', $id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$InstansiDesc = new InstansiDesc;
@@ -279,7 +279,7 @@ class FormController extends BaseController {
 				$FileName = $Persyaratan->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_persyaratan_img'), $FileName);
 				
 				if (!is_null($persyaratan_id)) {
 					PersyaratanImg::where('persyaratan_id', '=', $persyaratan_id)->update(['img' => $FileName]);
@@ -293,7 +293,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($persyaratan_id)) {
+			if (PersyaratanDesc::where('persyaratan_id', '=', $persyaratan_id)->count() > 0) {
 				PersyaratanDesc::where('persyaratan_id', '=', $persyaratan_id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$PersyaratanDesc = new PersyaratanDesc;
@@ -345,7 +345,7 @@ class FormController extends BaseController {
 				$FileName = $Prosedur->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.prosedur_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_prosedur_img'), $FileName);
 				
 				if (!is_null($prosedur_id)) {
 					ProsedurImg::where('prosedur_id', '=', $prosedur_id)->update(['img' => $FileName]);
@@ -359,7 +359,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($prosedur_id)) {
+			if (ProsedurDesc::where('prosedur_id', '=', $prosedur_id)->count() > 0) {
 				ProsedurDesc::where('prosedur_id', '=', $prosedur_id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$ProsedurDesc = new ProsedurDesc;
@@ -438,7 +438,7 @@ class FormController extends BaseController {
 					$FileName = $Opini->id;
 					$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-					Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
+					Input::file('image')->move(Config::get('empus.path_persyaratan_img'), $FileName);
 
 					$OpiniImg->img = $FileName;
 					$OpiniImg->opini()->associate($Opini);
@@ -576,7 +576,7 @@ class FormController extends BaseController {
 				$FileName = $Berita->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.berita_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_berita_img'), $FileName);
 
 				if (!is_null($id)) {
 					BeritaImg::where('berita_id', '=', $id)->update(['img' => $FileName]);
@@ -590,7 +590,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($id)) {
+			if (BeritaDesc::where('berita_id', '=', $id)->count() > 0) {
 				BeritaDesc::where('berita_id', '=', $id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$BeritaDesc = new BeritaDesc;

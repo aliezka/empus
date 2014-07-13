@@ -3,11 +3,11 @@
 return array(
 		'roles' => array(1 => 'Admin', 2 => 'Citizen', 3 => 'Government'),
 
-		'instansi_img' => public_path('assets/img/instansi'),
-		'persyaratan_img' => public_path('assets/img/persyaratan'),
-		'prosedur_img' => public_path('assets/img/prosedur'),
-		'opini_img' => public_path('assets/img/opini'),
-		'berita_img' => public_path('assets/img/berita'),
+		'path_instansi_img' => public_path('assets/img/instansi'),
+		'path_persyaratan_img' => public_path('assets/img/persyaratan'),
+		'path_prosedur_img' => public_path('assets/img/prosedur'),
+		'path_opini_img' => public_path('assets/img/opini'),
+		'path_berita_img' => public_path('assets/img/berita'),
 
 		'profile_img' => asset('assets/img/profile-picture.jpg'),
 		'profile_thumb_img' => asset('assets/img/profile-picture.jpg'),
