@@ -45,7 +45,7 @@
 						@endif
 					</div>
 					<div class="small-12 medium-12 columns text-center">
-						<input type="submit" value="Login" class="button expand">
+						<input type="submit" value="Save" class="button expand">
 					</div>
 				{{ Form::close() }}
 			</div>

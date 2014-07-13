@@ -77,6 +77,7 @@ Route::get('getAnalytics', 'DetailController@getAnalytics');
 
 // Instansi
 Route::get('dashboard/instansi', 'ListController@instansi');
+Route::post('dashboard/instansi', 'ListController@instansi');
 // New Record
 Route::get('dashboard/instansi/form', 'FormController@instansi');
 Route::post('dashboard/instansi/form', 'FormController@sInstansi');
@@ -85,9 +86,12 @@ Route::get('dashboard/instansi/form/{id}', 'FormController@instansi');
 Route::post('dashboard/instansi/form/{id}', 'FormController@sInstansi');
 // json
 Route::get('dashboard/instansi/jsonPerson', 'FormController@jsonPerson');
+// Delete Record
+Route::get('dashboard/instansi/{id}/delete', 'FormController@dInstansi');
 
 // Pelayanan
 Route::get('dashboard/pelayanan', 'ListController@pelayanan');
+Route::post('dashboard/pelayanan', 'ListController@pelayanan');
 // New Record
 Route::get('dashboard/pelayanan/form', 'FormController@pelayanan');
 Route::post('dashboard/pelayanan/form', 'FormController@sPelayanan');
@@ -113,6 +117,7 @@ Route::post('dashboard/pelayanan/{pelayanan_id}/prosedur/{prosedur_id}', 'FormCo
 
 // Berita
 Route::get('dashboard/berita', 'ListController@berita');
+Route::post('dashboard/berita', 'ListController@berita');
 // New Record
 Route::get('dashboard/berita/form', 'FormController@berita');
 Route::post('dashboard/berita/form', 'FormController@sBerita');

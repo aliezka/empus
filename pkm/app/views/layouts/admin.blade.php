@@ -33,6 +33,7 @@
 						<li><a href="{{ URL::to('dashboard/pelayanan') }}"><i class="fa fa-smile-o"></i>Pelayanan</a></li>
 						<li><a href="{{ URL::to('dashboard/berita') }}"><i class="fa fa-bullhorn"></i>Berita</a></li>
 						<li><a href="{{ URL::to('dashboard/opini') }}"><i class="fa fa-comments-o"></i>Opini Publik</a></li>
+						<li><a href="{{ URL::to('user') }}"><i class="fa fa-users"></i>Pengguna</a></li>
 						<li><a href="{{ URL::to('user/'.Auth::user()->id) }}"><i class="fa fa-cog"></i>Profil</a></li>
 						<li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-in"></i>Logout</a></li>
 					</ul>
@@ -85,6 +86,11 @@
 		<!-- CONTENT -->
 		{{ !empty($content) ? $content : null }}
 		<!-- END CONTENT -->
+
+		<!-- FLASH MESSAGE -->
+		@include('details.flashmessage')
+		<!-- END FLASH MESSAGE -->
+
 		
 		<script src="{{ asset('assets/js/vendor/fastclick.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/iscroll.js') }}"></script>

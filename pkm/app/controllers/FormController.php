@@ -12,7 +12,7 @@ class FormController extends BaseController {
 			$Instansi = !is_null($id) ? Instansi::find($id) : null;
 		else
 			$Instansi = !is_null($id) ? Instansi::where( 'person_id','=',Auth::user()->person->id )->get()->first() : null;
-
+		
 		$InstansiProfileTelepon = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 1)->first() : null;
 		$InstansiProfileAlamat = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 4)->first() : null;
 
@@ -46,7 +46,7 @@ class FormController extends BaseController {
 		$Pelayanan = Pelayanan::all();
 
 		if(Auth::user()->hasRole('Administrator'))
-			$Instansi = !is_null($id) ? Instansi::find($id) : null;
+			$Instansi = !is_null($id) ? Instansi::findOrFail($id) : new Instansi;
 		else
 			$Instansi = !is_null($id) ? Instansi::where( 'person_id','=',Auth::user()->person->id )->get()->first() : null;
 
@@ -82,7 +82,7 @@ class FormController extends BaseController {
 		} else {
 			$Instansi->name = Input::get('name');
 
-			if(Auth::user()->hasRole('Administrator'))
+			if(Auth::user()->hasRole('Administrator') && Input::get('person_id'))
 				$Instansi->person_id = Input::get('person_id');
 
 
@@ -181,6 +181,15 @@ class FormController extends BaseController {
 		}
 	}
 
+	function dInstansi($id) {
+		$Instansi = Instansi::findOrFail($id);
+		$InstansiName = $Instansi->name;
+		$Instansi->delete();
+
+		return Redirect::to('dashboard/instansi')
+				->with('fMessage', 'Instansi '.$InstansiName.' successfully deleted.');
+	}
+
 	function jsonPerson(){
 		$res = array();
 		foreach (Person::All() as $key => $person) {
@@ -239,6 +248,15 @@ class FormController extends BaseController {
 
 			return Redirect::to('dashboard/pelayanan');
 		}
+	}
+
+	function dPelayanan($id) {
+		$Pelayanan = Pelayanan::findOrFail($id);
+		$PelayananName = $Pelayanan->name;
+		$Pelayanan->delete();
+
+		return Redirect::to('dashboard/pelayanan')
+				->with('fMessage', 'Pelayanan '.$PelayananName.' successfully deleted.');
 	}
 
 	function persyaratan($pelayanan_id, $persyaratan_id = null) {
@@ -654,5 +672,14 @@ class FormController extends BaseController {
 
 			return Redirect::to('berita/'.$Berita->id);
 		}
+	}
+
+	function dBerita($id) {
+		$Berita = Berita::findOrFail($id);
+		$BeritaName = $Berita->name;
+		$Berita->delete();
+
+		return Redirect::to('dashboard/pelayanan')
+				->with('fMessage', 'News '.$BeritaName.' successfully deleted.');
 	}
 }

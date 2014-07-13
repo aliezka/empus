@@ -101,6 +101,10 @@
 		<!-- CONTENT -->
 		{{ !empty($content) ? $content : null }}
 		<!-- END CONTENT -->
+
+		<!-- FLASH MESSAGE -->
+		@include('details.flashmessage')
+		<!-- END FLASH MESSAGE -->
 		
 		<script src="{{ asset('assets/js/vendor/fastclick.js') }}"></script>
 		<script src="{{ asset('assets/js/vendor/iscroll.js') }}"></script>

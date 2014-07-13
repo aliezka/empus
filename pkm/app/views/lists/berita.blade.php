@@ -13,11 +13,9 @@
 			<a href="{{ URL::to('dashboard/berita/form') }}" class="button primary small">Create</a>
 		</div>
 		<div class="small-12 medium-6 columns">
-			<form>
-				<div class="small-6 medium-5 right">
-					<input type="text" name="search" placeholder="search">
-				</div>   
-			</form>
+			{{ Form::open() }}
+				{{ Form::input('text', 'search', Input::get('search', null), ['placeholder' => 'search']) }}
+			{{ Form::close() }}
 		</div>
 	</div>
 	<div class="row">
