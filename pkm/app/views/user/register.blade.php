@@ -26,7 +26,7 @@
 							</div>
 						</div>
 						<div class="small-12 medium-12 columns text-center">
-							<input type="submit" value="Login" class="button expand">
+							<input type="submit" value="Register" class="button expand">
 							
 							<a href="" class="tiny secondary reg">Lupa Password</a> <span class="divider">|</span>
 							<a href="{{ URL::to('register') }}" class="tiny secondary reg">Register</a>

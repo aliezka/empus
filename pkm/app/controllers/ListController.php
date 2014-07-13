@@ -25,6 +25,10 @@ class ListController extends BaseController {
 
 	function instansi() {
 		$Instansi = new Instansi;
+		if (Input::get('search')) {
+			$Instansi = Instansi::where('name', 'like', '%'.Input::get('search').'%');
+		}
+
 		$Lists = $Instansi->get();
 
 		$this->layout = View::make('layouts.admin');
@@ -33,6 +37,10 @@ class ListController extends BaseController {
 
 	function pInstansi() {
 		$Instansi = new Instansi;
+		if (Input::get('search')) {
+			$Instansi = Instansi::where('name', 'like', '%'.Input::get('search').'%');
+		}
+		
 		$Lists = $Instansi->get();
 
 		$this->layout = View::make('layouts.segi');
@@ -41,6 +49,10 @@ class ListController extends BaseController {
 	
 	function pelayanan() {
 		$Pelayanan = new Pelayanan;
+		if (Input::get('search')) {
+			$Pelayanan = Pelayanan::where('name', 'like', '%'.Input::get('search').'%');
+		}
+
 		$Lists = $Pelayanan->get();
 
 		$this->layout = View::make('layouts.admin');
@@ -49,6 +61,9 @@ class ListController extends BaseController {
 	
 	function pPelayanan() {
 		$Pelayanan = new Pelayanan;
+		if (Input::get('search')) {
+			$Pelayanan = Pelayanan::where('name', 'like', '%'.Input::get('search').'%');
+		}
 		$Lists = $Pelayanan->get();
 
 		$this->layout = View::make('layouts.segi');
@@ -57,6 +72,9 @@ class ListController extends BaseController {
 	
 	function berita() {
 		$Berita = new Berita;
+		if (Input::get('search')) {
+			$Berita = Berita::where('title', 'like', '%'.Input::get('search').'%');
+		}
 		$Lists = $Berita->get();
 
 		$this->layout = View::make('layouts.admin');
@@ -65,6 +83,9 @@ class ListController extends BaseController {
 	
 	function pBerita() {
 		$Berita = new Berita;
+		if (Input::get('search')) {
+			$Berita = Berita::where('title', 'like', '%'.Input::get('search').'%');
+		}
 		$Lists = $Berita->get();
 
 		$this->layout = View::make('layouts.segi');
@@ -72,6 +93,11 @@ class ListController extends BaseController {
 	}
 
 	function Opini(){
+		$Opini = new Opini;
+		if (Input::get('search')) {
+			$Opini = Opini::where('title', 'like', '%'.Input::get('search').'%');
+		}
+
 		$Opini = Opini::orderBy('created_at','desc')
 						->get();
 		$this->layout = View::make('layouts.segi');

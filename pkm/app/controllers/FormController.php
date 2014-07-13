@@ -12,7 +12,7 @@ class FormController extends BaseController {
 			$Instansi = !is_null($id) ? Instansi::find($id) : null;
 		else
 			$Instansi = !is_null($id) ? Instansi::where( 'person_id','=',Auth::user()->person->id )->get()->first() : null;
-
+		
 		$InstansiProfileTelepon = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 1)->first() : null;
 		$InstansiProfileAlamat = !is_null($id) ? InstansiProfile::where('instansi_id', '=', $id)->where('profile_id', '=', 4)->first() : null;
 
@@ -46,7 +46,7 @@ class FormController extends BaseController {
 		$Pelayanan = Pelayanan::all();
 
 		if(Auth::user()->hasRole('Administrator'))
-			$Instansi = !is_null($id) ? Instansi::find($id) : null;
+			$Instansi = !is_null($id) ? Instansi::findOrFail($id) : new Instansi;
 		else
 			$Instansi = !is_null($id) ? Instansi::where( 'person_id','=',Auth::user()->person->id )->get()->first() : null;
 
@@ -82,7 +82,7 @@ class FormController extends BaseController {
 		} else {
 			$Instansi->name = Input::get('name');
 
-			if(Auth::user()->hasRole('Administrator'))
+			if(Auth::user()->hasRole('Administrator') && Input::get('person_id'))
 				$Instansi->person_id = Input::get('person_id');
 
 
@@ -127,7 +127,7 @@ class FormController extends BaseController {
 				$FileName = $Instansi->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.instansi_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_instansi_img'), $FileName);
 				
 				if (!is_null($id)) {
 					InstansiImg::where('instansi_id', '=', $id)->update(['img' => $FileName]);
@@ -141,7 +141,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($id)) {
+			if (InstansiDesc::where('instansi_id', '=', $id)->count() > 0) {
 				InstansiDesc::where('instansi_id', '=', $id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$InstansiDesc = new InstansiDesc;
@@ -179,6 +179,15 @@ class FormController extends BaseController {
 			$url = Auth::user()->hasRole('Administrator') ? "dashboard/instansi" : "gov/$id";
 			return Redirect::to($url);
 		}
+	}
+
+	function dInstansi($id) {
+		$Instansi = Instansi::findOrFail($id);
+		$InstansiName = $Instansi->name;
+		$Instansi->delete();
+
+		return Redirect::to('dashboard/instansi')
+				->with('fMessage', 'Instansi '.$InstansiName.' successfully deleted.');
 	}
 
 	function jsonPerson(){
@@ -241,6 +250,15 @@ class FormController extends BaseController {
 		}
 	}
 
+	function dPelayanan($id) {
+		$Pelayanan = Pelayanan::findOrFail($id);
+		$PelayananName = $Pelayanan->name;
+		$Pelayanan->delete();
+
+		return Redirect::to('dashboard/pelayanan')
+				->with('fMessage', 'Pelayanan '.$PelayananName.' successfully deleted.');
+	}
+
 	function persyaratan($pelayanan_id, $persyaratan_id = null) {
 		$Pelayanan = Pelayanan::findOrFail($pelayanan_id);
 		$Persyaratan = !is_null($persyaratan_id) ? Persyaratan::findOrFail($persyaratan_id) : new Persyaratan;
@@ -279,7 +297,7 @@ class FormController extends BaseController {
 				$FileName = $Persyaratan->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_persyaratan_img'), $FileName);
 				
 				if (!is_null($persyaratan_id)) {
 					PersyaratanImg::where('persyaratan_id', '=', $persyaratan_id)->update(['img' => $FileName]);
@@ -293,7 +311,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($persyaratan_id)) {
+			if (PersyaratanDesc::where('persyaratan_id', '=', $persyaratan_id)->count() > 0) {
 				PersyaratanDesc::where('persyaratan_id', '=', $persyaratan_id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$PersyaratanDesc = new PersyaratanDesc;
@@ -345,7 +363,7 @@ class FormController extends BaseController {
 				$FileName = $Prosedur->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.prosedur_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_prosedur_img'), $FileName);
 				
 				if (!is_null($prosedur_id)) {
 					ProsedurImg::where('prosedur_id', '=', $prosedur_id)->update(['img' => $FileName]);
@@ -359,7 +377,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($prosedur_id)) {
+			if (ProsedurDesc::where('prosedur_id', '=', $prosedur_id)->count() > 0) {
 				ProsedurDesc::where('prosedur_id', '=', $prosedur_id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$ProsedurDesc = new ProsedurDesc;
@@ -438,7 +456,7 @@ class FormController extends BaseController {
 					$FileName = $Opini->id;
 					$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-					Input::file('image')->move(Config::get('empus.persyaratan_img'), $FileName);
+					Input::file('image')->move(Config::get('empus.path_persyaratan_img'), $FileName);
 
 					$OpiniImg->img = $FileName;
 					$OpiniImg->opini()->associate($Opini);
@@ -576,7 +594,7 @@ class FormController extends BaseController {
 				$FileName = $Berita->id;
 				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
 
-				Input::file('image')->move(Config::get('empus.berita_img'), $FileName);
+				Input::file('image')->move(Config::get('empus.path_berita_img'), $FileName);
 
 				if (!is_null($id)) {
 					BeritaImg::where('berita_id', '=', $id)->update(['img' => $FileName]);
@@ -590,7 +608,7 @@ class FormController extends BaseController {
 			// End Image
 
 			// Desc
-			if (!is_null($id)) {
+			if (BeritaDesc::where('berita_id', '=', $id)->count() > 0) {
 				BeritaDesc::where('berita_id', '=', $id)->update(['desc' => Input::get('desc')]);
 			} else {
 				$BeritaDesc = new BeritaDesc;
@@ -654,5 +672,14 @@ class FormController extends BaseController {
 
 			return Redirect::to('berita/'.$Berita->id);
 		}
+	}
+
+	function dBerita($id) {
+		$Berita = Berita::findOrFail($id);
+		$BeritaName = $Berita->name;
+		$Berita->delete();
+
+		return Redirect::to('dashboard/pelayanan')
+				->with('fMessage', 'News '.$BeritaName.' successfully deleted.');
 	}
 }
