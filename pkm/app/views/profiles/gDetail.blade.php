@@ -38,7 +38,7 @@
                             <a href="{{ URL::to('opini', $Opini->opini->id)}}">
                                 <div class="row">
                                     <div class="small-3 columns">
-                                        <img src="{{checkImageThumb(!is_null($Opini->opini->person->img) ? $Opini->opini->person->img->img : null,'profile')}}" width="75">
+                                        <img src="{{checkImageThumb(!is_null($Opini->opini->person->img) ? $Opini->opini->person->img->img : null,'person')}}" width="75">
                                     </div>
                                     <div class="small-9 columns">
                                         <div class="info">

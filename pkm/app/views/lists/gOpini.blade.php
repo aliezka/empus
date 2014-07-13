@@ -13,7 +13,7 @@
                             <a href="{{ URL::to('opini/'.$Opini->opini->id) }}">
                                 <div class="row">
                                     <div class="small-3 columns">
-                                        <img src="{{checkImage(!is_null($Opini->opini->person->img)? $Opini->opini->person->img->img : null,'profile')}}" width="50">
+                                        <img src="{{checkImage(!is_null($Opini->opini->person->img)? $Opini->opini->person->img->img : null,'person')}}" width="50">
                                     </div>
                                     <div class="small-9 columns">
                                         <div class="info">

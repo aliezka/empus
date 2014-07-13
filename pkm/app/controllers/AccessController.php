@@ -124,7 +124,7 @@ class AccessController extends BaseController {
 
 		$rules = array(
 					'name' => ' required | alpha_spaces | min:3 ',
-					'name' => ' required | min:6 ',
+					'name' => ' required | min:3 ',
 					'old-password' => ' min:6 | old_password ',
 					'new-password' => ' min:6 | required_with:old-password '
 				);
@@ -180,6 +180,24 @@ class AccessController extends BaseController {
 			}
 			// End Roles
 
+			// Image
+			if(Input::hasFile('image')){
+				$FileName = $User->person->id;
+				$FileName .= '.'.Input::file('image')->getClientOriginalExtension();
+
+				Input::file('image')->move(Config::get('empus.path_person_img'), $FileName);
+
+				if (PersonImg::where('person_id', '=', $User->person->id)->get()->count()>0) {
+					PersonImg::where('person_id', '=', $User->person->id)->update(['img' => $FileName]);
+				} else {
+					$PersonImg = new PersonImg;
+					$PersonImg->person()->associate($User->person);
+					$PersonImg->img = $FileName;
+					$PersonImg->save();
+				}
+
+			}
+			// End Image
 			return Redirect::back();
 		}
 	}

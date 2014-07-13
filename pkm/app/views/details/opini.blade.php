@@ -5,7 +5,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="small-3 columns">
-							<img src="{{checkImageThumb(!is_null($Opini->person->img) ? $Opini->person->img->img:null,'profile')}}" alt="" width="65" height="65">
+							<img src="{{checkImageThumb(!is_null($Opini->person->img) ? $Opini->person->img->img:null,'person')}}" alt="" width="65" height="65">
 						</div>
 						<div class="small-9 columns">
 							<div class="info">
@@ -75,7 +75,7 @@
 				<li>
 					<div class="row">
 						<div class="small-2 columns">
-							<img src="{{checkImageThumb(!is_null($Komentar->person->img) ? $Komentar->person->img->img:null,'profile')}}" alt="" width="65" height="65">
+							<img src="{{checkImageThumb(!is_null($Komentar->person->img) ? $Komentar->person->img->img:null,'person')}}" alt="" width="65" height="65">
 						</div>
 						<div class="small-10 columns">
 							<div class="info">

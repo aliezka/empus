@@ -15,4 +15,8 @@ class Person extends Eloquent {
 	public function opini() {
 		return $this->hasMany('Opini', 'person_id', 'id');
 	}
+
+	public function img() {
+		return $this->hasOne('PersonImg', 'person_id');
+	}
 }
