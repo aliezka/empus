@@ -67,7 +67,7 @@
 					<label for="image" class="right">Image</label>
 				</div>
 				<div class="small-9 columns {{ $errors->first('image') ? 'error' : null }}">
-					{{ Form::file('image', [ isset($Instansi->img->img) ? null : 'required' ]) }}
+					{{ Form::file('image')}}
 					@if (isset($Instansi->img->img)) 
 						@if ($errors->first('image')) 
 							<small class="error">{{ $errors->first('image') }}</small>

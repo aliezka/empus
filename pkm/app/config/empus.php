@@ -8,9 +8,10 @@ return array(
 		'path_prosedur_img' => public_path('assets/img/prosedur'),
 		'path_opini_img' => public_path('assets/img/opini'),
 		'path_berita_img' => public_path('assets/img/berita'),
+		'path_person_img' => public_path('assets/img/person'),
 
-		'profile_img' => asset('assets/img/profile-picture.jpg'),
-		'profile_thumb_img' => asset('assets/img/profile-picture.jpg'),
+		'person_img' => asset('assets/img/profile-picture.jpg'),
+		'person_thumb_img' => asset('assets/img/profile-picture.jpg'),
 		'kelurahan_img' => asset('assets/img/kelurahan.png'),
 		'kelurahan_thumb_img' => asset('assets/img/kelurahan-thumb.png'),
 		'berita_img' => asset('assets/img/berita.png'),

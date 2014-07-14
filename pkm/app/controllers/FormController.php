@@ -58,7 +58,7 @@ class FormController extends BaseController {
 					'person_id' => ' numeric'
 				);
 
-		$rules += !is_null($id) ? array('image' => ' image ') : array('image' => ' required | image ');
+		// $rules += !is_null($id) ? array('image' => ' image ') : array('image' => ' required | image ');
 
 		$rule_name = is_null($id) ? array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name') : $Instansi->name == Input::get('name', null) ? array() : array('name' => ' required | alpha_spaces | min:3 | unique:instansi,name');
 		$rule_person = Auth::user()->hasRole('Administrator') ? array('person_id' => ' required | numeric') : array();
