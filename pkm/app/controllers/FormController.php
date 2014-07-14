@@ -190,17 +190,6 @@ class FormController extends BaseController {
 				->with('fMessage', 'Instansi '.$InstansiName.' successfully deleted.');
 	}
 
-	function jsonPerson(){
-		$res = array();
-		foreach (Person::All() as $key => $person) {
-			$email=!is_null($person->user)? $person->user->email : null;
-			$res[] = array(
-				"{$person->id}" => "{$person->name} ({$email})"
-				);
-		}
-		echo json_encode($res);
-	}
-
 	function pelayanan($id = null) {
 		$Pelayanan = !is_null($id) ? Pelayanan::find($id) : null;
 		$Persyaratan = isset($Pelayanan->id) ? Persyaratan::where('pelayanan_id', '=', $Pelayanan->id)->orderBy('order', 'asc')->get() : new Persyaratan;

@@ -112,17 +112,14 @@
 	}
 
 	function checkImage ($img, $type='') {
-		// dd(asset("assets/img/{$type}/{$img}"));
-		// dd(public_path()."/assets/img/{$type}/{$img}");
-		// dd(file_exists(public_path()."assets/img/{$type}/{$img}"),public_path()."/assets/img/{$type}/{$img}");
-		if(!is_null($img) && file_exists(asset("assets/img/{$type}/{$img}"))) 
+		if(!is_null($img) && file_exists(public_path()."/assets/img/{$type}/{$img}")) 
 			return asset("assets/img/{$type}/{$img}");
 		else
 			return Config::get("empus.{$type}_img");
 	}
 
 	function checkImageThumb ($img, $type='') {
-		if(!is_null($img) && file_exists(asset("assets/img/{$type}/{$img}"))) 
+		if(!is_null($img) && file_exists(public_path()."/assets/img/{$type}/{$img}")) 
 			return asset("assets/img/{$type}/{$img}");
 		else
 			return Config::get("empus.{$type}_thumb_img");
