@@ -43,17 +43,7 @@
 	
 	<div class="row">
 		<div class="small-12 medium-6 medium-centered columns">
-			<ul class="pagination">
-				<li class="arrow unavailable"><a href="">&laquo;</a></li>
-				<li class="current"><a href="">1</a></li>
-				<li><a href="">2</a></li>
-				<li><a href="">3</a></li>
-				<li><a href="">4</a></li>
-				<li class="unavailable"><a href="">&hellip;</a></li>
-				<li><a href="">12</a></li>
-				<li><a href="">13</a></li>
-				<li class="arrow"><a href="">&raquo;</a></li>
-			</ul>
-		</div><!-- end of col -->
-	</div><!-- end of row -->
+			{{$lists->links()}}
+		</div>
+	</div>
 </section>  

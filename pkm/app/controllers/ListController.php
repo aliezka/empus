@@ -29,7 +29,7 @@ class ListController extends BaseController {
 			$Instansi = Instansi::where('name', 'like', '%'.Input::get('search').'%');
 		}
 
-		$Lists = $Instansi->get();
+		$Lists = $Instansi->paginate($this->perPage);
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('lists.instansi')->with('lists', $Lists);
@@ -53,7 +53,7 @@ class ListController extends BaseController {
 			$Pelayanan = Pelayanan::where('name', 'like', '%'.Input::get('search').'%');
 		}
 
-		$Lists = $Pelayanan->get();
+		$Lists = $Pelayanan->paginate($this->perPage);
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('lists.pelayanan')->with('lists', $Lists);
@@ -75,7 +75,7 @@ class ListController extends BaseController {
 		if (Input::get('search')) {
 			$Berita = Berita::where('title', 'like', '%'.Input::get('search').'%');
 		}
-		$Lists = $Berita->get();
+		$Lists = $Berita->paginate($this->perPage);
 
 		$this->layout = View::make('layouts.admin');
 		$this->layout->content = View::make('lists.berita')->with('lists', $Lists);

@@ -31,7 +31,7 @@
 				<tbody>
 					@foreach ($lists as $Count => $list) 
 						<tr>
-							<td>{{ $Count + 1 }}</td>
+							<td>{{ $Count + ($lists->getCurrentPage()-1) * $lists->getPerPage() + 1 }}</td>
 							<td><a href="{{ URL::to('dashboard/instansi/form/'.$list->id) }}">{{ $list->name }}</a></td>
 							<td class="grid-buttons"><a href="{{ URL::to('dashboard/instansi/'.$list->id.'/delete') }}" title="delete" class="delbutton"><i class="fa fa-times"></i></a></td>
 						</tr>
@@ -40,4 +40,9 @@
 			</table>
 		</div><!-- end of col -->
 	</div><!-- end of row -->
+	<div class="row">
+		<div class="small-12 medium-6 medium-centered columns">
+			{{$lists->links()}}
+		</div>
+	</div>
 </section>  
