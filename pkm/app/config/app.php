@@ -112,6 +112,7 @@ return array(
 		*/
 		
 		'Barryvdh\Debugbar\ServiceProvider',
+		// 'Empus\Notification\NotificationServiceProvider'
 	),
 
 	/*
