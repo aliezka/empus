@@ -28,7 +28,7 @@
 								</div>
 								<div class="row">
 									<div class="small-12 columns">
-										<p>{{ $list->desc->desc or null }}</p>
+										<p>{{ !is_null($list->desc) ? substr($list->desc->desc,0,strpos($list->desc->desc,' ',140)).' ...' : null }}</p>
 									</div>
 								</div>
 							</a>

@@ -14,7 +14,7 @@
 								<a href="{{ URL::to('instansi/'.$list->id) }}">
 									<div class="row">
 										<div class="small-3 columns">
-											<img src="{{ checkImageThumb(!is_null($list->img) ? $list->img->img : null,'kelurahan') }}">
+											<img src="{{ checkImageThumb(!is_null($list->img) ? $list->img->img : null,'instansi') }}">
 										</div>
 										<div class="small-9 columns">
 											<h6>{{ $list->name }}</h6>

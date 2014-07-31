@@ -11,7 +11,7 @@
                         <li>
                             <div class="row">
                                 <div class="small-3 columns">
-                                    <img src="{{!is_null($User->img) ? $User->img->img : Config::get('empus.profile_img')}}" alt="" height="75" height="75">
+                                    <img src="{{!is_null($User->person->img) ? asset('assets/img/person/'.$User->person->img->img) : Config::get('empus.profile_img')}}" alt="" height="75" height="75">
                                 </div>
                                 <div class="small-9 columns">
                                     <h6>{{!is_null($User->person) ? $User->person->name :""}}</h6>

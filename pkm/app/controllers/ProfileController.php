@@ -2,6 +2,7 @@
 
 class ProfileController extends BaseController{
 	function __construct(){
+		\Debugbar::disable();
 	}
 
 	function detail($id=null){
