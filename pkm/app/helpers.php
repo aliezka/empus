@@ -1,4 +1,126 @@
 <?php
+	function notified($Opini_id, $User_id) {
+		$NotificationHistory = new NotificationHistory;
+
+		$Notification = Notification::where('opini_id', '=', $Opini_id)->first();
+		$User = User::findOrFail($User_id);
+		
+		$Not = $NotificationHistory->where('person_id', '=', $User->person_id)->where('notification_id', '=', $Notification->id)->first();
+		
+		$Not->notified = true;
+		$Not->save();
+	}
+
+	function nstatus($Opini_id) {
+		$Opini = Opini::findOrFail($Opini_id);
+		
+		$Type = Config::get('empus.opini_type'); 
+		$Status = Config::get('empus.opini_status'); 
+		
+		$Message = "Status ".$Type[$Opini->type]." '".$Opini->title."', telah dirubah menjadi '".$Status[$Opini->status]."'";
+
+		notify($Opini->id, $Message);
+	}
+
+	function nopini($Opini_id) {
+		$Opini = Opini::findOrFail($Opini_id);
+		$Message = 'Pengguna dengan nama '.Auth::user()->person->name.' ('.Auth::user()->username.') telah memasukan opini baru pada instansi '.$Opini->tag->instansi->name;
+
+		notify($Opini->id, $Message);
+	}
+
+	function nkomentar($Komentar_id) {
+		$Komentar = Komentar::findOrFail($Komentar_id);
+		$Message = "Pengguna dengan nama ".Auth::user()->person->name.' telah memasukan komentar baru pada opini "'.$Komentar->opini->title.'"';
+
+		notify($Komentar->opini->id, $Message);
+	}
+
+	function notify($Opini_id, $Message) {
+		$Opini = Opini::findOrFail($Opini_id);
+
+		$Notification = new Notification;
+		if ($Not = $Notification->where('opini_id', '=', $Opini_id)->first()) {
+			$Not->title = $Message;
+			$Not->save();
+
+			$Not->touch();
+			$Notification = $Not;
+		} else {
+			$Notification->opini()->associate($Opini);
+			$Notification->title = $Message;
+			$Notification->save();
+		}
+
+		$NotificationInvolved = new NotificationInvolved;
+
+		// Reporter
+		if (!$Notification->involved->contains(1) && !$Notification->involved->contains(2)) {
+			$Reporter = array();
+
+			$Reporter['person_id'] = Auth::user()->person_id;
+			$Reporter['involved_as_id'] = 2;
+			$Reporter['notification_id'] = $Notification->id;
+
+			$NotificationInvolved->insert($Reporter);
+		}
+
+		// Instansi Holder
+		if (!$Notification->involved->contains(1)) {
+			if (is_object($Opini->tag->instansi)) {
+				if (is_object($Opini->tag->instansi->person)) {
+					$Holder = array();
+
+					$Holder['person_id'] = $Opini->tag->instansi->person->id;
+					$Holder['involved_as_id'] = 1;
+					$Holder['notification_id'] = $Notification->id;
+
+					$NotificationInvolved->insert($Holder);
+				}
+			}
+		} else {
+			$Not = $Notification->involved_list()->where('involved_as_id', '=', 1)->first();
+			if ($Not->person_id != $Opini->tag->instansi->person->id) {
+				$Not->person_id = $Opini->tag->instansi->person->id;
+				$Not->save();
+			}
+		}
+
+		// Commenters
+		$Reporter = $Notification->involved_list()->where('person_id', '=', Auth::user()->person_id)->first();
+		if (!$Reporter) {
+			$Commenters = array();
+			
+			$Commenters['person_id'] = Auth::user()->person_id;
+			$Commenters['involved_as'] = 3;
+			$Commenters['notification_id'] = $Notification->id;
+
+			$NotificationInvolved->insert($Holder);
+		}
+
+		// History
+		$NotificationHistory = new NotificationHistory;
+		foreach ($NotificationInvolved->where('notification_id', '=', $Notification->id)->get() as $Each) {
+			//var_dump($Each);
+			$Notify = $NotificationHistory->where('notification_id', '=', $Notification->id)->where('person_id', '=', $Each->person_id)->first();
+			if (!$Notify) {
+				if ($Each->person_id != Auth::user()->person_id) {
+					$Row = array();
+					$Row['notification_id'] = $Notification->id;
+					$Row['person_id'] = $Each->person_id;
+
+					$NotificationHistory->insert($Row);
+				}
+			} else {
+				if ($Notify->person_id != Auth::user()->person_id) {
+					$Notify->notified = false;
+					$Notify->save();
+					$Notify->touch();
+				}
+			}
+		}
+	}
+
 	function beritaTag($Id) {
 		$Berita = Berita::findOrFail($Id);
 		$Return = null;

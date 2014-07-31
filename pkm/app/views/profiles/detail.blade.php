@@ -67,4 +67,47 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="small-12 medium-6 columns wide-panel">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span><i class="fa fa-bell-o"></i>Notifikasi</span>
+                    <a href="{{URL::to('user/'.$User->id.'/opini')}}" class="button secondary tiny right"><i class="fa fa-list"></i></a>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        @foreach($Notifikasi as $not)
+                        <li>
+                            <a href="{{URL::to('opini/'.$not->notification->opini_id.'/notified')}}" >
+                                <div class="row">
+                                    <div class="small-12 columns">
+                                        <small>{{humanTiming(strtotime($not->updated_at))}} yang lalu</small>
+                                        <h6>{{$not->notification->title}}</h6>
+                                        <?php 
+                                            $Type = Config::get('empus.opini_type'); 
+                                            $Status = Config::get('empus.opini_status'); 
+                                            $Color = Config::get('empus.opini_color'); 
+                                        ?>
+                                        <span class="label secondary radius"><small class="fa fa-comment"></small>{{$not->notification->opini->komentar->count()}}</span>
+                                        <span class="radius label {{ $not->notification->opini->type == 3 ? 'success' : null }} {{ $not->notification->opini->type == 2 ? 'alert' : null }} ">{{ $Type[$not->notification->opini->type] }}</span>
+                                        <span class="label radius {{$Color[$not->notification->opini->status]}}">{{$Status[$not->notification->opini->status]}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        @endforeach
+                        @if(count($Notifikasi)<1)
+                        <li>
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    anda belum menulis opini
+                                </div>
+                            </div>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

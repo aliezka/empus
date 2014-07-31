@@ -17,6 +17,14 @@ class Opini extends Eloquent {
 		return $this->hasMany('Komentar', 'opini_id');
 	}
 
+	public function role(){
+		return $this->belongsToMany('Role', 'user_role', 'user_id', 'role_id');		
+	}
+
+	public function notification(){
+		return $this->hasMany('Notification', 'opini_id');
+	}
+
 	public function person() {
 		return $this->belongsTo('Person', 'person_id', 'id');
 	}

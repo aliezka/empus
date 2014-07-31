@@ -486,6 +486,8 @@ class FormController extends BaseController {
 				// End Object
 			});
 			
+			nopini($Opini->id);
+
 			return Redirect::to('opini/'.$Opini->id);
 		}
 	}
@@ -517,6 +519,8 @@ class FormController extends BaseController {
 			$Komentar->person()->associate(Auth::user()->person);
 			$Komentar->save();
 
+			nkomentar($Komentar->id);
+
 			// Desc
 			$KomentarDesc = new KomentarDesc;
 			$KomentarDesc->desc = Input::get('desc');
@@ -540,6 +544,8 @@ class FormController extends BaseController {
 		} else {
 			$Opini->status = Input::get('status');
 			$Opini->save();
+
+			nstatus($Opini->id);
 
 			return Redirect::to('opini/'.$opini);
 		}
@@ -670,5 +676,10 @@ class FormController extends BaseController {
 
 		return Redirect::to('dashboard/pelayanan')
 				->with('fMessage', 'News '.$BeritaName.' successfully deleted.');
+	}
+
+	function notified($Opini_id) {
+		notified($Opini_id, Auth::user()->id);
+		return Redirect::to('opini/'.$Opini_id);
 	}
 }
