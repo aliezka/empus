@@ -35,6 +35,7 @@ Route::get('berita/{id}', 'DetailController@berita');
 // Opini
 Route::get('opini', 'ListController@opini');
 Route::get('opini/{id}', 'DetailController@opini');
+Route::get('opini/{id}/notified', 'FormController@notified');
 
 // Login
 Route::get('login', 'AccessController@login');

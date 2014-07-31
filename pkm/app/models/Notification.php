@@ -10,11 +10,7 @@ class Notification extends Eloquent {
 	}
 
 	public function involved() {
-		return $this->belongsToMany('InvolvedAs', 'notification_involved', 'notification_id', 'involved_as_id');8
-	}
-
-	public function person() {
-		return $this->belongsToMany('Person', 'notification_involved', '');
+		return $this->belongsToMany('InvolvedAs', 'notification_involved', 'notification_id', 'involved_as_id');
 	}
 
 	public function involved_list() {

@@ -5,7 +5,7 @@ class Person extends Eloquent {
 	protected $fillable = array('name');
 
 	public function user() {
-		return $this->hasOne('User', 'person_id');
+		return $this->hasMany('User', 'person_id', 'id');
 	}
 
 	public function instansi() {
@@ -18,5 +18,13 @@ class Person extends Eloquent {
 
 	public function img() {
 		return $this->hasOne('PersonImg', 'person_id');
+	}
+
+	public function notification_involved() {
+		return $this->hasMany('NotificationInvolved', 'person_id', 'id');
+	}
+
+	public function notification_history() {
+		return $this->hasMany('NotificationHistory', 'person_id', 'id');
 	}
 }

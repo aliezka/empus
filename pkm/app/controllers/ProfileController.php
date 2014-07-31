@@ -18,10 +18,14 @@ class ProfileController extends BaseController{
 							  ->orderBy('created_at','desc')
 							  ->get();
 
+		$NotificationHistory = new NotificationHistory;
+		$Not = $NotificationHistory->where('person_id', '=', $User->person->id)->where('notified', '=', false)->orderBy('updated_at')->get(); 
+		
 		$this->layout = View::make('layouts.segi');
 		$this->layout->content = View::make('profiles.detail')
 			->with('Opini',$Opini)
-			->with('User',$User);
+			->with('User',$User)
+			->with('Notifikasi', $Not);
 	}
 
 	function gDetail($id=null){

@@ -3,7 +3,7 @@
 class NotificationInvolved extends Eloquent {
 	protected $table = 'notification_involved';
 	protected $fillable = array('involved_as', 'notified');
-	public $timestamps = true;
+	public $timestamps = false;
 
 	public function notification() {
 		return $this->belongsTo('Notification', 'notification_id', 'id');
