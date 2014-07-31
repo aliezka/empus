@@ -1,6 +1,6 @@
 <section id="content" class="main-content snap-content instansi">
 	<div class="row">
-		<div class="banner" style="background-image: url({{ checkImage(!is_null($Instansi->img)? $Instansi->img->img : null,'kelurahan') }})">
+		<div class="banner" style="background-image: url({{ checkImage(!is_null($Instansi->img)? $Instansi->img->img : null,'instansi') }})">
 		</div>
 	</div>
 	<div class="row">
@@ -68,7 +68,7 @@
 							<a href="{{ URL::to('opini/'.$Opini->opini->id) }}">
 								<div class="row">
 									<div class="small-3 columns">
-										<img src="{{checkImage(!is_null($Opini->person)? $Opini->person->img->img : null,'person')}}" width="50">
+										<img src="{{checkImage(!is_null($Opini->opini->person)? $Opini->opini->person->img->img : null,'person')}}" width="50">
 									</div>
 									<div class="small-9 columns">
 										<div class="info">

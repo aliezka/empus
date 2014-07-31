@@ -129,7 +129,7 @@ class FormController extends BaseController {
 
 				Input::file('image')->move(Config::get('empus.path_instansi_img'), $FileName);
 				
-				if (!is_null($id)) {
+				if (!is_null($Instansi->img)) {
 					InstansiImg::where('instansi_id', '=', $id)->update(['img' => $FileName]);
 				} else {
 					$InstansiImg = new InstansiImg;

@@ -12,7 +12,7 @@
                                     <a href="{{ URL::to('instansi/'.$instansi->id) }}">
                                         <div class="row">
                                             <div class="small-3 columns">
-                                                <img src="{{checkImageThumb(!is_null($instansi->img) ? $instansi->img->img : null,'kelurahan')}}" alt="" height="75" height="75">
+                                                <img src="{{checkImageThumb(!is_null($instansi->img) ? $instansi->img->img : null,'instansi')}}" alt="" height="75" height="75">
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$instansi->name}}</h6>
@@ -89,7 +89,7 @@
                                             </div>
                                             <div class="small-9 columns">
                                                 <h6>{{$berita->title}}</h6>
-                                                <p>{{!is_null($berita->desc) ? $berita->desc->desc:""}} </p>
+                                                <p>{{!is_null($berita->desc) ? substr($berita->desc->desc,0,strpos($berita->desc->desc,' ',140)).' ...' :""}} </p>
                                             </div>
                                         </div>
                                     </a>

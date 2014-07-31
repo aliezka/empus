@@ -12,8 +12,8 @@ return array(
 
 		'person_img' => asset('assets/img/profile-picture.jpg'),
 		'person_thumb_img' => asset('assets/img/profile-picture.jpg'),
-		'kelurahan_img' => asset('assets/img/kelurahan.png'),
-		'kelurahan_thumb_img' => asset('assets/img/kelurahan-thumb.png'),
+		'instansi_img' => asset('assets/img/kelurahan.png'),
+		'instansi_thumb_img' => asset('assets/img/kelurahan-thumb.png'),
 		'berita_img' => asset('assets/img/berita.png'),
 		'berita_thumb_img' => asset('assets/img/berita-thumb.png'),
 

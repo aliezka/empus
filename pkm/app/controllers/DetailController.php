@@ -2,7 +2,8 @@
 
 class DetailController extends BaseController{
 	function __construct(){
-
+		\Debugbar::disable();
+		
 	}
 
 	public function dashboard(){
